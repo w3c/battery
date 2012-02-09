@@ -237,35 +237,21 @@
           class="idl">
         <dt>readonly attribute boolean charging</dt>
         <dd>
-          Represents if the system's battery is charging. The attribute MUST be
-          set to false if the battery is discharging, and set to true, if the
-          battery is charging, the implementation is unable to report the
-          state, or there is no battery attached to the system, or otherwise.
+          Represents if the system's battery is charging.
         </dd>
         <dt>readonly attribute double chargingTime</dt>
         <dd>
           Represents the time remaining in seconds until the system's battery
-          is fully charged. The attribute MUST be set to 0, if the battery is
-          full or there is no battery attached to the system, and to the value
-          positive Infinity if the battery is discharging, the implementation
-          is unable to report the remaining charging time, or otherwise.
+          is fully charged.
         </dd>
         <dt>readonly attribute double dischargingTime</dt>
         <dd>
           Represents the time remaining in seconds until the system's battery
-          is completely discharged and the system is about to be suspended. The
-          attribute MUST be set to the value positive Infinity, if the battery
-          is charging, the implementation is unable to report the remaining
-          discharging time, there is no battery attached to the system, or
-          otherwise.
+          is completely discharged and the system is about to be suspended.
         </dd>
         <dt>readonly attribute double level</dt>
         <dd>
-          Represents the current battery level scaled from 0 to 1.0. The
-          attribute MUST be set to 0 if the system's battery is depleted and
-          the system is about to be suspended, and to 1.0 if the battery is
-          full, the implementation is unable to report the battery's level,
-          or there is no battery attached to the system.
+          Represents the current battery level scaled from 0 to 1.0.
         </dd>
         <dt>[TreatNonCallableAsNull] attribute Function? onchargingchange</dt>
         <dd>
@@ -289,28 +275,45 @@
         respectively.
       </p>
       <p>
-        When the battery charging state is updated, the <a>user agent</a> MUST
-        <a>queue a task</a> which sets the <code>charging</code> attribute's
-        value and <a>fires a simple event</a> named <code>chargingchange</code>
-        at the <a>BatteryManager</a> object.
+        The <code>charging</code> attribute MUST be set to false if the battery
+        is discharging, and set to true, if the battery is charging, the
+        implementation is unable to report the state, or there is no battery
+        attached to the system, or otherwise. When the battery charging state
+        is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
+        the <code>charging</code> attribute's value and <a>fires a simple
+        event</a> named <code>chargingchange</code> at the
+        <a>BatteryManager</a> object.
       </p>
       <p>
-        When the battery charging time is updated, the <a>user agent</a> MUST
-        <a>queue a task</a> which sets the <code>chargingTime</code>
-        attribute's value and <a>fires a simple event</a> named
-        <code>chargingtimechange</code> at the <a>BatteryManager</a> object.
+        The <code>chargingTime</code> attribute MUST be set to 0, if the
+        battery is full or there is no battery attached to the system, and to
+        the value positive Infinity if the battery is discharging, the
+        implementation is unable to report the remaining charging time, or
+        otherwise. When the battery charging time is updated, the <a>user
+        agent</a> MUST <a>queue a task</a> which sets the
+        <code>chargingTime</code> attribute's value and <a>fires a simple
+        event</a> named <code>chargingtimechange</code> at the
+        <a>BatteryManager</a> object.
       </p>
       <p>
-        When the battery discharging time is updated, the <a>user agent</a>
-        MUST <a>queue a task</a> which sets the <code> dischargingTime</code>
-        attribute's value and <a>fires a simple event </a> named
-        <code>dischargingtimechange</code> at the <a>BatteryManager</a> object.
+        The <code>dischargingTime</code> attribute MUST be set to the value
+        positive Infinity, if the battery is charging, the implementation is
+        unable to report the remaining discharging time, there is no battery
+        attached to the system, or otherwise. When the battery discharging time
+        is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
+        the <code>dischargingTime</code> attribute's value and <a>fires a
+        simple event </a> named <code>dischargingtimechange</code> at the
+        <a>BatteryManager</a> object.
       </p>
       <p>
-        When the battery level is updated, the <a>user agent</a> MUST
-        <a>queue a task</a> which sets the <code> level</code> attribute's
-        value and <a>fires a simple event</a> named <code>levelchange</code>
-        at the <a>BatteryManager</a> object.
+        The <code>level</code> attribute MUST be set to 0 if the system's
+        battery is depleted and the system is about to be suspended, and to
+        1.0 if the battery is full, the implementation is unable to report the
+        battery's level, or there is no battery attached to the system. When
+        the battery level is updated, the <a>user agent</a> MUST <a>queue a
+        task</a> which sets the <code> level</code> attribute's value and
+        <a>fires a simple event</a> named <code>levelchange</code> at the
+        <a>BatteryManager</a> object.
       </p>
       <div class="note">
         The definition of how often the <code>chargingtimechange</code>,
