@@ -1,0 +1,724 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html lang="en" dir="ltr" about="" property="dc:language" content="en" prefix="dc: http://purl.org/dc/terms/ bibo: http://purl.org/ontology/bibo/ foaf: http://xmlns.com/foaf/0.1/ xsd: http://www.w3.org/2001/XMLSchema#">
+<head>
+    <title>Battery Status API</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    
+    
+  <style type="text/css">
+/*
+    XXX this is not up to date with the needs of various other parts, it will require
+        to be synched up with the latest developments
+        It may be that this will be split up so that only the parts that are acually used
+        by the document get to be included (e.g. WebIDL).
+*/
+
+/*****************************************************************
+ * ReSpec 2 CSS
+ * Robin Berjon, 2010-01-04
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #ff4500;
+}
+
+
+/* --- WEB IDL --- */
+pre.idl {
+    border-top: 1px solid #90b8de;
+    border-bottom: 1px solid #90b8de;
+    padding:    1em;
+    line-height:    120%;
+}
+
+pre.idl::before {
+    content:    "WebIDL";
+    display:    block;
+    width:      150px;
+    background: #90b8de;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+.idlType {
+    color:  #ff4500;
+    font-weight:    bold;
+    text-decoration:    none;
+}
+
+/*.idlModule*/
+/*.idlModuleID*/
+/*.idlInterface*/
+.idlInterfaceID {
+    font-weight:    bold;
+    color:  #005a9c;
+}
+
+.idlSuperclass {
+    font-style: italic;
+    color:  #005a9c;
+}
+
+/*.idlAttribute*/
+.idlAttrType {
+    color:  #005a9c;
+}
+.idlAttrName {
+    color:  #ff4500;
+}
+.idlAttrName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlMethod*/
+.idlMethType {
+    color:  #005a9c;
+}
+.idlMethName {
+    color:  #ff4500;
+}
+.idlMethName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlParam*/
+.idlParamType {
+    color:  #005a9c;
+}
+.idlParamName {
+    font-style: italic;
+}
+
+.extAttr {
+    color:  #666;
+}
+
+/*.idlConst*/
+.idlConstType {
+    color:  #005a9c;
+}
+.idlConstName {
+    color:  #ff4500;
+}
+.idlConstName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlException*/
+.idlExceptionID {
+    font-weight:    bold;
+    color:  #c00;
+}
+
+.idlTypedefID, .idlTypedefType {
+    color:  #005a9c;
+}
+
+.idlRaises, .idlRaises a.idlType, .idlRaises a.idlType code, .excName a, .excName a code {
+    color:  #c00;
+    font-weight:    normal;
+}
+
+.excName a {
+    font-family:    monospace;
+}
+
+.idlRaises a.idlType, .excName a.idlType {
+    border-bottom:  1px dotted #c00;
+}
+
+.excGetSetTrue, .excGetSetFalse, .prmNullTrue, .prmNullFalse, .prmOptTrue, .prmOptFalse {
+    width:  45px;
+    text-align: center;
+}
+.excGetSetTrue, .prmNullTrue, .prmOptTrue { color:  #0c0; }
+.excGetSetFalse, .prmNullFalse, .prmOptFalse { color:  #c00; }
+
+.idlImplements a {
+    font-weight:    bold;
+}
+
+dl.attributes, dl.methods, dl.constants {
+    margin-left:    2em;
+}
+
+.attributes dt, .methods dt, .constants dt {
+    font-weight:    normal;
+}
+
+.attributes dt code, .methods dt code, .constants dt code {
+    font-weight:    bold;
+    color:  #000;
+    font-family:    monospace;
+}
+
+.attributes dt code {
+    background:  #ffffd2;
+}
+
+.attributes dt .idlAttrType code {
+    color:  #005a9c;
+    background:  transparent;
+    font-family:    inherit;
+    font-weight:    normal;
+    font-style: italic;
+}
+
+.methods dt code {
+    background:  #d9e6f8;
+}
+
+.constants dt code {
+    background:  #ddffd2;
+}
+
+.attributes dd, .methods dd, .constants dd {
+    margin-bottom:  1em;
+}
+
+table.parameters, table.exceptions {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    margin: 0.5em 0;
+    width:  100%;
+}
+table.parameters { border-bottom:  1px solid #90b8de; }
+table.exceptions { border-bottom:  1px solid #deb890; }
+
+.parameters th, .exceptions th {
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+    font-family:    initial;
+    font-weight:    normal;
+    text-shadow:    #666 1px 1px 0;
+}
+.parameters th { background: #90b8de; }
+.exceptions th { background: #deb890; }
+
+.parameters td, .exceptions td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.parameters tr:first-child td, .exceptions tr:first-child td {
+    border-top: none;
+}
+
+.parameters td.prmName, .exceptions td.excName, .exceptions td.excCodeName {
+    width:  100px;
+}
+
+.parameters td.prmType {
+    width:  120px;
+}
+
+table.exceptions table {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    width:  100%;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+/* --- EXAMPLES --- */
+pre.example {
+    border-top: 1px solid #ff4500;
+    border-bottom: 1px solid #ff4500;
+    padding:    1em;
+    margin:     2em 0;
+}
+
+pre.example::before {
+    content:    "Example";
+    display:    block;
+    width:      150px;
+    background: #ff4500;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+/* --- EDITORIAL NOTES --- */
+.issue {
+    padding:    1em;
+    border: 1px solid #f00;
+    background: #ffc;
+}
+
+.issue::before {
+    content:    "Issue";
+    display:    block;
+    width:  150px;
+    margin: -1.5em 0 0.5em 0;
+    font-weight:    bold;
+    border: 1px solid #f00;
+    background: #fff;
+    padding:    3px 1em;
+}
+
+.note {
+    padding:    1em;
+    border: 2px solid #cff6d9;
+    background: #e2fff0;
+}
+
+.note::before {
+    content:    "Note";
+    display:    block;
+    width:  150px;
+    margin: -1.5em 0 0.5em 0;
+    font-weight:    bold;
+    border: 1px solid #cff6d9;
+    background: #fff;
+    padding:    3px 1em;
+}
+
+
+/* --- SYNTAX HIGHLIGHTING --- */
+/* Pretty printing styles. Used with prettify.js. */
+.str { color: #080; }
+.kwd { color: #008; }
+.com { color: #800; }
+.typ { color: #606; }
+.lit { color: #066; }
+.pun { color: #660; }
+.pln { color: #000; }
+.tag { color: #008; }
+.atn { color: #606; }
+.atv { color: #080; }
+.dec { color: #606; }
+/*pre.prettyprint { padding: 2px; border: 1px solid #888 }*/
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
+li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+li.L1, li.L3, li.L5, li.L7, li.L9 { background: #eee }
+
+@media print {
+  .str { color: #060; }
+  .kwd { color: #006; font-weight: bold; }
+  .com { color: #600; font-style: italic; }
+  .typ { color: #404; font-weight: bold; }
+  .lit { color: #044; }
+  .pun { color: #440; }
+  .pln { color: #000; }
+  .tag { color: #006; font-weight: bold; }
+  .atn { color: #404; }
+  .atv { color: #060; }
+}
+</style><link charset="utf-8" media="all" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-CR.css" rel="stylesheet"></head>
+  <body><div class="head">     <p>            <a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" alt="W3C" height="48" width="72"></a>                         </p>      <h1 rel="dc:title" class="title" id="title">Battery Status API</h1>           <h2 id="w3c-candidate-recommendation-08-may-2012"><acronym title="World Wide Web Consortium">W3C</acronym> Candidate Recommendation 08 May 2012</h2>     <dl>                <dt>This Version:</dt><dd><a href="http://www.w3.org/TR/2012/CR-battery-status-20120508/">http://www.w3.org/TR/2012/CR-battery-status-20120508/</a></dd>         <dt>Latest Published Version:</dt><dd><a href="http://www.w3.org/TR/battery-status/">http://www.w3.org/TR/battery-status/</a></dd>                    <dt>Latest Editor's Draft:</dt><dd><a href="http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html">http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html</a></dd>                                           <dt>Previous version:</dt><dd><a rel="dc:replaces" href="http://www.w3.org/TR/2011/WD-battery-status-20111129/">http://www.w3.org/TR/2011/WD-battery-status-20111129/</a></dd>                                   <dt>Editors:</dt>          <dd class="Anssi Kostiainen">       <span class="name">Anssi Kostiainen</span>,                    <a class="company" href="http://nokia.com/">Nokia</a>                                   </dd>          <dd class="Mounir Lamouri">       <span class="name">Mounir Lamouri</span>,                    <a class="company" href="http://mozilla.org/">Mozilla</a>                                   </dd>                    </dl>                    <p class="copyright">            <a rel="license" class="license" href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©        2012              <span rel="dcterms:publisher"><a content="W3C" property="foaf:name" rel="foaf:homepage" class="publisher" href="http://www.w3.org/"><acronym title="World Wide Web Consortium"><acronym title="World Wide Web Consortium">W3C</acronym></acronym></a></span><sup>®</sup>       (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology"><acronym title="Massachusetts Institute of Technology">MIT</acronym></acronym></a>,       <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></acronym></a>,       <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved.       <acronym title="World Wide Web Consortium">W3C</acronym> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,       <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and       <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.          </p><hr></div>
+    <div typeof="bibo:Chapter" about="#abstract" datatype="" property="dcterms:absract" class="introductory section" id="abstract"><h2>Abstract</h2>
+      This specification defines an API that provides information about the
+      battery status of the hosting device.
+    </div><div typeof="bibo:Chapter" about="#sotd" id="sotd" class="introductory section">     <h2>Status of This Document</h2>            <p><em>This section describes the status of this document at the time of its publication. Other        documents may supersede this document. A list of current <acronym title="World Wide Web Consortium">W3C</acronym> publications and the latest revision        of this technical report can be found in the <a href="http://www.w3.org/TR/"><acronym title="World Wide Web Consortium">W3C</acronym> technical reports        index</a> at http://www.w3.org/TR/.</em></p>       
+      <p>
+        The functionality described in this specification was initially
+        specified as part of the
+        <a href="http://www.w3.org/TR/system-info-api/">System Information
+        API</a> but has been extracted in order to be more readily available,
+        more straightforward to implement, and in order to produce a
+        specification that could be implemented on its own merits without
+        interference with other, often unrelated, features.
+      </p>
+           <p>         This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a> as a         Candidate Recommendation.          This document is intended to become a <acronym title="World Wide Web Consortium">W3C</acronym> Recommendation.         If you wish to make comments regarding this document, please send them to          <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a>          (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>,         <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).                             <acronym title="World Wide Web Consortium">W3C</acronym> publishes a Candidate Recommendation to indicate that the document is believed to be stable and            to encourage implementation by the developer community. This Candidate Recommendation is expected to            advance to Proposed Recommendation on 01 July 2012.                  All feedback is welcome.       </p>                <p>           Publication as a Candidate Recommendation does not imply endorsement by            the <acronym title="World Wide Web Consortium">W3C</acronym> Membership. This is a draft document and may be updated, replaced or obsoleted by other            documents at any time. It is inappropriate to cite this document as other than work in progress.         </p>                     <p>         This document was produced by a group operating under the          <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <acronym title="World Wide Web Consortium">W3C</acronym> Patent Policy</a>.                  <acronym title="World Wide Web Consortium">W3C</acronym> maintains a <a href="http://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a>          made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An         individual who has actual knowledge of a patent which the individual believes contains          <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the         information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section          6 of the <acronym title="World Wide Web Consortium">W3C</acronym> Patent Policy</a>.       </p>        </div><div class="section" typeof="bibo:Chapter" about="#toc" id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a class="tocxref" href="#conformance"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a class="tocxref" href="#terminology"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a class="tocxref" href="#security-and-privacy-considerations"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a class="tocxref" href="#navigatorbattery-interface"><span class="secno">5. </span><a class="idlType" href="#idl-def-NavigatorBattery"><code>NavigatorBattery</code></a> Interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes"><span class="secno">5.1 </span>Attributes</a></li></ul></li><li class="tocline"><a class="tocxref" href="#batterymanager-interface"><span class="secno">6. </span><a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> Interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-1"><span class="secno">6.1 </span>Attributes</a></li><li class="tocline"><a class="tocxref" href="#event-handlers"><span class="secno">6.2 </span>Event handlers</a></li></ul></li><li class="tocline"><a class="tocxref" href="#examples"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a class="tocxref" href="#acknowledgements"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a class="tocxref" href="#references"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></div>
+    
+    
+    
+    <div typeof="bibo:Chapter" about="#introduction" id="introduction" class="informative section">
+      <!--OddPage--><h2><span class="secno">1. </span>Introduction</h2><em>This section is non-normative.</em>
+      <p>
+        The Battery Status API specification defines a means for web
+        developers to programmatically determine the battery status of the
+        hosting device. Without knowing the battery status of a device, a web
+        developer must design the web application with an assumption of
+        sufficient battery level for the task at hand. This means the battery
+        of a device may exhaust faster than desired because web developers are
+        unable to make decisions based on the battery status. Given knowledge
+        of the battery status, web developers are able to craft web content and
+        applications which are power-efficient, thereby leading to improved
+        user experience.
+     </p>
+     <p>
+        The Battery Status API can be used to defer or scale back work when
+        the device is not charging in or is low on battery. An archetype of an
+        advanced web application, a web-based email client, may check the
+        server for new email every few seconds if the device is charging,
+        but do so less frequently if the device is not charging or is low on
+        battery. Another example is a web-based word processor which could
+        monitor the battery level and save changes before the battery runs
+        out to prevent data loss.
+      </p>
+      <p>
+        The following example shows how a web-based email client could check
+        for new emails every ten seconds without knowledge of the battery
+        status:
+      </p>
+      <pre class="example highlight prettyprint"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln"><br></span><span class="tag">&lt;html&gt;</span><span class="pln"><br></span><span class="tag">&lt;head&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;title&gt;</span><span class="pln">Email Client</span><span class="tag">&lt;/title&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> mail </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; INTERVAL_DEFAULT</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; interval</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; timer</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"><br><br>&nbsp; &nbsp; &nbsp; check</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">/</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">' seconds.'</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">},</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; setTimer</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval </span><span class="pun">===</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> clearTimeout</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">=</span><span class="pln"> setInterval</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">check</span><span class="pun">();</span><span class="pln"> </span><span class="pun">},</span><span class="pln"> interval</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">};</span><span class="pln"><br><br>&nbsp; &nbsp; window</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'load'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(!</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">?</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT </span><span class="pun">:</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/script&gt;</span><span class="pln"><br></span><span class="tag">&lt;/head&gt;</span><span class="pln"><br></span><span class="tag">&lt;body&gt;&lt;/body&gt;</span><span class="pln"><br></span><span class="tag">&lt;/html&gt;</span></pre>
+      <p>
+        The script will always check for emails every ten seconds, even if the
+        battery level is critically low and the device is not charging.
+        This is an example of poor resource management.
+      </p>
+      <p>
+        Using the <a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> interface, the web application is, for
+        example, able to throttle checking for emails if the device is low on
+        battery, stop checking for emails if the battery is critically low and
+        resume normal operation when the battery is charging:
+      </p>
+      <pre class="example highlight prettyprint"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln"><br></span><span class="tag">&lt;html&gt;</span><span class="pln"><br></span><span class="tag">&lt;head&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;title&gt;</span><span class="pln">Battery-aware Email Client</span><span class="tag">&lt;/title&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> mail </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; INTERVAL_BATTERY_LOW</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; INTERVAL_DEFAULT</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; interval</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; timer</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; check</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">/</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">' seconds.'</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">},</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; setTimer</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval </span><span class="pun">===</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> clearTimeout</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">=</span><span class="pln"> setInterval</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">check</span><span class="pun">();</span><span class="pln"> </span><span class="pun">},</span><span class="pln"> interval</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">};</span><span class="pln"><br>&nbsp; &nbsp; <br>&nbsp; &nbsp; window</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'load'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(!</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">?</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT </span><span class="pun">:</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> battery </span><span class="pun">=</span><span class="pln"> navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; <br>&nbsp; &nbsp; battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'dischargingtimechange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">30</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0.1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_BATTERY_LOW</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'30 minutes remaining or level below 10%, checking the server less frequently.'</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0.05</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'10 minutes remaining or level below 5%, stop checking the server.'</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; <br>&nbsp; &nbsp; battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'chargingchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">charging</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Battery is charging, checking the server normally.'</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/script&gt;</span><span class="pln"><br></span><span class="tag">&lt;/head&gt;</span><span class="pln"><br></span><span class="tag">&lt;body&gt;&lt;/body&gt;</span><span class="pln"><br></span><span class="tag">&lt;/html&gt;</span></pre>
+    </div>
+    
+    <div class="section" typeof="bibo:Chapter" about="#conformance" id="conformance"><!--OddPage--><h2><span class="secno">2. </span>Conformance</h2><p>     As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,      and notes in this specification are non-normative. Everything else in this specification is     normative.   </p>   <p>     The key words <em title="must" class="rfc2119">must</em>, <em title="must not" class="rfc2119">must not</em>, <em title="required" class="rfc2119">required</em>, <em title="should" class="rfc2119">should</em>, <em title="should not" class="rfc2119">should not</em>, <em title="recommended" class="rfc2119">recommended</em>, <em title="may" class="rfc2119">may</em>,     and <em title="optional" class="rfc2119">optional</em> in this specification are to be interpreted as described in [<cite><a href="#bib-RFC2119" rel="biblioentry" class="bibref">RFC2119</a></cite>].   </p>
+      <p>
+        This specification defines conformance criteria that apply to a single
+        product: the <dfn id="dfn-user-agent">user agent</dfn> that implements the
+        interfaces that it contains.
+      </p>
+      <p>
+        Implementations that use ECMAScript to implement the APIs defined in
+        this specification must implement them in a manner consistent with the
+        ECMAScript Bindings defined in the Web IDL specification [<cite><a href="#bib-WEBIDL" rel="biblioentry" class="bibref">WEBIDL</a></cite>],
+        as this specification uses that specification and terminology.
+      </p>
+    </div>
+    <div class="section" typeof="bibo:Chapter" about="#terminology" id="terminology">
+      <!--OddPage--><h2><span class="secno">3. </span>Terminology</h2>
+      <p>
+        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#function">
+        Function</a></code> interface represents a function in the scripting
+        language being used as defined in [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>].
+      </p>
+      <p>
+        The concepts <dfn id="dfn-queue-a-task"><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+        queue a task</a></dfn> and
+        <dfn id="dfn-fires-a-simple-event"><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
+        fires a simple event</a></dfn> are defined in [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>].
+      </p>
+      <p>
+        The terms <dfn id="dfn-event-handlers"><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
+        event handlers</a></dfn> and
+        <dfn id="dfn-event-handler-event-types"><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
+        event handler event types</a></dfn> are defined in [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>].
+      </p>
+    </div>
+    <div class="section" typeof="bibo:Chapter" about="#security-and-privacy-considerations" id="security-and-privacy-considerations">
+      <!--OddPage--><h2><span class="secno">4. </span>Security and privacy considerations</h2>
+      <p>
+        The API defined in this specification is used to determine the battery
+        status of the hosting device. The information disclosed has minimal
+        impact on privacy or fingerprinting, and therefore is exposed without
+        permission grants. For example, authors cannot directly know if there
+        is a battery or not in the hosting device.
+      </p>
+    </div>
+    <div class="section" typeof="bibo:Chapter" about="#navigatorbattery-interface" id="navigatorbattery-interface">
+      <!--OddPage--><h2><span class="secno">5. </span><a class="idlType" href="#idl-def-NavigatorBattery"><code>NavigatorBattery</code></a> Interface</h2>
+      <p>
+        The <a class="idlType" href="#idl-def-NavigatorBattery"><code>NavigatorBattery</code></a> interface is exposed on the 
+        <code>Navigator</code> object.
+      </p>
+      <pre class="idl"><span id="idl-def-Navigator" class="idlImplements"><a class="idlType" href="#idl-def-Navigator"><code>Navigator</code></a> implements <a href="#idl-def-NavigatorBattery" class="idlType"><code>NavigatorBattery</code></a>;
+</span></pre><div class="idlImplementsDesc">            <p>         All instances of the <code><a class="idlType" href="#idl-def-Navigator"><code>Navigator</code></a></code> type are defined to also implement the         <a href="#idl-def-NavigatorBattery" class="idlType"><code>NavigatorBattery</code></a> interface.       </p>        </div>
+      <pre class="idl"><span id="idl-def-NavigatorBattery" class="idlInterface">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">NavigatorBattery</span> {
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a></span></span> <span class="idlAttrName"><a href="#widl-NavigatorBattery-battery">battery</a></span>;
+</span>};
+</span></pre><div class="section" typeof="bibo:Chapter" about="#attributes" id="attributes"><h3><span class="secno">5.1 </span>Attributes</h3><dl><dt id="widl-NavigatorBattery-battery">     <code>battery</code>     of type          <span class="idlAttrType">BatteryManager</span>, readonly   </dt>   <dd>     
+          The object that exposes the battery status information.
+                    <div><em>No exceptions.</em></div>        </dd></dl></div>
+    </div>
+    
+    <div class="section" typeof="bibo:Chapter" about="#batterymanager-interface" id="batterymanager-interface">
+      <!--OddPage--><h2><span class="secno">6. </span><a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> Interface</h2>
+      <pre class="idl"><span id="idl-def-BatteryManager" class="idlInterface">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">BatteryManager</span> : <span class="idlSuperclass"><a>EventTarget</a></span> {
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a>boolean</a></span></span>   <span class="idlAttrName"><a href="#widl-BatteryManager-charging">charging</a></span>;
+</span><span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a>double</a></span></span>    <span class="idlAttrName"><a href="#widl-BatteryManager-chargingTime">chargingTime</a></span>;
+</span><span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a>double</a></span></span>    <span class="idlAttrName"><a href="#widl-BatteryManager-dischargingTime">dischargingTime</a></span>;
+</span><span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a>double</a></span></span>    <span class="idlAttrName"><a href="#widl-BatteryManager-level">level</a></span>;
+</span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingchange">onchargingchange</a></span>;
+</span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingtimechange">onchargingtimechange</a></span>;
+</span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</a></span>;
+</span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;
+</span>};
+</span></pre><div class="section" typeof="bibo:Chapter" about="#attributes-1" id="attributes-1"><h3><span class="secno">6.1 </span>Attributes</h3><dl><dt id="widl-BatteryManager-charging">     <code>charging</code>     of type          <span class="idlAttrType">boolean</span>, readonly   </dt>   <dd>     
+          Represents if the system's battery is charging.
+                    <div><em>No exceptions.</em></div>        </dd><dt id="widl-BatteryManager-chargingTime">     <code>chargingTime</code>     of type          <span class="idlAttrType">double</span>, readonly   </dt>   <dd>     
+          Represents the time remaining in seconds until the system's battery
+          is fully charged.
+                    <div><em>No exceptions.</em></div>        </dd><dt id="widl-BatteryManager-dischargingTime">     <code>dischargingTime</code>     of type          <span class="idlAttrType">double</span>, readonly   </dt>   <dd>     
+          Represents the time remaining in seconds until the system's battery
+          is completely discharged and the system is about to be suspended.
+                    <div><em>No exceptions.</em></div>        </dd><dt id="widl-BatteryManager-level">     <code>level</code>     of type          <span class="idlAttrType">double</span>, readonly   </dt>   <dd>     
+          Represents the current battery level scaled from 0 to 1.0.
+                    <div><em>No exceptions.</em></div>        </dd></dl></div>
+      <p>
+        When a <code>BatteryManager</code> object is created,
+        <code>charging</code> <em title="must" class="rfc2119">must</em> be set to true, <code>chargingTime</code>
+        to 0, <code>level</code> to 1.0 and <code>dischargingTime</code> to
+        the value positive Infinity, if the implementation is unable to report
+        the battery's charging state, charging time, level or remaining time
+        respectively.
+      </p>
+      <p>
+        The <code>charging</code> attribute <em title="must" class="rfc2119">must</em> be set to false if the battery
+        is discharging, and set to true, if the battery is charging, the
+        implementation is unable to report the state, or there is no battery
+        attached to the system, or otherwise. When the battery charging state
+        is updated, the <a class="internalDFN" href="#dfn-user-agent">user agent</a> <em title="must" class="rfc2119">must</em> <a class="internalDFN" href="#dfn-queue-a-task">queue a task</a> which sets
+        the <code>charging</code> attribute's value and <a class="internalDFN" href="#dfn-fires-a-simple-event">fires a simple
+        event</a> named <code><a class="internalDFN" href="#dfn-chargingchange">chargingchange</a></code> at the
+        <a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> object.
+      </p>
+      <p>
+        The <code>chargingTime</code> attribute <em title="must" class="rfc2119">must</em> be set to 0, if the
+        battery is full or there is no battery attached to the system, and to
+        the value positive Infinity if the battery is discharging, the
+        implementation is unable to report the remaining charging time, or
+        otherwise. When the battery charging time is updated, the <a class="internalDFN" href="#dfn-user-agent">user
+        agent</a> <em title="must" class="rfc2119">must</em> <a class="internalDFN" href="#dfn-queue-a-task">queue a task</a> which sets the
+        <code>chargingTime</code> attribute's value and <a class="internalDFN" href="#dfn-fires-a-simple-event">fires a simple
+        event</a> named <code><a class="internalDFN" href="#dfn-chargingtimechange">chargingtimechange</a></code> at the
+        <a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> object.
+      </p>
+      <p>
+        The <code>dischargingTime</code> attribute <em title="must" class="rfc2119">must</em> be set to the value
+        positive Infinity, if the battery is charging, the implementation is
+        unable to report the remaining discharging time, there is no battery
+        attached to the system, or otherwise. When the battery discharging time
+        is updated, the <a class="internalDFN" href="#dfn-user-agent">user agent</a> <em title="must" class="rfc2119">must</em> <a class="internalDFN" href="#dfn-queue-a-task">queue a task</a> which sets
+        the <code>dischargingTime</code> attribute's value and <a class="internalDFN" href="#dfn-fires-a-simple-event">fires a
+        simple event </a> named <code><a class="internalDFN" href="#dfn-dischargingtimechange">dischargingtimechange</a></code> at the
+        <a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> object.
+      </p>
+      <p>
+        The <code>level</code> attribute <em title="must" class="rfc2119">must</em> be set to 0 if the system's
+        battery is depleted and the system is about to be suspended, and to
+        1.0 if the battery is full, the implementation is unable to report the
+        battery's level, or there is no battery attached to the system. When
+        the battery level is updated, the <a class="internalDFN" href="#dfn-user-agent">user agent</a> <em title="must" class="rfc2119">must</em> <a class="internalDFN" href="#dfn-queue-a-task">queue a
+        task</a> which sets the <code>level</code> attribute's value and
+        <a class="internalDFN" href="#dfn-fires-a-simple-event">fires a simple event</a> named <code><a class="internalDFN" href="#dfn-levelchange">levelchange</a></code> at
+        the <a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> object.
+      </p>
+      <div class="note">
+        The definition of how often the <code><a class="internalDFN" href="#dfn-chargingtimechange">chargingtimechange</a></code>,
+        <code><a class="internalDFN" href="#dfn-dischargingtimechange">dischargingtimechange</a></code>, and <code><a class="internalDFN" href="#dfn-levelchange">levelchange</a>
+        </code> events are fired is left to the implementation.
+      </div>
+      <div class="section" typeof="bibo:Chapter" about="#event-handlers" id="event-handlers">
+        <h3><span class="secno">6.2 </span>Event handlers</h3>
+        <p>
+          The following are the <a class="internalDFN" href="#dfn-event-handlers">event handlers</a> (and their corresponding
+          <a class="internalDFN" href="#dfn-event-handler-event-types">event handler event types</a>) that <em title="must" class="rfc2119">must</em> be supported as
+          attributes by the <a class="idlType" href="#idl-def-BatteryManager"><code>BatteryManager</code></a> object:
+        </p>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>event handler</th>
+              <th>event handler event type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><code>onchargingchange</code></strong></td>
+              <td><code><dfn id="dfn-chargingchange">chargingchange</dfn></code></td>
+            </tr>
+            <tr>
+              <td><strong><code>onchargingtimechange</code></strong></td>
+              <td><code><dfn id="dfn-chargingtimechange">chargingtimechange</dfn></code></td>
+            </tr>
+            <tr>
+              <td><strong><code>ondischargingtimechange</code></strong></td>
+              <td><code><dfn id="dfn-dischargingtimechange">dischargingtimechange</dfn></code></td>
+            </tr>
+            <tr>
+              <td><strong><code>onlevelchange</code></strong></td>
+              <td><code><dfn id="dfn-levelchange">levelchange</dfn></code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div typeof="bibo:Chapter" about="#examples" id="examples" class="informative section">
+      <!--OddPage--><h2><span class="secno">7. </span>Examples</h2><em>This section is non-normative.</em>
+      <p>
+        This trivial example writes the battery level to the console each time
+        the level changes:
+      </p>
+      <div class="example">
+        <pre class="example highlight prettyprint"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">};</span></pre>
+      </div>
+      <p>
+        Alternatively, the same using the <code>addEventListener()</code>
+        method:
+      </p>
+      <div class="example">
+        <pre class="example highlight prettyprint"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'levelchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre>
+      </div>
+      <p>
+        The following example updates the indicators to show the charging
+        state, level and time remaining in minutes:
+      </p>
+      <div class="example">
+        <pre class="example highlight prettyprint"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln"><br></span><span class="tag">&lt;html&gt;</span><span class="pln"><br></span><span class="tag">&lt;head&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;title&gt;</span><span class="pln">Battery Status API Example</span><span class="tag">&lt;/title&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> battery </span><span class="pun">=</span><span class="pln"> navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; <br>&nbsp; &nbsp; battery</span><span class="pun">.</span><span class="pln">onchargingchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#charging'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">charging </span><span class="pun">?</span><span class="pln"> </span><span class="str">'charging'</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">'not charging'</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">};</span><span class="pln"><br><br>&nbsp; &nbsp; battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#level'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">};</span><span class="pln"><br><br>&nbsp; &nbsp; battery</span><span class="pun">.</span><span class="pln">ondischargingtimechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#dischargingTime'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">/</span><span class="pln"> </span><span class="lit">60</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">};</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/script&gt;</span><span class="pln"><br></span><span class="tag">&lt;/head&gt;</span><span class="pln"><br></span><span class="tag">&lt;body&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"charging"</span><span class="tag">&gt;</span><span class="pln">(charging state unknown)</span><span class="tag">&lt;/div&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"level"</span><span class="tag">&gt;</span><span class="pln">(battery level unknown)</span><span class="tag">&lt;/div&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"dischargingTime"</span><span class="tag">&gt;</span><span class="pln">(discharging time unknown)</span><span class="tag">&lt;/div&gt;</span><span class="pln"><br></span><span class="tag">&lt;/body&gt;</span><span class="pln"><br></span><span class="tag">&lt;/html&gt;</span></pre>
+      </div>
+    </div>
+    <div typeof="bibo:Chapter" about="#acknowledgements" id="acknowledgements" class="appendix section">
+      <!--OddPage--><h2><span class="secno">A. </span>Acknowledgements</h2>
+      <p>
+        The group is deeply indebted to Mounir Lamouri, Jonas Sicking, and
+        the Mozilla WebAPI team in general for their invaluable feedback
+        based on prototype implementations. Many thanks to the people behind
+        the System Information API and Device Orientation Event specification
+        for the initial inspiration. Also thanks to the nice folks bringing us
+        the Page Visibility specification, which motivated the editor of this
+        specification to write the introduction chapter discussing some
+        real-world high value use cases that apply equally to this
+        specification. Special thanks to all the participants of the Device
+        APIs Working Group and others who have sent in substantial feedback
+        and comments, and made the Web a better place for everyone by
+        doing so.
+      </p>
+    </div>
+  
+
+<div typeof="bibo:Chapter" about="#references" id="references" class="appendix section"><!--OddPage--><h2><span class="secno">B. </span>References</h2><div class="section" typeof="bibo:Chapter" about="#normative-references" id="normative-references"><h3><span class="secno">B.1 </span>Normative references</h3><dl about="" class="bibliography"><dt id="bib-HTML5">[HTML5]</dt><dd rel="dc:requires"><span class="reference-editors"><span class="view editor-name ">Ian Hickson</span>, <span class="view editor-name ">David Hyatt</span>.</span>
+  
+  <a class="reference-uri" href="http://www.w3.org/TR/2010/WD-html5-20100304/"><span class="view reference-name ">HTML 5</span></a>.
+  <span class="reference-date">4 March 2010</span>.
+  <span class="reference-status">W3C Working Draft</span>.
+  
+  URL: <a href="http://www.w3.org/TR/2010/WD-html5-20100304/">http://www.w3.org/TR/2010/WD-html5-20100304/</a></dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dc:requires"><span class="reference-editors"><span class="view editor-name ">S. Bradner</span>.</span>
+  
+  <a class="reference-uri" href="http://www.ietf.org/rfc/rfc2119.txt"><span class="view reference-name ">Key words for use in RFCs to Indicate Requirement Levels</span></a>.
+  <span class="reference-date">March 1997</span>.
+  <span class="reference-status">Internet RFC 2119</span>.
+  <span class="work-in-progress">(Work in progress.)</span>
+  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a></dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dc:requires"><span class="reference-editors"><span class="view editor-name ">Cameron McCormack</span>.</span>
+  
+  <a class="reference-uri" href="http://www.w3.org/TR/2008/WD-WebIDL-20081219"><span class="view reference-name ">Web IDL</span></a>.
+  <span class="reference-date">19 December 2008</span>.
+  <span class="reference-status">W3C Working Draft</span>.
+  
+  URL: <a href="http://www.w3.org/TR/2008/WD-WebIDL-20081219">http://www.w3.org/TR/2008/WD-WebIDL-20081219</a></dd></dl></div></div></body></html>
