@@ -551,13 +551,13 @@ interface <span class="idlInterfaceID">BatteryManager</span> : <span class="idlS
 </span><span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a>double</a></span></span>    <span class="idlAttrName"><a href="#widl-BatteryManager-dischargingTime">dischargingTime</a></span>;
 </span><span class="idlAttribute">    readonly attribute <span class="idlAttrType"><span><a>double</a></span></span>    <span class="idlAttrName"><a href="#widl-BatteryManager-level">level</a></span>;
 </span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
-             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-onchargingchange">onchargingchange</a></span>;
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-chargingchange">onchargingchange</a></span>;
 </span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
-             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-onchargingtimechange">onchargingtimechange</a></span>;
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-chargingtimechange">onchargingtimechange</a></span>;
 </span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
-             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-ondischargingtimechange">ondischargingtimechange</a></span>;
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-dischargingtimechange">ondischargingtimechange</a></span>;
 </span><span class="idlAttribute">    [<span class="extAttr">TreatNonCallableAsNull</span>]
-             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-onlevelchange">onlevelchange</a></span>;
+             attribute <span class="idlAttrType"><span><a>Function</a>?</span></span> <span class="idlAttrName"><a href="#dfn-levelchange">onlevelchange</a></span>;
 </span>};
 </span></pre><div class="section" id="attributes-1"><h3><span class="secno">6.1 </span>Attributes</h3><dl><dt id="widl-BatteryManager-charging">     <code>charging</code>     of type          <span class="idlAttrType">boolean</span>, readonly   </dt>   <dd>     
           Represents if the system's battery is charging.
