@@ -3,7 +3,7 @@
   <head>
     <title>Battery Status API</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script src='http://respec.specifiction.com/js/profiles/w3c-common.js' class='remove'></script>
+    <script src='http://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
     <script class="remove">
       var respecConfig = {
           specStatus:           "CR",
@@ -75,7 +75,7 @@
         for new emails every ten seconds without knowledge of the battery
         status:
       </p>
-      <pre class="example highlight">
+      <pre class="example sh_javascript">
         &lt;!DOCTYPE html&gt;
         &lt;html&gt;
         &lt;head&gt;
@@ -119,7 +119,7 @@
         battery, stop checking for emails if the battery is critically low and
         resume normal operation when the battery is charging:
       </p>
-      <pre class="example highlight">
+      <pre class="example sh_javascript">
         &lt;!DOCTYPE html&gt;
         &lt;html&gt;
         &lt;head&gt;
@@ -372,7 +372,7 @@
         the level changes:
       </p>
       <div class="example">
-        <pre class="example highlight">
+        <pre class="example sh_javascript">
           navigator.battery.onlevelchange = function () {
             console.log(navigator.battery.level);
           };
@@ -383,7 +383,7 @@
         method:
       </p>
       <div class="example">
-        <pre class="example highlight">
+        <pre class="example sh_javascript">
         navigator.battery.addEventListener('levelchange', function () {
           console.log(navigator.battery.level);
         }, false);
@@ -394,7 +394,7 @@
         state, level and time remaining in minutes:
       </p>
       <div class="example">
-        <pre class="example highlight">
+        <pre class="example sh_javascript">
           &lt;!DOCTYPE html&gt;
           &lt;html&gt;
           &lt;head&gt;
