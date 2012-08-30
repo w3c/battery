@@ -1,1 +1,6 @@
 index.html		Battery Status API Test Suite					
+battery-charging.html		Battery Status API Test Suite					
+battery-chargingchange.html		Battery Status API Test Suite					
+battery-created.html		Battery Status API Test Suite					
+battery-discharging.html		Battery Status API Test Suite					
+battery-full.html		Battery Status API Test Suite					
