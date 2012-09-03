@@ -6,11 +6,11 @@
     <script src='http://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
     <script class="remove">
       var respecConfig = {
-          specStatus:           "CR",
+          specStatus:           "ED",
           shortName:            "battery-status",
-          publishDate:          "2012-05-08",
-          previousPublishDate:  "2011-11-29",
-          previousMaturity:     "LC",
+          //publishDate:          "2012-05-08",
+          previousPublishDate:  "2012-05-08",
+          previousMaturity:     "CR",
           edDraftURI:           "http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html",
           // lcEnd:                "2011-12-20",
           crEnd:                "2012-07-01",
@@ -189,9 +189,9 @@
     <section>
       <h2>Terminology</h2>
       <p>
-        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#function">
-        Function</a></code> interface represents a function in the scripting
-        language being used as defined in [[!HTML5]].
+        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
+        EventHandler</a></code> interface represents a callback used for event
+        handlers as defined in [[!HTML5]].
       </p>
       <p>
         The concepts <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
@@ -255,22 +255,22 @@
           Represents the current battery level scaled from 0 to 1.0.
         </dd>
         <dt class="no-docs">
-          [TreatNonCallableAsNull] attribute Function? onchargingchange
+          attribute EventHandler onchargingchange
         </dt>
         <dd>
         </dd>
         <dt class="no-docs">
-          [TreatNonCallableAsNull] attribute Function? onchargingtimechange
+          attribute EventHandler onchargingtimechange
         </dt>
         <dd>
         </dd>
         <dt class="no-docs">
-          [TreatNonCallableAsNull] attribute Function? ondischargingtimechange
+          attribute EventHandler ondischargingtimechange
         </dt>
         <dd>
         </dd>
         <dt class="no-docs">
-          [TreatNonCallableAsNull] attribute Function? onlevelchange
+          attribute EventHandler onlevelchange
         </dt>
         <dd>
         </dd>
