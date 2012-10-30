@@ -29,7 +29,8 @@
       
       test(function() {
         assert_true(navigator.battery.chargingTime < Infinity);
-      }, 'The chargingTime attribute must be set to the value positive Infinity if the battery is discharging');
+      }, 'The chargingTime attribute must be set to the time remaining in ' +
+      'seconds until the system\'s battery is completely charged.');
       
       test(function() {
         assert_true(navigator.battery.dischargingTime === Infinity);
