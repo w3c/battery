@@ -23,7 +23,6 @@
     <script>
     (function() {
 
-      // timeout in 5 mins
       setup({ timeout: 5*60*1000 });
 
       test(function() {
@@ -32,8 +31,7 @@
       
       test(function() {
         assert_true(navigator.battery.chargingTime < Infinity);
-      }, 'The chargingTime attribute must be set to the time remaining in ' +
-      'seconds until the system\'s battery is completely charged.');
+      }, 'The chargingTime attribute must be set to the time remaining in seconds until the system\'s battery is completely charged.');
       
       test(function() {
         assert_true(navigator.battery.dischargingTime === Infinity);

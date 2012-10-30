@@ -19,11 +19,14 @@
         The battery must neither be empty or full, nor reach empty or full capacity during the test.
       </li>
     </ol>
+    <p>
+      The highest prime number discovered so far is:  <output id="prime"></output>
+    </p>
     <div id="log"></div>
     <script>
+
     (function() {
 
-      // timeout in 5 mins
       setup({ timeout: 5*60*1000 });
       
       test(function() {
@@ -36,8 +39,7 @@
       
       test(function() {
         assert_true(navigator.battery.dischargingTime < Infinity);
-      }, 'The dischargingTime attribute must be set to the time remaining in ' +
-      'seconds until the system\'s battery is completely discharged.');
+      }, 'The dischargingTime attribute must be set to the time remaining in seconds until the system\'s battery is completely discharged.');
       
       test(function() {
         assert_true(0 <= navigator.battery.level && navigator.battery.level <= 1.0);
@@ -45,10 +47,18 @@
       
       var onlevelchange_test = async_test('When the battery\'s level changes, must decrease the level attribute\'s value and fire a levelchange event.');
       var battery_level = navigator.battery.level;
-      // TODO: run some computationally heavy stuff e.g. in a worker to make the battery deplete faster?
+      
+      // compute primes to deplete the battery faster
+      var w = new Worker('prime.js');
+      w.postMessage('compute');
+      w.onmessage = function (e) {
+        document.querySelector('#prime').textContent = e.data;
+      }
+      
       navigator.battery.onlevelchange = onlevelchange_test.step_func(function (e) {
         assert_true(navigator.battery.level < battery_level, 'The value of the level attribute must decrease, if the battery is discharging.');
         onlevelchange_test.done();
+        w.terminate();
       });
       
     })();

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Battery Status API Test Suite</title>
+  <script src="http://www.w3c-test.org/resources/testharness.js"></script>
+  <link rel='stylesheet' href='http://w3c-test.org/resources/testharness.css' media='all'/>
+  </head>
+  <body>
+    <h1>Description</h1>
+    <p>
+       The battery charging state, charging time, discharging time and level are updated, and corresponding events fired, when the charger is plugged in.
+    </p>
+    <h2>Preconditions</h2>
+    <ol>
+      <li>
+        The device is unplugged from the charger before this test case is run.
+      </li>
+      <li>
+        The battery must not be full or reach full capacity during the time the test is run.
+      </li>
+    </ol>
+    <div id="log"></div>
+    <script>
+    (function() {
+
+      setup({ timeout: 5*60*1000 });
+      
+      alert('Unplug the device from its charger (if not already unplugged), and click OK.');
+      
+      var onchargingchange_test = async_test('When the battery charging state is updated, must fire a chargingchange event.');
+      navigator.battery.onchargingchange = onchargingchange_test.step_func(function (e) {
+        assert_true(navigator.battery.charging, 'The charging attribute must be set to true, if the battery is charging.')
+        onchargingchange_test.done();
+      });
+      
+      var onchargingtimechange_test = async_test('When the battery charging time is updated, must fire a chargingtimechange event.');
+      var battery_chargingtime = navigator.battery.chargingTime;
+      navigator.battery.onchargingtimechange = onchargingtimechange_test.step_func(function (e) {
+        assert_true(navigator.battery.chargingTime < battery_chargingtime, 'The value of the chargingTime attribute must decrease, if the battery is charging.');
+        onchargingtimechange_test.done();
+      });
+      
+      var ondischargingtimechange_test = async_test('When the battery discharging time is updated, must fire a dischargingtimechange event.');
+      var battery_dischargingtime = navigator.battery.dischargingTime;
+      navigator.battery.ondischargingtimechange = ondischargingtimechange_test.step_func(function (e) {
+        assert_true(navigator.battery.dischargingTime === Infinity, 'The value of the dischargingTime attribute must be set to Infinity, if the battery is charging.');
+        ondischargingtimechange_test.done();
+      });
+      
+      var onlevelchange_test = async_test('When the battery\'s level changes, must fire a levelchange event.');
+      var battery_level = navigator.battery.level;
+      navigator.battery.onlevelchange = onlevelchange_test.step_func(function (e) {
+        assert_true(navigator.battery.level > 0 && navigator.battery.level < 1.0, 'The value of the level attribute must >0 and <1.0');
+        onlevelchange_test.done();
+      });
+
+      alert('Plug in the charger, and click OK.');
+
+      })();
+    </script>
+  </body>
+</html>
