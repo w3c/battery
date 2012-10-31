@@ -13,7 +13,7 @@
     <h2>Preconditions</h2>
     <ol>
       <li>
-        The device is plugged in to the charger before this test case is run.
+        The device is plugged in to the charger before this test is run.
       </li>
       <li>
         The battery is full.
@@ -25,15 +25,15 @@
 
       test(function() {
         assert_true(navigator.battery.charging);
-      }, 'The charging attribute must be set to true if the battery is charging ("or otherwise" condition).');
+      }, 'The charging attribute must be set to true if the battery is full (the "otherwise" condition).');
       
       test(function() {
         assert_true(navigator.battery.chargingTime === 0);
-      }, 'The chargingTime attribute must be set to 0, if the battery is full.');
+      }, 'The chargingTime attribute must be set to 0.');
       
       test(function() {
         assert_true(navigator.battery.dischargingTime === Infinity);
-      }, 'The dischargingTime attribute must be set to the value positive Infinity if the battery is charging ("or otherwise" condition).');
+      }, 'The dischargingTime attribute must be set to the value positive Infinity (the "otherwise" condition).');
       
       test(function() {
         assert_true(navigator.battery.level === 1.0);
