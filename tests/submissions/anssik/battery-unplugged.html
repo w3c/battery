@@ -49,9 +49,18 @@
       
       var onlevelchange_test = async_test('When the battery\'s level changes, must fire a levelchange event.');
       var battery_level = navigator.battery.level;
+      
+      // compute primes to deplete the battery faster
+      var w = new Worker('prime.js');
+      w.postMessage('compute');
+      w.onmessage = function (e) {
+        document.querySelector('#prime').textContent = e.data;
+      };
+      
       navigator.battery.onlevelchange = onlevelchange_test.step_func(function (e) {
         assert_true(navigator.battery.level > 0 && navigator.battery.level < 1.0, 'The level attribute must be set to the current battery level scaled from 0 to 1.0.');
         onlevelchange_test.done();
+        w.terminate();
       });
 
       alert('Unplug in the charger, and click OK.');
