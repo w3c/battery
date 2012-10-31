@@ -1,5 +1,4 @@
 ---+ TODO
   
    * proper {level | chargingtime | dischargingtime}change tests
-   * async tests for *change when plugged in
    * validate tests on a real device and tweak timeouts for async tests

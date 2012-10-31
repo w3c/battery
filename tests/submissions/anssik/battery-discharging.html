@@ -24,7 +24,6 @@
     </p>
     <div id="log"></div>
     <script>
-
     (function() {
 
       setup({ timeout: 5*60*1000 });
@@ -53,7 +52,7 @@
       w.postMessage('compute');
       w.onmessage = function (e) {
         document.querySelector('#prime').textContent = e.data;
-      }
+      };
       
       navigator.battery.onlevelchange = onlevelchange_test.step_func(function (e) {
         assert_true(navigator.battery.level < battery_level, 'The value of the level attribute must decrease, if the battery is discharging.');
