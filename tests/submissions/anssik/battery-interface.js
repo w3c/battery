@@ -52,14 +52,14 @@
   *
   * [NoInterfaceObject]
   * interface BatteryManager : EventTarget {
-  *     readonly attribute boolean      charging;
-  *     readonly attribute double       chargingTime;
-  *     readonly attribute double       dischargingTime;
-  *     readonly attribute double       level;
-  *              attribute EventHandler onchargingchange;
-  *              attribute EventHandler onchargingtimechange;
-  *              attribute EventHandler ondischargingtimechange;
-  *              attribute EventHandler onlevelchange;
+  *     readonly attribute boolean             charging;
+  *     readonly attribute unrestricted double chargingTime;
+  *     readonly attribute unrestricted double dischargingTime;
+  *     readonly attribute double              level;
+  *              attribute EventHandler        onchargingchange;
+  *              attribute EventHandler        onchargingtimechange;
+  *              attribute EventHandler        ondischargingtimechange;
+  *              attribute EventHandler        onlevelchange;
   * };
   *
   */
@@ -80,7 +80,7 @@
     assert_readonly(navigator.battery, 'charging', 'charging must be readonly')
   }, 'charging attribute is readonly');
 
-  // readonly attribute double chargingTime;
+  // readonly attribute unrestricted double chargingTime;
 
   test(function() {
     assert_idl_attribute(navigator.battery, 'chargingTime', 'battery must have chargingTime attribute');
@@ -90,7 +90,7 @@
     assert_readonly(navigator.battery, 'chargingTime', 'chargingTime must be readonly')
   }, 'chargingTime attribute is readonly');
 
-  // readonly attribute double dischargingTime;
+  // readonly attribute unrestricted double dischargingTime;
 
   test(function() {
     assert_idl_attribute(navigator.battery, 'dischargingTime', 'battery must have dischargingTime attribute');
