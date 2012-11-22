@@ -3,6 +3,7 @@
   <head>
     <title>Battery Status API Test Suite</title>
     <script src="/resources/testharness.js"></script>
+    <script src="countdown.js"></script>
     <link rel="stylesheet" href="/resources/testharness.css" media="all"/>
     <meta name="flags" content="interact">
   </head>
@@ -27,7 +28,9 @@
     <script>
     (function() {
 
-      setup({ timeout: 5*60*1000 });
+      var t = 5*60*1000;
+      setup({ timeout: t });
+      countdown({ timeout: t });
       
       test(function() {
         assert_false(navigator.battery.charging);
