@@ -61,6 +61,9 @@
       navigator.battery.onlevelchange = onlevelchange_test.step_func(function (e) {
         assert_true(navigator.battery.level < battery_level, 'The value of the level attribute must decrease.');
         onlevelchange_test.done();
+      });
+      
+      add_completion_callback(function () {
         w.terminate();
       });
       
