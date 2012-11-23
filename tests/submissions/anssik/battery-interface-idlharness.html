@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Battery Status API Test Suite</title>
+    <script src="/resources/testharness.js"></script>
+    <script src="/resources/testharnessreport.js"></script>
+    <script src="/resources/WebIDLParser.js"></script>
+    <script src="/resources/idlharness.js"></script>
+    <script>
+    var idl_array = new IdlArray();
+    idl_array.add_untested_idls("interface Navigator { };");
+    idl_array.add_idls("Navigator implements NavigatorBattery;");
+    idl_array.add_idls("[NoInterfaceObject] interface NavigatorBattery {\
+        readonly attribute BatteryManager battery;\
+    };");
+    idl_array.add_idls("[NoInterfaceObject] interface BatteryManager : EventTarget {\
+        readonly attribute boolean   charging;\
+        readonly attribute double    chargingTime;\
+        readonly attribute double    dischargingTime;\
+        readonly attribute double    level;\
+        [TreatNonCallableAsNull]\
+                 attribute Function? onchargingchange;\
+        [TreatNonCallableAsNull]\
+                 attribute Function? onchargingtimechange;\
+        [TreatNonCallableAsNull]\
+                 attribute Function? ondischargingtimechange;\
+        [TreatNonCallableAsNull]\
+                 attribute Function? onlevelchange;\
+    };");
+    idl_array.add_objects({Navigator: ["navigator"], BatteryManager: ["navigator.battery"]});
+    idl_array.test();
+    </script>
+  </head>
+  <body>
+    <h1>Description</h1>
+    <p>
+      This test validates the BatteryManager interface IDL.
+    </p>
+    <p>
+      This test uses <a href="/resources/idlharness.js">idlharness.js</a>, and
+      is an alternative to the <a href="battery-interface.html">battery-interface.html</a>
+      test.
+    </p>
+    <div id="log"></div>
+    <p>
+      <small>
+        Distributed under both the
+        <a href="http://www.w3.org/Consortium/Legal/2008/04-testsuite-license">
+        W3C Test Suite License</a> and the
+        <a href="http://www.w3.org/Consortium/Legal/2008/03-bsd-license">
+        W3C 3-clause BSD License</a>. To contribute to a W3C Test Suite, see the
+        <a href="http://www.w3.org/2004/10/27-testcases">policies and contribution
+        forms</a>.
+      </small>
+    </p>
+  </body>
+</html>
+
+
