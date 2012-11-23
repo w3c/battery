@@ -5,6 +5,9 @@
     <script src="/resources/testharness.js"></script>
     <script src="countdown.js"></script>
     <link rel="stylesheet" href="/resources/testharness.css" media="all"/>
+    <style>
+      #note { background-color: #fef1b5; border: solid 1px #cdab2d; padding: 5px; margin: 15px; display: none; }
+    </style>
     <meta name="flags" content="interact">
   </head>
   <body>
@@ -21,6 +24,9 @@
         The battery must not be full or reach full capacity during the time the test is run.
       </li>
     </ol>
+    <div id="note">
+      Plug in the charger and wait for all the tests to complete.
+    </div>
     <div id="log"></div>
     <script>
     (function() {
@@ -29,9 +35,7 @@
       setup({ timeout: t });
       countdown({ timeout: t });
       
-      alert('Unplug the device from its charger (if not already unplugged), and click OK.');
-      
-      var onchargingchange_test = async_test('When the device is plugged in and its charging state is updated, must set the level attribute\'s value to true and fire a chargingchange event.');
+      var onchargingchange_test = async_test('When the device is plugged in and its charging state is updated, must set the charging attribute\'s value to true and fire a chargingchange event.');
       navigator.battery.onchargingchange = onchargingchange_test.step_func(function (e) {
         assert_true(navigator.battery.charging, 'The charging attribute must be set to true.')
         onchargingchange_test.done();
@@ -57,9 +61,17 @@
         assert_true(navigator.battery.level > 0 && navigator.battery.level < 1.0, 'The level attribute must be set to the current battery level scaled from 0 to 1.0. If the reported battery level ' + navigator.battery.level + ' is not correct, please indicate that the test has failed.');
         onlevelchange_test.done();
       });
-
-      alert('Plug in the charger, and click OK.');
-
+      
+      setTimeout(function() {
+        var note = document.querySelector('#note');
+        note.style.display = 'block';
+        navigator.battery.onchargingchange = function (e) {
+          if (navigator.battery.charging) {
+            note.style.display = 'none';
+          }
+        };
+      }, 4000);
+      
       })();
     </script>
   </body>

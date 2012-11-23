@@ -5,6 +5,9 @@
     <script src="/resources/testharness.js"></script>
     <script src="countdown.js"></script>
     <link rel="stylesheet" href="/resources/testharness.css" media="all"/>
+    <style>
+      #note { background-color: #fef1b5; border: solid 1px #cdab2d; padding: 5px; margin: 15px; display: none; }
+    </style>
     <meta name="flags" content="interact">
   </head>
   <body>
@@ -24,6 +27,9 @@
     <p>
       The highest prime number discovered so far is:  <output id="prime"></output>
     </p>
+    <div id="note">
+      Unplug the charger and wait for all the tests to complete.
+    </div>
     <div id="log"></div>
     <script>
     (function() {
@@ -32,9 +38,7 @@
       setup({ timeout: t });
       countdown({ timeout: t });
       
-      alert('Plug the device into its charger (if not already plugged in), and click OK.');
-      
-      var onchargingchange_test = async_test('When the device is unplugged in and its charging state is updated, must set the level attribute\'s value to false and fire a chargingchange event.');
+      var onchargingchange_test = async_test('When the device is unplugged in and its charging state is updated, must set the charging attribute\'s value to false and fire a chargingchange event.');
       navigator.battery.onchargingchange = onchargingchange_test.step_func(function (e) {
         assert_false(navigator.battery.charging, 'The charging attribute must be set to false.')
         onchargingchange_test.done();
@@ -67,14 +71,23 @@
       navigator.battery.onlevelchange = onlevelchange_test.step_func(function (e) {
         assert_true(navigator.battery.level > 0 && navigator.battery.level < 1.0, 'The level attribute must be set to the current battery level scaled from 0 to 1.0.');
         onlevelchange_test.done();
+        w.terminate();
       });
 
       add_completion_callback(function () {
         w.terminate();
       });
 
-      alert('Unplug the charger, and click OK.');
-
+      setTimeout(function() {
+        var note = document.querySelector('#note');
+        note.style.display = 'block';
+        navigator.battery.onchargingchange = function (e) {
+          if (!navigator.battery.charging) {
+            note.style.display = 'none';
+          }
+        };
+      }, 4000);
+      
       })();
     </script>
   </body>
