@@ -25,6 +25,7 @@
           wgURI:        "http://www.w3.org/2009/dap/",
           wgPublicList: "public-device-apis",
           wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/43696/status",
+          testSuiteURI: "http://w3c-test.org/dap/battery/tests/"
       };
     </script>
   </head>
@@ -371,58 +372,52 @@
         This trivial example writes the battery level to the console each time
         the level changes:
       </p>
-      <div class="example">
-        <pre class="example sh_javascript">
-          navigator.battery.onlevelchange = function () {
-            console.log(navigator.battery.level);
-          };
-        </pre>
-      </div>
+      <pre class="example sh_javascript">
+        navigator.battery.onlevelchange = function () {
+          console.log(navigator.battery.level);
+        };
+      </pre>
       <p>
         Alternatively, the same using the <code>addEventListener()</code>
         method:
       </p>
-      <div class="example">
-        <pre class="example sh_javascript">
-        navigator.battery.addEventListener('levelchange', function () {
-          console.log(navigator.battery.level);
-        }, false);
-        </pre>
-      </div>
+      <pre class="example sh_javascript">
+      navigator.battery.addEventListener('levelchange', function () {
+        console.log(navigator.battery.level);
+      }, false);
+      </pre>
       <p>
         The following example updates the indicators to show the charging
         state, level and time remaining in minutes:
       </p>
-      <div class="example">
-        <pre class="example sh_javascript">
-          &lt;!DOCTYPE html&gt;
-          &lt;html&gt;
-          &lt;head&gt;
-            &lt;title&gt;Battery Status API Example&lt;/title&gt;
-            &lt;script&gt;
-              var battery = navigator.battery;
-              
-              battery.onchargingchange = function () {
-                document.querySelector('#charging').textContent = battery.charging ? 'charging' : 'not charging';
-              };
+      <pre class="example sh_javascript">
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Battery Status API Example&lt;/title&gt;
+          &lt;script&gt;
+            var battery = navigator.battery;
+            
+            battery.onchargingchange = function () {
+              document.querySelector('#charging').textContent = battery.charging ? 'charging' : 'not charging';
+            };
 
-              battery.onlevelchange = function () {
-                document.querySelector('#level').textContent = battery.level;
-              };
+            battery.onlevelchange = function () {
+              document.querySelector('#level').textContent = battery.level;
+            };
 
-              battery.ondischargingtimechange = function () {
-                document.querySelector('#dischargingTime').textContent = battery.dischargingTime / 60;
-              };
-            &lt;/script&gt;
-          &lt;/head&gt;
-          &lt;body&gt;
-            &lt;div id="charging"&gt;(charging state unknown)&lt;/div&gt;
-            &lt;div id="level"&gt;(battery level unknown)&lt;/div&gt;
-            &lt;div id="dischargingTime"&gt;(discharging time unknown)&lt;/div&gt;
-          &lt;/body&gt;
-          &lt;/html&gt;
-        </pre>
-      </div>
+            battery.ondischargingtimechange = function () {
+              document.querySelector('#dischargingTime').textContent = battery.dischargingTime / 60;
+            };
+          &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;div id="charging"&gt;(charging state unknown)&lt;/div&gt;
+          &lt;div id="level"&gt;(battery level unknown)&lt;/div&gt;
+          &lt;div id="dischargingTime"&gt;(discharging time unknown)&lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+      </pre>
     </section>
     <section class="appendix">
       <h2>Acknowledgements</h2>
