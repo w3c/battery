@@ -20,6 +20,7 @@
           ],
           inlineCSS:    true,
           noIDLIn:      true,
+          noLegacyStyle: true,
           extraCSS:     ["../ReSpec.js/css/respec.css"],
           wg:           "Device APIs Working Group",
           wgURI:        "http://www.w3.org/2009/dap/",
@@ -191,6 +192,11 @@
     <section>
       <h2>Terminology</h2>
       <p>
+        The <code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
+        Navigator</a></code> interface this specification extends is defined
+        in [[!HTML5]].
+      </p>
+      <p>
         The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
         EventHandler</a></code> interface represents a callback used for event
         handlers as defined in [[!HTML5]].
@@ -221,13 +227,13 @@
     <section>
       <h2><a>Navigator</a> Interface</h2>
       <p>
-        A <a>BatteryManager</a> object is exposed on the <code>Navigator</code> object.
+        The <code>battery</code> attribute of the <a>Navigator</a> interface
+        MUST return an instance of the <a>BatteryManager</a> interface, which
+        represents the battery status of the hosting device.
       </p>
       <dl title="partial interface Navigator" class="idl">
         <dt>readonly attribute BatteryManager battery</dt>
-        <dd>
-          The object that exposes the battery status information.
-        </dd>
+        <dd></dd>
       </dl>
     </section>
 
@@ -236,46 +242,32 @@
       <dl title="interface BatteryManager : EventTarget"
           class="idl">
         <dt>readonly attribute boolean charging</dt>
-        <dd>
-          Represents if the system's battery is charging.
-        </dd>
+        <dd></dd>
         <dt>readonly attribute unrestricted double chargingTime</dt>
-        <dd>
-          Represents the time remaining in seconds until the system's battery
-          is fully charged.
-        </dd>
+        <dd></dd>
         <dt>readonly attribute unrestricted double dischargingTime</dt>
-        <dd>
-          Represents the time remaining in seconds until the system's battery
-          is completely discharged and the system is about to be suspended.
-        </dd>
+        <dd></dd>
         <dt>readonly attribute double level</dt>
-        <dd>
-          Represents the current battery level scaled from 0 to 1.0.
-        </dd>
+        <dd></dd>
         <dt class="no-docs">
           attribute EventHandler onchargingchange
         </dt>
-        <dd>
-        </dd>
+        <dd></dd>
         <dt class="no-docs">
           attribute EventHandler onchargingtimechange
         </dt>
-        <dd>
-        </dd>
+        <dd></dd>
         <dt class="no-docs">
           attribute EventHandler ondischargingtimechange
         </dt>
-        <dd>
-        </dd>
+        <dd></dd>
         <dt class="no-docs">
           attribute EventHandler onlevelchange
         </dt>
-        <dd>
-        </dd>
+        <dd></dd>
       </dl>
       <p>
-        When a <code>BatteryManager</code> object is created,
+        When a <a>BatteryManager</a> object is created,
         <code>charging</code> MUST be set to true, <code>chargingTime</code>
         to 0, <code>level</code> to 1.0 and <code>dischargingTime</code> to
         the value positive Infinity, if the implementation is unable to report
@@ -290,7 +282,8 @@
         is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
         the <code>charging</code> attribute's value and <a>fires a simple
         event</a> named <code><a>chargingchange</a></code> at the
-        <a>BatteryManager</a> object.
+        <a>BatteryManager</a> object. It represents the charging state of the
+        system's battery.
       </p>
       <p>
         The <code>chargingTime</code> attribute MUST be set to 0, if the
@@ -301,7 +294,8 @@
         agent</a> MUST <a>queue a task</a> which sets the
         <code>chargingTime</code> attribute's value and <a>fires a simple
         event</a> named <code><a>chargingtimechange</a></code> at the
-        <a>BatteryManager</a> object.
+        <a>BatteryManager</a> object. It represents the time remaining in
+        seconds until the system's battery is fully charged.
       </p>
       <p>
         The <code>dischargingTime</code> attribute MUST be set to the value
@@ -311,7 +305,9 @@
         is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
         the <code>dischargingTime</code> attribute's value and <a>fires a
         simple event </a> named <code><a>dischargingtimechange</a></code> at the
-        <a>BatteryManager</a> object.
+        <a>BatteryManager</a> object. It represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended.
       </p>
       <p>
         The <code>level</code> attribute MUST be set to 0 if the system's
@@ -321,7 +317,8 @@
         the battery level is updated, the <a>user agent</a> MUST <a>queue a
         task</a> which sets the <code>level</code> attribute's value and
         <a>fires a simple event</a> named <code><a>levelchange</a></code> at
-        the <a>BatteryManager</a> object.
+        the <a>BatteryManager</a> object. It represents the level of the
+        system's battery.
       </p>
       <div class="note">
         The definition of how often the <code><a>chargingtimechange</a></code>,

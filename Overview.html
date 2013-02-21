@@ -412,7 +412,7 @@ table.exceptions table {
   </p>
   <h1 class="title" id="title">Battery Status API</h1>
   
-  <h2 id="w3c-editor-s-draft-07-february-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft 07 February 2013</h2>
+  <h2 id="w3c-editor-s-draft-21-february-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft 21 February 2013</h2>
   <dl>
     
       <dt>This version:</dt>
@@ -529,7 +529,7 @@ table.exceptions table {
       
     
   
-</section><section id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#navigator-interface" class="tocxref"><span class="secno">5. </span><span class="formerLink"><code>Navigator</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">5.1 </span>Attributes</a></li></ul></li><li class="tocline"><a href="#batterymanager-interface" class="tocxref"><span class="secno">6. </span><span class="formerLink"><code>BatteryManager</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#attributes-1" class="tocxref"><span class="secno">6.1 </span>Attributes</a></li><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">6.2 </span>Event handlers</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
+</section><section id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#navigator-interface" class="tocxref"><span class="secno">5. </span><span class="formerLink"><code>Navigator</code></span> Interface</a></li><li class="tocline"><a href="#batterymanager-interface" class="tocxref"><span class="secno">6. </span><span class="formerLink"><code>BatteryManager</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">6.1 </span>Event handlers</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
     
     
     
@@ -681,6 +681,11 @@ table.exceptions table {
     <section id="terminology">
       <!--OddPage--><h2><span class="secno">3. </span>Terminology</h2>
       <p>
+        The <code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
+        Navigator</a></code> interface this specification extends is defined
+        in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
+      </p>
+      <p>
         The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
         EventHandler</a></code> interface represents a callback used for event
         handlers as defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
@@ -711,13 +716,13 @@ table.exceptions table {
     <section id="navigator-interface">
       <!--OddPage--><h2><span class="secno">5. </span><a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> Interface</h2>
       <p>
-        A <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is exposed on the <code>Navigator</code> object.
+        The <code>battery</code> attribute of the <a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> interface
+        <em class="rfc2119" title="must">must</em> return an instance of the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface, which
+        represents the battery status of the hosting device.
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-Navigator">partial interface <span class="idlInterfaceID">Navigator</span> {
 <span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a></span> <span class="idlAttrName"><a href="#widl-Navigator-battery">battery</a></span>;</span>
-};</span></pre><section id="attributes"><h3><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-Navigator-battery"><code>battery</code> of type <span class="idlAttrType"><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a></span>, readonly</dt><dd>
-          The object that exposes the battery status information.
-        </dd></dl></section>
+};</span></pre>
     </section>
 
     <section id="batterymanager-interface">
@@ -731,23 +736,9 @@ table.exceptions table {
 <span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingtimechange">onchargingtimechange</a></span>;</span>
 <span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</a></span>;</span>
 <span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
-};</span></pre><section id="attributes-1"><h3><span class="secno">6.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-BatteryManager-charging"><code>charging</code> of type <span class="idlAttrType"><a>boolean</a></span>, readonly</dt><dd>
-          Represents if the system's battery is charging.
-        </dd><dt id="widl-BatteryManager-chargingTime"><code>chargingTime</code> of type <span class="idlAttrType"><a>unrestricted double</a></span>, readonly</dt><dd>
-          Represents the time remaining in seconds until the system's battery
-          is fully charged.
-        </dd><dt id="widl-BatteryManager-dischargingTime"><code>dischargingTime</code> of type <span class="idlAttrType"><a>unrestricted double</a></span>, readonly</dt><dd>
-          Represents the time remaining in seconds until the system's battery
-          is completely discharged and the system is about to be suspended.
-        </dd><dt id="widl-BatteryManager-level"><code>level</code> of type <span class="idlAttrType"><a>double</a></span>, readonly</dt><dd>
-          Represents the current battery level scaled from 0 to 1.0.
-        </dd><dt id="widl-BatteryManager-onchargingchange"><code>onchargingchange</code> of type <span class="idlAttrType"><a>EventHandler</a></span></dt><dd>
-        </dd><dt id="widl-BatteryManager-onchargingtimechange"><code>onchargingtimechange</code> of type <span class="idlAttrType"><a>EventHandler</a></span></dt><dd>
-        </dd><dt id="widl-BatteryManager-ondischargingtimechange"><code>ondischargingtimechange</code> of type <span class="idlAttrType"><a>EventHandler</a></span></dt><dd>
-        </dd><dt id="widl-BatteryManager-onlevelchange"><code>onlevelchange</code> of type <span class="idlAttrType"><a>EventHandler</a></span></dt><dd>
-        </dd></dl></section>
+};</span></pre>
       <p>
-        When a <code>BatteryManager</code> object is created,
+        When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created,
         <code>charging</code> <em class="rfc2119" title="must">must</em> be set to true, <code>chargingTime</code>
         to 0, <code>level</code> to 1.0 and <code>dischargingTime</code> to
         the value positive Infinity, if the implementation is unable to report
@@ -762,7 +753,8 @@ table.exceptions table {
         is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets
         the <code>charging</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple
         event</a> named <code><a href="#dfn-chargingchange" class="internalDFN">chargingchange</a></code> at the
-        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
+        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the charging state of the
+        system's battery.
       </p>
       <p>
         The <code>chargingTime</code> attribute <em class="rfc2119" title="must">must</em> be set to 0, if the
@@ -773,7 +765,8 @@ table.exceptions table {
         agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets the
         <code>chargingTime</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple
         event</a> named <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code> at the
-        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
+        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the time remaining in
+        seconds until the system's battery is fully charged.
       </p>
       <p>
         The <code>dischargingTime</code> attribute <em class="rfc2119" title="must">must</em> be set to the value
@@ -783,7 +776,9 @@ table.exceptions table {
         is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets
         the <code>dischargingTime</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a
         simple event </a> named <code><a href="#dfn-dischargingtimechange" class="internalDFN">dischargingtimechange</a></code> at the
-        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
+        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended.
       </p>
       <p>
         The <code>level</code> attribute <em class="rfc2119" title="must">must</em> be set to 0 if the system's
@@ -793,7 +788,8 @@ table.exceptions table {
         the battery level is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a
         task</a> which sets the <code>level</code> attribute's value and
         <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple event</a> named <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a></code> at
-        the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
+        the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the level of the
+        system's battery.
       </p>
       <div class="note"><div class="note-title"><span>Note</span></div><div class="">
         The definition of how often the <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code>,
@@ -801,7 +797,7 @@ table.exceptions table {
         </code> events are fired is left to the implementation.
       </div></div>
       <section id="event-handlers">
-        <h3><span class="secno">6.2 </span>Event handlers</h3>
+        <h3><span class="secno">6.1 </span>Event handlers</h3>
         <p>
           The following are the <a href="#dfn-event-handlers" class="internalDFN">event handlers</a> (and their corresponding
           <a href="#dfn-event-handler-event-types" class="internalDFN">event handler event types</a>) that <em class="rfc2119" title="must">must</em> be supported as
