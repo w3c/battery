@@ -31,11 +31,8 @@
   
   /**
   *
-  * Navigator implements NavigatorBattery;
-  *
-  * [NoInterfaceObject]
-  * interface NavigatorBattery {
-  *    readonly attribute BatteryManager battery;
+  * partial interface Navigator {
+  *     readonly attribute BatteryManager battery;
   * };
   *
   */
@@ -45,12 +42,11 @@
   }, 'battery is present on navigator');
     
   test(function() {
-    assert_readonly(navigator, 'battery', 'battery must be readonly')
+    assert_readonly(navigator, 'battery', 'battery must be readonly');
   }, 'battery is readonly');
   
   /**
   *
-  * [NoInterfaceObject]
   * interface BatteryManager : EventTarget {
   *     readonly attribute boolean             charging;
   *     readonly attribute unrestricted double chargingTime;
@@ -65,6 +61,10 @@
   */
 
   // interface BatteryManager : EventTarget {
+
+  test(function() {
+      assert_own_property(window, 'BatteryManager');
+  }, 'window has an own property BatteryManager');
   
   test(function() {
       assert_true(navigator.battery instanceof EventTarget);

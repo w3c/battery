@@ -6,27 +6,29 @@
     <script src="/resources/testharnessreport.js"></script>
     <script src="/resources/WebIDLParser.js"></script>
     <script src="/resources/idlharness.js"></script>
+    <script type="text/plain">
+    partial interface Navigator {
+        readonly attribute BatteryManager battery;
+    };
+    
+    interface BatteryManager : EventTarget {
+        readonly attribute boolean             charging;
+        readonly attribute unrestricted double chargingTime;
+        readonly attribute unrestricted double dischargingTime;
+        readonly attribute double              level;
+                 attribute EventHandler        onchargingchange;
+                 attribute EventHandler        onchargingtimechange;
+                 attribute EventHandler        ondischargingtimechange;
+                 attribute EventHandler        onlevelchange;
+    };
+    </script>
     <script>
     var idl_array = new IdlArray();
-    idl_array.add_untested_idls("interface Navigator { };");
-    idl_array.add_idls("Navigator implements NavigatorBattery;");
-    idl_array.add_idls("[NoInterfaceObject] interface NavigatorBattery {\
-        readonly attribute BatteryManager battery;\
-    };");
-    idl_array.add_idls("[NoInterfaceObject] interface BatteryManager : EventTarget {\
-        readonly attribute boolean   charging;\
-        readonly attribute double    chargingTime;\
-        readonly attribute double    dischargingTime;\
-        readonly attribute double    level;\
-        [TreatNonCallableAsNull]\
-                 attribute Function? onchargingchange;\
-        [TreatNonCallableAsNull]\
-                 attribute Function? onchargingtimechange;\
-        [TreatNonCallableAsNull]\
-                 attribute Function? ondischargingtimechange;\
-        [TreatNonCallableAsNull]\
-                 attribute Function? onlevelchange;\
-    };");
+    idl_array.add_untested_idls('interface Navigator { };');
+    var idls = document.querySelector('script[type=text\\/plain]').textContent;
+    // replace 'EventHandler' and 'unrestricted double' unrecognized by idlharness.js
+    idls = idls.replace('EventHandler', 'Function?', 'g').replace('unrestricted double', 'double', 'g');
+    idl_array.add_idls(idls);
     idl_array.add_objects({Navigator: ["navigator"], BatteryManager: ["navigator.battery"]});
     idl_array.test();
     </script>
@@ -38,7 +40,7 @@
     </p>
     <p>
       This test uses <a href="/resources/idlharness.js">idlharness.js</a>, and
-      is an alternative to the <a href="battery-interface.html">battery-interface.html</a>
+      is complementary to the <a href="battery-interface.html">battery-interface.html</a>
       test.
     </p>
     <div id="log"></div>
