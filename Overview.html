@@ -51,12 +51,6 @@ code {
     color:  #ff4500;
 }
 
-
-/* --- --- */
-ol.algorithm { counter-reset:numsection; list-style-type: none; }
-ol.algorithm li { margin: 0.5em 0; }
-ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
-
 /* --- TOC --- */
 .toc a, .tof a {
     text-decoration:    none;
@@ -159,7 +153,7 @@ div.issue-title, div.note-title {
     color: #b9ab2d;
 }
 div.issue-title { color: #e05252; }
-div.note-title { color: #52e052; }
+div.note-title { color: #2b2; }
 div.issue-title span, div.note-title span {
     text-transform: uppercase;
 }
@@ -174,7 +168,7 @@ div.note, div.issue {
     border-left-style: solid;
 }
 div.issue, div.note {
-    padding: 0.5em;
+    padding: 1em 1.2em 0.5em;
     margin: 1em 0;
     position: relative;
     clear: both;
@@ -231,6 +225,11 @@ pre.idl::before {
     font-weight:    bold;
     color:  #005a9c;
 }
+a.idlEnumItem {
+    color:  #000;
+    border-bottom:  1px dotted #ccc;
+    text-decoration: none;
+}
 
 .idlSuperclass {
     font-style: italic;
@@ -263,6 +262,16 @@ pre.idl::before {
     text-decoration: none;
 }
 
+/*.idlCtor*/
+.idlCtorName {
+    color:  #ff4500;
+}
+.idlCtorName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
 /*.idlParam*/
 .idlParamType {
     color:  #005a9c;
@@ -273,6 +282,11 @@ pre.idl::before {
 
 .extAttr {
     color:  #666;
+}
+
+/*.idlSectionComment*/
+.idlSectionComment {
+    color: gray;
 }
 
 /*.idlConst*/
@@ -322,15 +336,15 @@ pre.idl::before {
     font-weight:    bold;
 }
 
-dl.attributes, dl.methods, dl.constants, dl.fields, dl.dictionary-members {
+dl.attributes, dl.methods, dl.constants, dl.constructors, dl.fields, dl.dictionary-members {
     margin-left:    2em;
 }
 
-.attributes dt, .methods dt, .constants dt, .fields dt, .dictionary-members dt {
+.attributes dt, .methods dt, .constants dt, .constructors dt, .fields dt, .dictionary-members dt {
     font-weight:    normal;
 }
 
-.attributes dt code, .methods dt code, .constants dt code, .fields dt code, .dictionary-members dt code {
+.attributes dt code, .methods dt code, .constants dt code, .constructors dt code, .fields dt code, .dictionary-members dt code {
     font-weight:    bold;
     color:  #000;
     font-family:    monospace;
@@ -356,7 +370,11 @@ dl.attributes, dl.methods, dl.constants, dl.fields, dl.dictionary-members {
     background:  #ddffd2;
 }
 
-.attributes dd, .methods dd, .constants dd, .fields dd, .dictionary-members dd {
+.constructors dt code {
+    background:  #cfc;
+}
+
+.attributes dd, .methods dd, .constants dd, .constructors dd, .fields dd, .dictionary-members dd {
     margin-bottom:  1em;
 }
 
@@ -403,7 +421,7 @@ table.exceptions table {
     border-collapse:    collapse;
     width:  100%;
 }
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
+</style><link rel="stylesheet" href="//www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
   <body><div class="head">
   <p>
     
@@ -412,7 +430,7 @@ table.exceptions table {
   </p>
   <h1 class="title" id="title">Battery Status API</h1>
   
-  <h2 id="w3c-editor-s-draft-21-february-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft 21 February 2013</h2>
+  <h2 id="w3c-editor-s-draft-19-april-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft 19 April 2013</h2>
   <dl>
     
       <dt>This version:</dt>
@@ -435,7 +453,7 @@ table.exceptions table {
     
     
     <dt>Editors:</dt>
-    <dd><span>Anssi Kostiainen</span>, <a href="http://nokia.com/">Nokia</a></dd>
+    <dd><span>Anssi Kostiainen</span>, <a href="http://intel.com/">Intel</a></dd>
 <dd><span>Mounir Lamouri</span>, <a href="http://mozilla.org/">Mozilla</a></dd>
 
     
@@ -662,8 +680,8 @@ table.exceptions table {
   normative.
 </p>
 <p>
-  The key words <em class="rfc2119" title="must">must</em>, <em class="rfc2119" title="must not">must not</em>, <em class="rfc2119" title="required">required</em>, <em class="rfc2119" title="should">should</em>, <em class="rfc2119" title="should not">should not</em>, <em class="rfc2119" title="recommended">recommended</em>, <em class="rfc2119" title="may">may</em>,
-  and <em class="rfc2119" title="optional">optional</em> in this specification are to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
+  The key words <em class="rfc2119" title="MUST">MUST</em>, <em class="rfc2119" title="MUST NOT">MUST NOT</em>, <em class="rfc2119" title="REQUIRED">REQUIRED</em>, <em class="rfc2119" title="SHOULD">SHOULD</em>, <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em>, <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>, <em class="rfc2119" title="MAY">MAY</em>,
+  and <em class="rfc2119" title="OPTIONAL">OPTIONAL</em> in this specification are to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
 </p>
 
       <p>
@@ -717,63 +735,63 @@ table.exceptions table {
       <!--OddPage--><h2><span class="secno">5. </span><a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> Interface</h2>
       <p>
         The <code>battery</code> attribute of the <a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> interface
-        <em class="rfc2119" title="must">must</em> return an instance of the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface, which
+        <em class="rfc2119" title="MUST">MUST</em> return an instance of the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface, which
         represents the battery status of the hosting device.
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-Navigator">partial interface <span class="idlInterfaceID">Navigator</span> {
-<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a></span> <span class="idlAttrName"><a href="#widl-Navigator-battery">battery</a></span>;</span>
+<span class="idlAttribute">    readonly    attribute <span class="idlAttrType"><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a></span> <span class="idlAttrName"><a href="#widl-Navigator-battery">battery</a></span>;</span>
 };</span></pre>
     </section>
 
     <section id="batterymanager-interface">
       <!--OddPage--><h2><span class="secno">6. </span><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> Interface</h2>
       <pre class="idl"><span class="idlInterface" id="idl-def-BatteryManager">interface <span class="idlInterfaceID">BatteryManager</span> : <span class="idlSuperclass"><a>EventTarget</a></span> {
-<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>boolean</a></span>             <span class="idlAttrName"><a href="#widl-BatteryManager-charging">charging</a></span>;</span>
-<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>unrestricted double</a></span> <span class="idlAttrName"><a href="#widl-BatteryManager-chargingTime">chargingTime</a></span>;</span>
-<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>unrestricted double</a></span> <span class="idlAttrName"><a href="#widl-BatteryManager-dischargingTime">dischargingTime</a></span>;</span>
-<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>double</a></span>              <span class="idlAttrName"><a href="#widl-BatteryManager-level">level</a></span>;</span>
-<span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingchange">onchargingchange</a></span>;</span>
-<span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingtimechange">onchargingtimechange</a></span>;</span>
-<span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</a></span>;</span>
-<span class="idlAttribute">             attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
+<span class="idlAttribute">    readonly    attribute <span class="idlAttrType"><a>boolean</a></span>             <span class="idlAttrName"><a href="#widl-BatteryManager-charging">charging</a></span>;</span>
+<span class="idlAttribute">    readonly    attribute <span class="idlAttrType"><a>unrestricted double</a></span> <span class="idlAttrName"><a href="#widl-BatteryManager-chargingTime">chargingTime</a></span>;</span>
+<span class="idlAttribute">    readonly    attribute <span class="idlAttrType"><a>unrestricted double</a></span> <span class="idlAttrName"><a href="#widl-BatteryManager-dischargingTime">dischargingTime</a></span>;</span>
+<span class="idlAttribute">    readonly    attribute <span class="idlAttrType"><a>double</a></span>              <span class="idlAttrName"><a href="#widl-BatteryManager-level">level</a></span>;</span>
+<span class="idlAttribute">                attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingchange">onchargingchange</a></span>;</span>
+<span class="idlAttribute">                attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onchargingtimechange">onchargingtimechange</a></span>;</span>
+<span class="idlAttribute">                attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</a></span>;</span>
+<span class="idlAttribute">                attribute <span class="idlAttrType"><a>EventHandler</a></span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
 };</span></pre>
       <p>
         When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created,
-        <code>charging</code> <em class="rfc2119" title="must">must</em> be set to true, <code>chargingTime</code>
+        <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be set to true, <code>chargingTime</code>
         to 0, <code>level</code> to 1.0 and <code>dischargingTime</code> to
         the value positive Infinity, if the implementation is unable to report
         the battery's charging state, charging time, level or remaining time
         respectively.
       </p>
       <p>
-        The <code>charging</code> attribute <em class="rfc2119" title="must">must</em> be set to false if the battery
+        The <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
         implementation is unable to report the state, or there is no battery
         attached to the system, or otherwise. When the battery charging state
-        is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets
+        is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets
         the <code>charging</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple
         event</a> named <code><a href="#dfn-chargingchange" class="internalDFN">chargingchange</a></code> at the
         <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the charging state of the
         system's battery.
       </p>
       <p>
-        The <code>chargingTime</code> attribute <em class="rfc2119" title="must">must</em> be set to 0, if the
+        The <code>chargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to 0, if the
         battery is full or there is no battery attached to the system, and to
         the value positive Infinity if the battery is discharging, the
         implementation is unable to report the remaining charging time, or
         otherwise. When the battery charging time is updated, the <a href="#dfn-user-agent" class="internalDFN">user
-        agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets the
+        agent</a> <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets the
         <code>chargingTime</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple
         event</a> named <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code> at the
         <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the time remaining in
         seconds until the system's battery is fully charged.
       </p>
       <p>
-        The <code>dischargingTime</code> attribute <em class="rfc2119" title="must">must</em> be set to the value
+        The <code>dischargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the value
         positive Infinity, if the battery is charging, the implementation is
         unable to report the remaining discharging time, there is no battery
         attached to the system, or otherwise. When the battery discharging time
-        is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets
+        is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets
         the <code>dischargingTime</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a
         simple event </a> named <code><a href="#dfn-dischargingtimechange" class="internalDFN">dischargingtimechange</a></code> at the
         <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the time remaining in
@@ -781,17 +799,17 @@ table.exceptions table {
         system is about to be suspended.
       </p>
       <p>
-        The <code>level</code> attribute <em class="rfc2119" title="must">must</em> be set to 0 if the system's
+        The <code>level</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to 0 if the system's
         battery is depleted and the system is about to be suspended, and to
         1.0 if the battery is full, the implementation is unable to report the
         battery's level, or there is no battery attached to the system. When
-        the battery level is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="must">must</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a
+        the battery level is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a
         task</a> which sets the <code>level</code> attribute's value and
         <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple event</a> named <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a></code> at
         the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object. It represents the level of the
         system's battery.
       </p>
-      <div class="note"><div class="note-title"><span>Note</span></div><div class="">
+      <div class="note"><div class="note-title" role="heading" aria-level="3"><span>Note</span></div><div class="">
         The definition of how often the <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code>,
         <code><a href="#dfn-dischargingtimechange" class="internalDFN">dischargingtimechange</a></code>, and <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a>
         </code> events are fired is left to the implementation.
@@ -800,7 +818,7 @@ table.exceptions table {
         <h3><span class="secno">6.1 </span>Event handlers</h3>
         <p>
           The following are the <a href="#dfn-event-handlers" class="internalDFN">event handlers</a> (and their corresponding
-          <a href="#dfn-event-handler-event-types" class="internalDFN">event handler event types</a>) that <em class="rfc2119" title="must">must</em> be supported as
+          <a href="#dfn-event-handler-event-types" class="internalDFN">event handler event types</a>) that <em class="rfc2119" title="MUST">MUST</em> be supported as
           attributes by the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object:
         </p>
         <table class="simple">
@@ -900,5 +918,5 @@ table.exceptions table {
 
 <section id="references" class="appendix"><!--OddPage--><h2><span class="secno">B. </span>References</h2><section id="normative-references"><h3><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography"><dt id="bib-HTML5">[HTML5]</dt><dd>Robin Berjon et al. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 17 December 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd>S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
-</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/2011/WD-WebIDL-20110927/"><cite>Web IDL</cite></a>. 27 September 2011. W3C Working Draft. URL: <a href="http://www.w3.org/TR/2011/WD-WebIDL-20110927/">http://www.w3.org/TR/2011/WD-WebIDL-20110927/</a>
+</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">http://www.w3.org/TR/2012/CR-WebIDL-20120419/</a>
 </dd></dl></section></section></body></html>
