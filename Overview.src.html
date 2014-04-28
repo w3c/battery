@@ -16,17 +16,16 @@
           crEnd:                "2012-07-01",
           editors:  [
               { name: "Anssi Kostiainen", company: "Intel", companyURL: "http://intel.com/" },
-              { name: "Mounir Lamouri", company: "Mozilla", companyURL: "http://mozilla.org/" }
+              { name: "Mounir Lamouri", company: "Google Inc.", companyURL: "http://google.com/", note: "previously Mozilla" }
           ],
           inlineCSS:    true,
           noIDLIn:      true,
           noLegacyStyle: true,
-          extraCSS:     ["../ReSpec.js/css/respec.css"],
           wg:           "Device APIs Working Group",
           wgURI:        "http://www.w3.org/2009/dap/",
           wgPublicList: "public-device-apis",
           wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/43696/status",
-          testSuiteURI: "http://w3c-test.org/dap/battery/tests/",
+          testSuiteURI: "http://w3c-test.org/battery-status/",
           scheme:       "https"
       };
     </script>
@@ -78,7 +77,7 @@
         for new emails every ten seconds without knowledge of the battery
         status:
       </p>
-      <pre class="example sh_javascript">
+      <pre class="example highlight">
         &lt;!DOCTYPE html&gt;
         &lt;html&gt;
         &lt;head&gt;
@@ -122,7 +121,7 @@
         battery, stop checking for emails if the battery is critically low and
         resume normal operation when the battery is charging:
       </p>
-      <pre class="example sh_javascript">
+      <pre class="example highlight">
         &lt;!DOCTYPE html&gt;
         &lt;html&gt;
         &lt;head&gt;
@@ -367,7 +366,7 @@
         This trivial example writes the battery level to the console each time
         the level changes:
       </p>
-      <pre class="example sh_javascript">
+      <pre class="example highlight">
         navigator.battery.onlevelchange = function () {
           console.log(navigator.battery.level);
         };
@@ -376,7 +375,7 @@
         Alternatively, the same using the <code>addEventListener()</code>
         method:
       </p>
-      <pre class="example sh_javascript">
+      <pre class="example highlight">
       navigator.battery.addEventListener('levelchange', function () {
         console.log(navigator.battery.level);
       }, false);
@@ -385,7 +384,7 @@
         The following example updates the indicators to show the charging
         state, level and time remaining in minutes:
       </p>
-      <pre class="example sh_javascript">
+      <pre class="example highlight">
         &lt;!DOCTYPE html&gt;
         &lt;html&gt;
         &lt;head&gt;
