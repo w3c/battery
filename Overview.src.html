@@ -352,6 +352,31 @@
         </code> events are fired is left to the implementation.
       </div>
       <section>
+        <h2>Multiple batteries</h2>
+        <p>
+          If a hosting device contains more than one battery,
+          <a>BatteryManager</a> SHOULD expose an unified view of the batteries.
+        </p>
+        <p>
+          The <code>charging</code> attribute MUST be set to true if at least
+          one battery's <code>charging</code> state as described above is true.
+          Otherwise, it MUST be set to false.
+        </p>
+        <p>
+          The <code>level</code> attribute MUST be set to the sum of the
+          individual battery's <code>level</code> attributes divided by the
+          number of batteries.
+        </p>
+        <p>
+          The <code>chargingTime</code> attribute MUST be set to the max of all
+          the individual batteries <code>chargingTime</code>.
+        </p>
+        <p>
+          The <code>dischargingTime</code> attribute MUST be set to the max of
+          all the individual batteries <code>dischargingTime</code>.
+        </p>
+      </section>
+      <section>
         <h2>Event handlers</h2>
         <p>
           The following are the <a>event handlers</a> (and their corresponding
