@@ -150,23 +150,32 @@
               mail.setTimer(!mail.interval ? mail.INTERVAL_DEFAULT : mail.interval);
             }, false);
 
-            navigator.getBattery().then(function(battery) {
-              battery.addEventListener('dischargingtimechange', function () {
-                if (battery.dischargingTime &lt; 60 * 30 || battery.level &lt; 0.1) {
-                  mail.setTimer(mail.INTERVAL_BATTERY_LOW);
-                  console.log('30 minutes remaining or level below 10%, checking the server less frequently.');
-                } else if (battery.dischargingTime &lt; 60 * 10 || battery.level &lt; 0.05) {
-                  mail.setTimer(null);
-                  console.log('10 minutes remaining or level below 5%, stop checking the server.');
-                }
-              }, false);
+            function updateTimer(battery) {
+              if (battery.charging) {
+                mail.setTimer(mail.INTERVAL_DEFAULT);
+                console.log('Battery is charging, checking the server normally.');
+                return;
+              }
 
-              battery.addEventListener('chargingchange', function () {
-                if (battery.charging) {
-                  mail.setTimer(mail.INTERVAL_DEFAULT);
-                  console.log('Battery is charging, checking the server normally.');
-                }
-              }, false);
+              if (battery.dischargingTime &lt; 60 * 30 || battery.level &lt; 0.1) {
+                mail.setTimer(mail.INTERVAL_BATTERY_LOW);
+                console.log('30 minutes remaining or level below 10%, checking the server less frequently.');
+              } else if (battery.dischargingTime &lt; 60 * 10 || battery.level &lt; 0.05) {
+                mail.setTimer(null);
+                console.log('10 minutes remaining or level below 5%, stop checking the server.');
+              }
+            }
+
+            navigator.getBattery().then(function(battery) {
+              battery.addEventListener('levelchange', function() {
+                updateTimer(battery);
+              });
+              battery.addEventListener('dischargingtimechange', function() {
+                updateTimer(battery);
+              });
+              battery.addEventListener('chargingchange', function() {
+                updateTimer(battery);
+              });
             });
           &lt;/script&gt;
         &lt;/head&gt;
@@ -221,8 +230,9 @@
         The API defined in this specification is used to determine the battery
         status of the hosting device. The information disclosed has minimal
         impact on privacy or fingerprinting, and therefore is exposed without
-        permission grants. For example, authors cannot directly know if there
-        is a battery or not in the hosting device.
+        permission grants. For example, the user agent can obfuscate the
+        exposed value in a way that authors cannot directly know if a hosting
+        device has no battery, is charging or is exposing fake values.
       </p>
     </section>
     <section>
@@ -284,12 +294,11 @@
         <dd></dd>
       </dl>
       <p>
-        When a <a>BatteryManager</a> object is created,
-        <code>charging</code> MUST be set to true, <code>chargingTime</code>
-        to 0, <code>level</code> to 1.0 and <code>dischargingTime</code> to
-        the value positive Infinity, if the implementation is unable to report
-        the battery's charging state, charging time, level or remaining time
-        respectively.
+        When a <a>BatteryManager</a> object is created, if the implementation is
+        unable to report the battery's charging state, charging time, level or
+        remaining time, <code>charging</code> MUST be set to true,
+        <code>chargingTime</code> to 0, <code>level</code> to 1.0 and
+        <code>dischargingTime</code> to the value positive Infinity respectively.
       </p>
       <p>
         The <code>charging</code> attribute MUST be set to false if the battery
