@@ -35,7 +35,7 @@
       This specification defines an API that provides information about the
       battery status of the hosting device.
     </section>
-    
+
     <section id="sotd">
       <p>
         The functionality described in this specification was initially
@@ -47,7 +47,7 @@
         interference with other, often unrelated, features.
       </p>
     </section>
-    
+
     <section class="informative">
       <h2>Introduction</h2>
       <p>
@@ -89,10 +89,10 @@
               timer: 0,
 
               check: function () {
-                console.log('Checking the server for new emails using an interval of ' + 
+                console.log('Checking the server for new emails using an interval of ' +
                             (mail.interval / 1000) + ' seconds.');
               },
-              
+
               setTimer: function (interval) {
                 if (interval === mail.interval) { return; }
                 if (mail.timer !== 0) { clearTimeout(mail.timer); }
@@ -132,12 +132,12 @@
               INTERVAL_DEFAULT: 1000 * 10,
               interval: null,
               timer: 0,
-              
+
               check: function () {
-                console.log('Checking the server for new emails using an interval of ' + 
+                console.log('Checking the server for new emails using an interval of ' +
                             (mail.interval / 1000) + ' seconds.');
               },
-              
+
               setTimer: function (interval) {
                 if (interval === mail.interval) { return; }
                 if (mail.timer !== 0) { clearTimeout(mail.timer); }
@@ -145,36 +145,36 @@
                 mail.interval = interval;
               }
             };
-            
+
             window.addEventListener('load', function () {
               mail.setTimer(!mail.interval ? mail.INTERVAL_DEFAULT : mail.interval);
             }, false);
-            
-            var battery = navigator.battery;
-            
-            battery.addEventListener('dischargingtimechange', function () {
-              if (battery.dischargingTime &lt; 60 * 30 || battery.level &lt; 0.1) {
-                mail.setTimer(mail.INTERVAL_BATTERY_LOW);
-                console.log('30 minutes remaining or level below 10%, checking the server less frequently.');
-              } else if (battery.dischargingTime &lt; 60 * 10 || battery.level &lt; 0.05) {
-                mail.setTimer(null);
-                console.log('10 minutes remaining or level below 5%, stop checking the server.');
-              }
-            }, false);
-            
-            battery.addEventListener('chargingchange', function () {
-              if (battery.charging) {
-                mail.setTimer(mail.INTERVAL_DEFAULT);
-                console.log('Battery is charging, checking the server normally.');
-              }
-            }, false);
+
+            navigator.getBattery().then(function(battery) {
+              battery.addEventListener('dischargingtimechange', function () {
+                if (battery.dischargingTime &lt; 60 * 30 || battery.level &lt; 0.1) {
+                  mail.setTimer(mail.INTERVAL_BATTERY_LOW);
+                  console.log('30 minutes remaining or level below 10%, checking the server less frequently.');
+                } else if (battery.dischargingTime &lt; 60 * 10 || battery.level &lt; 0.05) {
+                  mail.setTimer(null);
+                  console.log('10 minutes remaining or level below 5%, stop checking the server.');
+                }
+              }, false);
+
+              battery.addEventListener('chargingchange', function () {
+                if (battery.charging) {
+                  mail.setTimer(mail.INTERVAL_DEFAULT);
+                  console.log('Battery is charging, checking the server normally.');
+                }
+              }, false);
+            });
           &lt;/script&gt;
         &lt;/head&gt;
         &lt;body&gt;&lt;/body&gt;
         &lt;/html&gt;
       </pre>
     </section>
-    
+
     <section id="conformance">
       <p>
         This specification defines conformance criteria that apply to a single
@@ -191,26 +191,28 @@
     <section>
       <h2>Terminology</h2>
       <p>
-        The <code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
-        Navigator</a></code> interface this specification extends is defined
-        in [[!HTML5]].
+        The following concepts, terms and interfaces are defined in [[!HTML5]]:
+        <ul>
+          <li><code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
+          Navigator</a></code></li>
+          <li><code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
+          EventHandler</a></code></li>
+          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+          queue a task</a></dfn></li>
+          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
+          fires a simple event</a></dfn></li>
+          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
+          event handlers</a></dfn></li>
+          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
+          event handler event types</a></li>
+          <li><dfn><a href="http://dev.w3.org/html5/spec/browsers.html#browsing-context">
+          browsing context</a></dfn></li>
+        </ul>
       </p>
       <p>
-        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
-        EventHandler</a></code> interface represents a callback used for event
-        handlers as defined in [[!HTML5]].
-      </p>
-      <p>
-        The concepts <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
-        queue a task</a></dfn> and
-        <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
-        fires a simple event</a></dfn> are defined in [[!HTML5]].
-      </p>
-      <p>
-        The terms <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
-        event handlers</a></dfn> and
-        <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
-        event handler event types</a></dfn> are defined in [[!HTML5]].
+        <a href=
+        'http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise-objects'>
+        Promise objects</a> are defined in [[!ECMASCRIPT]].
       </p>
     </section>
     <section class="informative">
@@ -225,15 +227,31 @@
     </section>
     <section>
       <h2><a>Navigator</a> Interface</h2>
-      <p>
-        The <code>battery</code> attribute of the <a>Navigator</a> interface
-        MUST return an instance of the <a>BatteryManager</a> interface, which
-        represents the battery status of the hosting device.
-      </p>
       <dl title="partial interface Navigator" class="idl">
-        <dt>readonly attribute BatteryManager battery</dt>
+        <dt>Promise&lt;BatteryManager&gt; getBattery()</dt>
         <dd></dd>
       </dl>
+      <p>
+        The <code>getBattery()</code> method, when invoked, MUST run the
+        following steps:
+        <ul>
+          <li>Let <var>promise</var> be a newly created Promise and return it
+          </li>
+          <li>If those steps were previously successfully run in the current
+          <a>browsing context</a>, let <var>battery</var> be the previously
+          returned instance of <a>BatteryManager</a>.</li>
+          <li>Otherwise, let <var>battery</var> be a new instance of
+          <a>BatteryManager</a>.</li>
+          <li>Resolve <var>promise</var> with <var>battery</var>.</li>
+        </ul>
+      </p>
+      <p>
+        The <a>user agent</a> SHOULD NOT reject the promise returned by
+        <code>getBattery()</code>. If the <a>user agent</a> does not want to
+        expose the battery information to the web page, it is RECOMMENDED to
+        not expose <code>getBattery()</code> or resolve the promise with an
+        instance of <a>BatteryManager</a> exposing only default values.
+      </p>
     </section>
 
     <section>
@@ -367,18 +385,22 @@
         the level changes:
       </p>
       <pre class="example highlight">
-        navigator.battery.onlevelchange = function () {
-          console.log(navigator.battery.level);
-        };
+        navigator.getBattery(function(battery) {
+          battery.onlevelchange = function() {
+            console.log(this.level);
+          };
+        });
       </pre>
       <p>
         Alternatively, the same using the <code>addEventListener()</code>
         method:
       </p>
       <pre class="example highlight">
-      navigator.battery.addEventListener('levelchange', function () {
-        console.log(navigator.battery.level);
-      }, false);
+        navigator.getBattery(function(battery) {
+          battery.addEventListener('levelchange', function() {
+            console.log(this.level);
+          });
+        });
       </pre>
       <p>
         The following example updates the indicators to show the charging
@@ -390,19 +412,19 @@
         &lt;head&gt;
           &lt;title&gt;Battery Status API Example&lt;/title&gt;
           &lt;script&gt;
-            var battery = navigator.battery;
-            
-            battery.onchargingchange = function () {
-              document.querySelector('#charging').textContent = battery.charging ? 'charging' : 'not charging';
-            };
+            navigator.getBattery().then(function(battery) {
+              battery.onchargingchange = function () {
+                document.querySelector('#charging').textContent = battery.charging ? 'charging' : 'not charging';
+              };
 
-            battery.onlevelchange = function () {
-              document.querySelector('#level').textContent = battery.level;
-            };
+              battery.onlevelchange = function () {
+                document.querySelector('#level').textContent = battery.level;
+              };
 
-            battery.ondischargingtimechange = function () {
-              document.querySelector('#dischargingTime').textContent = battery.dischargingTime / 60;
-            };
+              battery.ondischargingtimechange = function () {
+                document.querySelector('#dischargingTime').textContent = battery.dischargingTime / 60;
+              };
+            });
           &lt;/script&gt;
         &lt;/head&gt;
         &lt;body&gt;
