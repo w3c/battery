@@ -46,6 +46,18 @@
         specification that could be implemented on its own merits without
         interference with other, often unrelated, features.
       </p>
+      <p>
+        The following changes have been made since the <a href="http://www.w3.org/TR/2012/CR-battery-status-20120508/">
+        last published version</a>:
+        <ul>
+          <li>Expose <a>BatteryManager</a> via <code>getBattery()</code>
+          returning a Promise instead of a synchronous accessor. (Section 5)
+          </li>
+          <li>Specify the behavior when a host device has more than one battery.
+          (Section 6.1)
+          </li>
+        </ul>
+      </p>
     </section>
 
     <section class="informative">
