@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
+<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en" style="">
 <head>
     <title>Battery Status API</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-05-12T05:55:05.000Z" id="w3c-editor-s-draft-12-may-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-05-12">12 May 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-06T11:39:52.000Z" id="w3c-editor-s-draft-06-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-06">06 June 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -571,10 +571,10 @@ table.exceptions table {
       
     
   
-</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#navigator-interface" class="tocxref"><span class="secno">5. </span><span class="formerLink"><code>Navigator</code></span> Interface</a></li><li class="tocline"><a href="#batterymanager-interface" class="tocxref"><span class="secno">6. </span><span class="formerLink"><code>BatteryManager</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">6.1 </span>Event handlers</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
+</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#navigator-interface" class="tocxref"><span class="secno">5. </span><span class="formerLink"><code>Navigator</code></span> Interface</a></li><li class="tocline"><a href="#batterymanager-interface" class="tocxref"><span class="secno">6. </span><span class="formerLink"><code>BatteryManager</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#multiple-batteries" class="tocxref"><span class="secno">6.1 </span>Multiple batteries</a></li><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">6.2 </span>Event handlers</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
+
     
-    
-    
+
     <section class="informative" id="introduction">
       <!--OddPage--><h2 aria-level="1" role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
       <p>
@@ -615,10 +615,10 @@ table.exceptions table {
       timer</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
 
       check</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> 
+        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln">
                     </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">/</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">' seconds.'</span><span class="pun">);</span><span class="pln">
       </span><span class="pun">},</span><span class="pln">
-      
+
       setTimer</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval </span><span class="pun">===</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> clearTimeout</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
@@ -655,12 +655,12 @@ table.exceptions table {
       INTERVAL_DEFAULT</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln">
       interval</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln">
       timer</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
-      
+
       check</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> 
+        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln">
                     </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">/</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">' seconds.'</span><span class="pun">);</span><span class="pln">
       </span><span class="pun">},</span><span class="pln">
-      
+
       setTimer</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval </span><span class="pun">===</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
         </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> clearTimeout</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
@@ -668,14 +668,18 @@ table.exceptions table {
         mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">;</span><span class="pln">
       </span><span class="pun">}</span><span class="pln">
     </span><span class="pun">};</span><span class="pln">
-    
+
     window</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'load'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
       mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(!</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">?</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT </span><span class="pun">:</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">);</span><span class="pln">
     </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
-    
-    </span><span class="kwd">var</span><span class="pln"> battery </span><span class="pun">=</span><span class="pln"> navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">;</span><span class="pln">
-    
-    battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'dischargingtimechange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+    </span><span class="kwd">function</span><span class="pln"> updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">charging</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT</span><span class="pun">);</span><span class="pln">
+        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Battery is charging, checking the server normally.'</span><span class="pun">);</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pun">;</span><span class="pln">
+      </span><span class="pun">}</span><span class="pln">
+
       </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">30</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0.1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
         mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_BATTERY_LOW</span><span class="pun">);</span><span class="pln">
         console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'30 minutes remaining or level below 10%, checking the server less frequently.'</span><span class="pun">);</span><span class="pln">
@@ -683,20 +687,25 @@ table.exceptions table {
         mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
         console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'10 minutes remaining or level below 5%, stop checking the server.'</span><span class="pun">);</span><span class="pln">
       </span><span class="pun">}</span><span class="pln">
-    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
-    
-    battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'chargingchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">charging</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT</span><span class="pun">);</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Battery is charging, checking the server normally.'</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">}</span><span class="pln">
-    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'levelchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
+      </span><span class="pun">});</span><span class="pln">
+      battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'dischargingtimechange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
+      </span><span class="pun">});</span><span class="pln">
+      battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'chargingchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
+      </span><span class="pun">});</span><span class="pln">
+    </span><span class="pun">});</span><span class="pln">
   </span><span class="tag">&lt;/script&gt;</span><span class="pln">
 </span><span class="tag">&lt;/head&gt;</span><span class="pln">
 </span><span class="tag">&lt;body&gt;&lt;/body&gt;</span><span class="pln">
 </span><span class="tag">&lt;/html&gt;</span></pre></div>
     </section>
-    
+
     <section id="conformance" typeof="bibo:Chapter" resource="#conformance" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_conformance"><span class="secno">2. </span>Conformance</h2>
 <p>
   As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
@@ -723,26 +732,27 @@ table.exceptions table {
     <section id="terminology">
       <!--OddPage--><h2 aria-level="1" role="heading" id="h2_terminology"><span class="secno">3. </span>Terminology</h2>
       <p>
-        The <code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
-        Navigator</a></code> interface this specification extends is defined
-        in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
-      </p>
+        The following concepts, terms and interfaces are defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>]:
+        </p><ul>
+          <li><code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
+          Navigator</a></code></li>
+          <li><code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
+          EventHandler</a></code></li>
+          <li><dfn id="dfn-queue-a-task"><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+          queue a task</a></dfn></li>
+          <li><dfn id="dfn-fires-a-simple-event"><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
+          fires a simple event</a></dfn></li>
+          <li><dfn id="dfn-event-handlers"><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
+          event handlers</a></dfn></li>
+          <li><dfn id="dfn-event-handler-event-types"><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
+          event handler event types</a></dfn></li>
+          <li><dfn id="dfn-browsing-context"><a href="http://dev.w3.org/html5/spec/browsers.html#browsing-context">
+          browsing context</a></dfn></li>
+        </ul>
+      <p></p>
       <p>
-        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
-        EventHandler</a></code> interface represents a callback used for event
-        handlers as defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
-      </p>
-      <p>
-        The concepts <dfn id="dfn-queue-a-task"><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
-        queue a task</a></dfn> and
-        <dfn id="dfn-fires-a-simple-event"><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
-        fires a simple event</a></dfn> are defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
-      </p>
-      <p>
-        The terms <dfn id="dfn-event-handlers"><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
-        event handlers</a></dfn> and
-        <dfn id="dfn-event-handler-event-types"><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
-        event handler event types</a></dfn> are defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
+        <a href="http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise-objects">
+        Promise objects</a> are defined in [<cite><a class="bibref" href="#bib-ECMASCRIPT">ECMASCRIPT</a></cite>].
       </p>
     </section>
     <section class="informative" id="security-and-privacy-considerations">
@@ -751,20 +761,37 @@ table.exceptions table {
         The API defined in this specification is used to determine the battery
         status of the hosting device. The information disclosed has minimal
         impact on privacy or fingerprinting, and therefore is exposed without
-        permission grants. For example, authors cannot directly know if there
-        is a battery or not in the hosting device.
+        permission grants. For example, the user agent can obfuscate the
+        exposed value in a way that authors cannot directly know if a hosting
+        device has no battery, is charging or is exposing fake values.
       </p>
     </section>
     <section id="navigator-interface">
       <!--OddPage--><h2 aria-level="1" role="heading" id="h2_navigator-interface"><span class="secno">5. </span><a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> Interface</h2>
-      <p>
-        The <code>battery</code> attribute of the <a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> interface
-        <em class="rfc2119" title="MUST">MUST</em> return an instance of the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface, which
-        represents the battery status of the hosting device.
-      </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-Navigator">partial interface <span class="idlInterfaceID">Navigator</span> {
-<span class="idlAttribute">    readonly    attribute <span class="idlAttrType"><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a></span> <span class="idlAttrName"><a href="#widl-Navigator-battery">battery</a></span>;</span>
+<span class="idlMethod">    <span class="idlMethType">Promise&lt;<a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>&gt;</span> <span class="idlMethName"><a href="#widl-Navigator-getBattery-Promise-BatteryManager">getBattery</a></span> ();</span>
 };</span></pre>
+      <p>
+        The <code>getBattery()</code> method, when invoked, <em class="rfc2119" title="MUST">MUST</em> run the
+        following steps:
+        </p><ul>
+          <li>Let <var>promise</var> be a newly created Promise and return it
+          </li>
+          <li>If those steps were previously successfully run in the current
+          <a href="#dfn-browsing-context" class="internalDFN">browsing context</a>, let <var>battery</var> be the previously
+          returned instance of <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>.</li>
+          <li>Otherwise, let <var>battery</var> be a new instance of
+          <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>.</li>
+          <li>Resolve <var>promise</var> with <var>battery</var>.</li>
+        </ul>
+      <p></p>
+      <p>
+        The <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> reject the promise returned by
+        <code>getBattery()</code>. If the <a href="#dfn-user-agent" class="internalDFN">user agent</a> does not want to
+        expose the battery information to the web page, it is <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em> to
+        not expose <code>getBattery()</code> or resolve the promise with an
+        instance of <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> exposing only default values.
+      </p>
     </section>
 
     <section id="batterymanager-interface">
@@ -780,12 +807,11 @@ table.exceptions table {
 <span class="idlAttribute">                attribute <span class="idlAttrType">EventHandler</span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
 };</span></pre>
       <p>
-        When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created,
-        <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be set to true, <code>chargingTime</code>
-        to 0, <code>level</code> to 1.0 and <code>dischargingTime</code> to
-        the value positive Infinity, if the implementation is unable to report
-        the battery's charging state, charging time, level or remaining time
-        respectively.
+        When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created, if the implementation is
+        unable to report the battery's charging state, charging time, level or
+        remaining time, <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be set to true,
+        <code>chargingTime</code> to 0, <code>level</code> to 1.0 and
+        <code>dischargingTime</code> to the value positive Infinity respectively.
       </p>
       <p>
         The <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to false if the battery
@@ -838,8 +864,33 @@ table.exceptions table {
         <code><a href="#dfn-dischargingtimechange" class="internalDFN">dischargingtimechange</a></code>, and <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a>
         </code> events are fired is left to the implementation.
       </div></div>
+      <section id="multiple-batteries">
+        <h3 aria-level="2" role="heading" id="h3_multiple-batteries"><span class="secno">6.1 </span>Multiple batteries</h3>
+        <p>
+          If a hosting device contains more than one battery,
+          <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> <em class="rfc2119" title="SHOULD">SHOULD</em> expose an unified view of the batteries.
+        </p>
+        <p>
+          The <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to true if at least
+          one battery's <code>charging</code> state as described above is true.
+          Otherwise, it <em class="rfc2119" title="MUST">MUST</em> be set to false.
+        </p>
+        <p>
+          The <code>level</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the sum of the
+          individual battery's <code>level</code> attributes divided by the
+          number of batteries.
+        </p>
+        <p>
+          The <code>chargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the max of all
+          the individual batteries <code>chargingTime</code>.
+        </p>
+        <p>
+          The <code>dischargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the max of
+          all the individual batteries <code>dischargingTime</code>.
+        </p>
+      </section>
       <section id="event-handlers">
-        <h3 aria-level="2" role="heading" id="h3_event-handlers"><span class="secno">6.1 </span>Event handlers</h3>
+        <h3 aria-level="2" role="heading" id="h3_event-handlers"><span class="secno">6.2 </span>Event handlers</h3>
         <p>
           The following are the <a href="#dfn-event-handlers" class="internalDFN">event handlers</a> (and their corresponding
           <a href="#dfn-event-handler-event-types" class="internalDFN">event handler event types</a>) that <em class="rfc2119" title="MUST">MUST</em> be supported as
@@ -880,16 +931,20 @@ table.exceptions table {
         This trivial example writes the battery level to the console each time
         the level changes:
       </p>
-      <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln">
-</span><span class="pun">};</span></pre></div>
+      <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">};</span><span class="pln">
+</span><span class="pun">});</span></pre></div>
       <p>
         Alternatively, the same using the <code>addEventListener()</code>
         method:
       </p>
-      <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'levelchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln">
-</span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre></div>
+      <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'levelchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln">
+  </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">});</span></pre></div>
       <p>
         The following example updates the indicators to show the charging
         state, level and time remaining in minutes:
@@ -899,19 +954,19 @@ table.exceptions table {
 </span><span class="tag">&lt;head&gt;</span><span class="pln">
   </span><span class="tag">&lt;title&gt;</span><span class="pln">Battery Status API Example</span><span class="tag">&lt;/title&gt;</span><span class="pln">
   </span><span class="tag">&lt;script&gt;</span><span class="pln">
-    </span><span class="kwd">var</span><span class="pln"> battery </span><span class="pun">=</span><span class="pln"> navigator</span><span class="pun">.</span><span class="pln">battery</span><span class="pun">;</span><span class="pln">
-    
-    battery</span><span class="pun">.</span><span class="pln">onchargingchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#charging'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">charging </span><span class="pun">?</span><span class="pln"> </span><span class="str">'charging'</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">'not charging'</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">};</span><span class="pln">
+    navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      battery</span><span class="pun">.</span><span class="pln">onchargingchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#charging'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">charging </span><span class="pun">?</span><span class="pln"> </span><span class="str">'charging'</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">'not charging'</span><span class="pun">;</span><span class="pln">
+      </span><span class="pun">};</span><span class="pln">
 
-    battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#level'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">};</span><span class="pln">
+      battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#level'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">;</span><span class="pln">
+      </span><span class="pun">};</span><span class="pln">
 
-    battery</span><span class="pun">.</span><span class="pln">ondischargingtimechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#dischargingTime'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">/</span><span class="pln"> </span><span class="lit">60</span><span class="pun">;</span><span class="pln">
-    </span><span class="pun">};</span><span class="pln">
+      battery</span><span class="pun">.</span><span class="pln">ondischargingtimechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#dischargingTime'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">/</span><span class="pln"> </span><span class="lit">60</span><span class="pun">;</span><span class="pln">
+      </span><span class="pun">};</span><span class="pln">
+    </span><span class="pun">});</span><span class="pln">
   </span><span class="tag">&lt;/script&gt;</span><span class="pln">
 </span><span class="tag">&lt;/head&gt;</span><span class="pln">
 </span><span class="tag">&lt;body&gt;</span><span class="pln">
@@ -940,7 +995,8 @@ table.exceptions table {
     </section>
   
 
-<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 29 April 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-ECMASCRIPT">[ECMASCRIPT]</dt><dd rel="dcterms:requires"><a href="http://people.mozilla.org/~jorendorff/es6-draft.html"><cite>ECMA-262 ECMAScript Language Specification, Edition 6</cite></a>. Draft. URL: <a href="http://people.mozilla.org/~jorendorff/es6-draft.html">http://people.mozilla.org/~jorendorff/es6-draft.html</a>
+</dd><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 29 April 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
 </dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
 </dd></dl></section></section></body></html>
