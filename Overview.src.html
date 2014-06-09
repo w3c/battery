@@ -107,7 +107,7 @@
 
               setTimer: function (interval) {
                 if (interval === mail.interval) { return; }
-                if (mail.timer !== 0) { clearTimeout(mail.timer); }
+                if (mail.timer !== 0) { clearInterval(mail.timer); }
                 if (interval) { mail.timer = setInterval(function () { mail.check(); }, interval); }
                 mail.interval = interval;
               }
@@ -259,9 +259,9 @@
         <ul>
           <li>Let <var>promise</var> be a newly created Promise and return it
           </li>
-          <li>If those steps were previously successfully run in the current
-          <a>browsing context</a>, let <var>battery</var> be the previously
-          returned instance of <a>BatteryManager</a>.</li>
+          <li>If an instance of <a>BatteryManager</a> has previously been
+          created in the current <a>browsing context</a>, let <var>battery</var>
+          be the previously created instance.</li>
           <li>Otherwise, let <var>battery</var> be a new instance of
           <a>BatteryManager</a>.</li>
           <li>Resolve <var>promise</var> with <var>battery</var>.</li>
@@ -327,11 +327,11 @@
         The <code>chargingTime</code> attribute MUST be set to 0, if the
         battery is full or there is no battery attached to the system, and to
         the value positive Infinity if the battery is discharging, the
-        implementation is unable to report the remaining charging time, or
-        otherwise. When the battery charging time is updated, the <a>user
-        agent</a> MUST <a>queue a task</a> which sets the
-        <code>chargingTime</code> attribute's value and <a>fires a simple
-        event</a> named <code><a>chargingtimechange</a></code> at the
+        implementation is unable to report the remaining charging time while the
+        battery is charging but not full, or otherwise. When the battery
+        charging time is updated, the <a>user agent</a> MUST <a>queue a task</a>
+        which sets the <code>chargingTime</code> attribute's value and <a>fires
+        a simple event</a> named <code><a>chargingtimechange</a></code> at the
         <a>BatteryManager</a> object. It represents the time remaining in
         seconds until the system's battery is fully charged.
       </p>
@@ -431,7 +431,7 @@
         the level changes:
       </p>
       <pre class="example highlight">
-        navigator.getBattery(function(battery) {
+        navigator.getBattery().then(function(battery) {
           battery.onlevelchange = function() {
             console.log(this.level);
           };
@@ -442,7 +442,7 @@
         method:
       </p>
       <pre class="example highlight">
-        navigator.getBattery(function(battery) {
+        navigator.getBattery().then(function(battery) {
           battery.addEventListener('levelchange', function() {
             console.log(this.level);
           });
