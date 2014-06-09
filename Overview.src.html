@@ -278,6 +278,17 @@
 
     <section>
       <h2><a>BatteryManager</a> Interface</h2>
+      <p>
+        The <a>BatteryManager</a> interface represents information about the
+        battery status of the hosting device. The <code>charging</code>
+        attribute represents the charging state of the system's battery.
+        The <code>chargingTime</code> attribute represents the time remaining
+        in seconds until the system's battery is fully charged. The
+        <code>dischargingTime</code> attribute represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended, and the <code>level</code> attribute 
+        represents the level of the system's battery.
+      </p>
       <dl title="interface BatteryManager : EventTarget"
           class="idl">
         <dt>readonly attribute boolean charging</dt>
@@ -320,8 +331,7 @@
         is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
         the <code>charging</code> attribute's value and <a>fires a simple
         event</a> named <code><a>chargingchange</a></code> at the
-        <a>BatteryManager</a> object. It represents the charging state of the
-        system's battery.
+        <a>BatteryManager</a> object.
       </p>
       <p>
         The <code>chargingTime</code> attribute MUST be set to 0, if the
@@ -332,8 +342,7 @@
         charging time is updated, the <a>user agent</a> MUST <a>queue a task</a>
         which sets the <code>chargingTime</code> attribute's value and <a>fires
         a simple event</a> named <code><a>chargingtimechange</a></code> at the
-        <a>BatteryManager</a> object. It represents the time remaining in
-        seconds until the system's battery is fully charged.
+        <a>BatteryManager</a> object.
       </p>
       <p>
         The <code>dischargingTime</code> attribute MUST be set to the value
@@ -343,9 +352,7 @@
         is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
         the <code>dischargingTime</code> attribute's value and <a>fires a
         simple event </a> named <code><a>dischargingtimechange</a></code> at the
-        <a>BatteryManager</a> object. It represents the time remaining in
-        seconds until the system's battery is completely discharged and the
-        system is about to be suspended.
+        <a>BatteryManager</a> object.
       </p>
       <p>
         The <code>level</code> attribute MUST be set to 0 if the system's
@@ -355,8 +362,7 @@
         the battery level is updated, the <a>user agent</a> MUST <a>queue a
         task</a> which sets the <code>level</code> attribute's value and
         <a>fires a simple event</a> named <code><a>levelchange</a></code> at
-        the <a>BatteryManager</a> object. It represents the level of the
-        system's battery.
+        the <a>BatteryManager</a> object.
       </p>
       <div class="note">
         The definition of how often the <code><a>chargingtimechange</a></code>,
