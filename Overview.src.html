@@ -152,7 +152,7 @@
 
               setTimer: function (interval) {
                 if (interval === mail.interval) { return; }
-                if (mail.timer !== 0) { clearTimeout(mail.timer); }
+                if (mail.timer !== 0) { clearInterval(mail.timer); }
                 if (interval) { mail.timer = setInterval(function () { mail.check(); }, interval); }
                 mail.interval = interval;
               }
