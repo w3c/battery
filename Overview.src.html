@@ -49,15 +49,15 @@
       <p>
         The following changes have been made since the <a href="http://www.w3.org/TR/2012/CR-battery-status-20120508/">
         last published version</a>:
-        <ul>
-          <li>Expose <a>BatteryManager</a> via <code>getBattery()</code>
-          returning a Promise instead of a synchronous accessor. (Section 5)
-          </li>
-          <li>Specify the behavior when a host device has more than one battery.
-          (Section 6.1)
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>Expose <a>BatteryManager</a> via <code>getBattery()</code>
+        returning a Promise instead of a synchronous accessor. (Section 5)
+        </li>
+        <li>Specify the behavior when a host device has more than one battery.
+        (Section 6.1)
+        </li>
+      </ul>
     </section>
 
     <section class="informative">
@@ -213,23 +213,23 @@
       <h2>Terminology</h2>
       <p>
         The following concepts, terms and interfaces are defined in [[!HTML5]]:
-        <ul>
-          <li><code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
-          Navigator</a></code></li>
-          <li><code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
-          EventHandler</a></code></li>
-          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
-          queue a task</a></dfn></li>
-          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
-          fires a simple event</a></dfn></li>
-          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
-          event handlers</a></dfn></li>
-          <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
-          event handler event types</a></li>
-          <li><dfn><a href="http://dev.w3.org/html5/spec/browsers.html#browsing-context">
-          browsing context</a></dfn></li>
-        </ul>
       </p>
+      <ul>
+        <li><code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
+        Navigator</a></code></li>
+        <li><code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
+        EventHandler</a></code></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+        queue a task</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
+        fires a simple event</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
+        event handlers</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
+        event handler event types</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/browsers.html#browsing-context">
+        browsing context</a></dfn></li>
+      </ul>
       <p>
         <a href=
         'http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise-objects'>
@@ -256,17 +256,17 @@
       <p>
         The <code>getBattery()</code> method, when invoked, MUST run the
         following steps:
-        <ul>
-          <li>Let <var>promise</var> be a newly created Promise and return it
-          </li>
-          <li>If an instance of <a>BatteryManager</a> has previously been
-          created in the current <a>browsing context</a>, let <var>battery</var>
-          be the previously created instance.</li>
-          <li>Otherwise, let <var>battery</var> be a new instance of
-          <a>BatteryManager</a>.</li>
-          <li>Resolve <var>promise</var> with <var>battery</var>.</li>
-        </ul>
       </p>
+      <ul>
+        <li>Let <var>promise</var> be a newly created Promise and return it
+        </li>
+        <li>If an instance of <a>BatteryManager</a> has previously been
+        created in the current <a>browsing context</a>, let <var>battery</var>
+        be the previously created instance.</li>
+        <li>Otherwise, let <var>battery</var> be a new instance of
+        <a>BatteryManager</a>.</li>
+        <li>Resolve <var>promise</var> with <var>battery</var>.</li>
+      </ul>
       <p>
         The <a>user agent</a> SHOULD NOT reject the promise returned by
         <code>getBattery()</code>. If the <a>user agent</a> does not want to
