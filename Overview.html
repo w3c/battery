@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-10T06:09:31.000Z" id="w3c-editor-s-draft-10-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-10">10 June 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-10T07:58:01.000Z" id="w3c-editor-s-draft-10-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-10">10 June 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -523,11 +523,18 @@ table.exceptions table {
         last published version</a>:
       </p>
       <ul>
-        <li>Expose <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> via <code>getBattery()</code>
-        returning a Promise instead of a synchronous accessor. (Section 5)
+        <li>
+          Expose <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> via <code>getBattery()</code>
+          returning a Promise instead of a synchronous accessor.
+          (<a href="#h2_navigator-interface">Section 5</a>)
         </li>
-        <li>Specify the behavior when a host device has more than one battery.
-        (Section 6.1)
+        <li>
+          Clarify defaults when a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created.
+          (<a href="#batterymanager-interface">Section 6</a>)
+        </li>
+        <li>
+          Specify the behavior when a host device has more than one battery.
+          (<a href="#h3_multiple-batteries">Section 6.1</a>)
         </li>
       </ul>
     
