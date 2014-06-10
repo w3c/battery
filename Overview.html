@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-09T10:21:57.000Z" id="w3c-editor-s-draft-09-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-09">09 June 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-10T06:09:31.000Z" id="w3c-editor-s-draft-10-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-10">10 June 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -830,12 +830,29 @@ table.exceptions table {
 <span class="idlAttribute">                attribute <span class="idlAttrType">EventHandler</span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
 };</span></pre>
       <p>
-        When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created, if the implementation is
-        unable to report the battery's charging state, charging time, level or
-        remaining time, <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be set to true,
-        <code>chargingTime</code> to 0, <code>level</code> to 1.0 and
-        <code>dischargingTime</code> to the value positive Infinity respectively.
+        When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created, if the implementation
+        is unable to report the battery’s:
       </p>
+      <ul>
+        <li>
+          charging state, the <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to
+          true,
+        </li>
+        <li>
+          charging time, the <code>chargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to 0,
+        </li>
+        <li>
+          remaining time, the <code>dischargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to the
+          value positive Infinity,
+        </li>
+        <li>
+          level, the <code>level</code> attribute must be set to 1.0.
+        </li>
+      </ul>
+      <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_1"><span>Note</span></div><div class="">
+        The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>'s default attribute values emulate a fully
+        charged battery.
+      </div></div>
       <p>
         The <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
@@ -877,7 +894,7 @@ table.exceptions table {
         <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple event</a> named <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a></code> at
         the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
       </p>
-      <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_1"><span>Note</span></div><div class="">
+      <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_2"><span>Note</span></div><div class="">
         The definition of how often the <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code>,
         <code><a href="#dfn-dischargingtimechange" class="internalDFN">dischargingtimechange</a></code>, and <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a>
         </code> events are fired is left to the implementation.
