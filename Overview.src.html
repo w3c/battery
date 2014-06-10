@@ -317,12 +317,25 @@
         <dd></dd>
       </dl>
       <p>
-        When a <a>BatteryManager</a> object is created, if the implementation is
-        unable to report the battery's charging state, charging time, level or
-        remaining time, <code>charging</code> MUST be set to true,
-        <code>chargingTime</code> to 0, <code>level</code> to 1.0 and
-        <code>dischargingTime</code> to the value positive Infinity respectively.
+        When a <a>BatteryManager</a> object is created, if the implementation
+        is unable to report the battery’s:
       </p>
+      <ul>
+        <li>
+          charging state, the <code>charging</code> attribute MUST be set to
+          true,
+        </li>
+        <li>
+          charging time, the <code>chargingTime</code> MUST be set to 0,
+        </li>
+        <li>
+          remaining time, the <code>dischargingTime</code> MUST be set to the
+          value positive Infinity,
+        </li>
+        <li>
+          level, the <code>level</code> attribute must be set to 1.0.
+        </li>
+      </ul>
       <div class="note">
         The <a>BatteryManager</a>'s default attribute values emulate a fully
         charged battery.
