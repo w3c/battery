@@ -296,6 +296,15 @@
         system is about to be suspended, and the <code>level</code> attribute 
         represents the level of the system's battery.
       </p>
+      <p>
+        If the implementation is unable to report the battery status
+        information for a particular attribute, the <a>BatteryManager</a> will
+        emulate a fully charged battery by setting the attribute's value to a
+        value that of the fully charged battery. This prevents leaking of
+        information that could be used to fingerprint a user and allow web
+        developers to use the same code path for handling battery full and
+        battery status unknown cases.
+      </p>
       <dl title="interface BatteryManager : EventTarget"
           class="idl">
         <dt>readonly attribute boolean charging</dt>
@@ -343,10 +352,6 @@
           level, the <code>level</code> attribute must be set to 1.0.
         </li>
       </ul>
-      <div class="note">
-        The <a>BatteryManager</a>'s default attribute values emulate a fully
-        charged battery.
-      </div>
       <p>
         The <code>charging</code> attribute MUST be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
