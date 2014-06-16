@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-16T08:15:37.000Z" id="w3c-editor-s-draft-16-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-16">16 June 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-16T08:31:57.000Z" id="w3c-editor-s-draft-16-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-16">16 June 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -618,111 +618,6 @@ table.exceptions table {
         monitor the battery level and save changes before the battery runs
         out to prevent data loss.
       </p>
-      <p>
-        The following example shows how a web-based email client could check
-        for new emails every ten seconds without knowledge of the battery
-        status:
-      </p>
-      <div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example highlight prettyprint prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
-</span><span class="tag">&lt;html&gt;</span><span class="pln">
-</span><span class="tag">&lt;head&gt;</span><span class="pln">
-  </span><span class="tag">&lt;title&gt;</span><span class="pln">Email Client</span><span class="tag">&lt;/title&gt;</span><span class="pln">
-  </span><span class="tag">&lt;script&gt;</span><span class="pln">
-    </span><span class="kwd">var</span><span class="pln"> mail </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      INTERVAL_DEFAULT</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln">
-      interval</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln">
-      timer</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
-
-      check</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln">
-                    </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">/</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">' seconds.'</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">},</span><span class="pln">
-
-      setTimer</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval </span><span class="pun">===</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> clearInterval</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">=</span><span class="pln"> setInterval</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">check</span><span class="pun">();</span><span class="pln"> </span><span class="pun">},</span><span class="pln"> interval</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
-        mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">;</span><span class="pln">
-      </span><span class="pun">}</span><span class="pln">
-    </span><span class="pun">};</span><span class="pln">
-
-    window</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'load'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(!</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">?</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT </span><span class="pun">:</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
-  </span><span class="tag">&lt;/script&gt;</span><span class="pln">
-</span><span class="tag">&lt;/head&gt;</span><span class="pln">
-</span><span class="tag">&lt;body&gt;&lt;/body&gt;</span><span class="pln">
-</span><span class="tag">&lt;/html&gt;</span></pre></div>
-      <p>
-        The script will always check for emails every ten seconds, even if the
-        battery level is critically low and the device is not charging.
-        This is an example of poor resource management.
-      </p>
-      <p>
-        Using the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface, the web application is, for
-        example, able to throttle checking for emails if the device is low on
-        battery, stop checking for emails if the battery is critically low and
-        resume normal operation when the battery is charging:
-      </p>
-      <div class="example"><div class="example-title"><span>Example 2</span></div><pre class="example highlight prettyprint prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
-</span><span class="tag">&lt;html&gt;</span><span class="pln">
-</span><span class="tag">&lt;head&gt;</span><span class="pln">
-  </span><span class="tag">&lt;title&gt;</span><span class="pln">Battery-aware Email Client</span><span class="tag">&lt;/title&gt;</span><span class="pln">
-  </span><span class="tag">&lt;script&gt;</span><span class="pln">
-    </span><span class="kwd">var</span><span class="pln"> mail </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      INTERVAL_BATTERY_LOW</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln">
-      INTERVAL_DEFAULT</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1000</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pun">,</span><span class="pln">
-      interval</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln">
-      timer</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
-
-      check</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Checking the server for new emails using an interval of '</span><span class="pln"> </span><span class="pun">+</span><span class="pln">
-                    </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">/</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">' seconds.'</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">},</span><span class="pln">
-
-      setTimer</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval </span><span class="pun">===</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> clearInterval</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">timer</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
-        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">interval</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">timer </span><span class="pun">=</span><span class="pln"> setInterval</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">check</span><span class="pun">();</span><span class="pln"> </span><span class="pun">},</span><span class="pln"> interval</span><span class="pun">);</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
-        mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">=</span><span class="pln"> interval</span><span class="pun">;</span><span class="pln">
-      </span><span class="pun">}</span><span class="pln">
-    </span><span class="pun">};</span><span class="pln">
-
-    window</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'load'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(!</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">interval </span><span class="pun">?</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT </span><span class="pun">:</span><span class="pln"> mail</span><span class="pun">.</span><span class="pln">interval</span><span class="pun">);</span><span class="pln">
-    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
-
-    </span><span class="kwd">function</span><span class="pln"> updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">charging</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_DEFAULT</span><span class="pun">);</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Battery is charging, checking the server normally.'</span><span class="pun">);</span><span class="pln">
-        </span><span class="kwd">return</span><span class="pun">;</span><span class="pln">
-      </span><span class="pun">}</span><span class="pln">
-
-      </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">30</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0.1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="pln">mail</span><span class="pun">.</span><span class="pln">INTERVAL_BATTERY_LOW</span><span class="pun">);</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'30 minutes remaining or level below 10%, checking the server less frequently.'</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">60</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="lit">10</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">0.05</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        mail</span><span class="pun">.</span><span class="pln">setTimer</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
-        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'10 minutes remaining or level below 5%, stop checking the server.'</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">}</span><span class="pln">
-    </span><span class="pun">}</span><span class="pln">
-
-    navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-      battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'levelchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">});</span><span class="pln">
-      battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'dischargingtimechange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">});</span><span class="pln">
-      battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'chargingchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
-        updateTimer</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
-      </span><span class="pun">});</span><span class="pln">
-    </span><span class="pun">});</span><span class="pln">
-  </span><span class="tag">&lt;/script&gt;</span><span class="pln">
-</span><span class="tag">&lt;/head&gt;</span><span class="pln">
-</span><span class="tag">&lt;body&gt;&lt;/body&gt;</span><span class="pln">
-</span><span class="tag">&lt;/html&gt;</span></pre></div>
     </section>
 
     <section id="conformance" typeof="bibo:Chapter" resource="#conformance" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_conformance"><span class="secno">2. </span>Conformance</h2>
@@ -981,7 +876,7 @@ table.exceptions table {
         This trivial example writes the battery level to the console each time
         the level changes:
       </p>
-      <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      <div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
   battery</span><span class="pun">.</span><span class="pln">onlevelchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
     console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln">
   </span><span class="pun">};</span><span class="pln">
@@ -990,7 +885,7 @@ table.exceptions table {
         Alternatively, the same using the <code>addEventListener()</code>
         method:
       </p>
-      <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      <div class="example"><div class="example-title"><span>Example 2</span></div><pre class="example highlight prettyprint prettyprinted"><span class="pln">navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="kwd">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
   battery</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'levelchange'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
     console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">level</span><span class="pun">);</span><span class="pln">
   </span><span class="pun">});</span><span class="pln">
@@ -999,7 +894,7 @@ table.exceptions table {
         The following example updates the indicators to show the charging
         state, level and time remaining in minutes:
       </p>
-      <div class="example"><div class="example-title"><span>Example 5</span></div><pre class="example highlight prettyprint prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
+      <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example highlight prettyprint prettyprinted"><span class="dec">&lt;!DOCTYPE html&gt;</span><span class="pln">
 </span><span class="tag">&lt;html&gt;</span><span class="pln">
 </span><span class="tag">&lt;head&gt;</span><span class="pln">
   </span><span class="tag">&lt;title&gt;</span><span class="pln">Battery Status API Example</span><span class="tag">&lt;/title&gt;</span><span class="pln">
