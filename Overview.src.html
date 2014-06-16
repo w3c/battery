@@ -410,17 +410,20 @@
           Otherwise, it MUST be set to false.
         </p>
         <p>
-          The <code>level</code> attribute MUST be set to the sum of the
-          individual battery's <code>level</code> attributes divided by the
-          number of batteries.
+          The <code>level</code> attribute can be set to the sum of the levels
+          of batteries of same capacity, or the weighted average of the battery
+          level attributes for batteries of different capacities.
         </p>
         <p>
-          The <code>chargingTime</code> attribute MUST be set to the max of all
-          the individual batteries <code>chargingTime</code>.
+          Depending on whether multiple batteries charge in parallel or
+          serially, the <code>chargingTime</code> attribute can be set to the
+          maximum or sum of the individual battery charging time, respectively.
         </p>
         <p>
-          The <code>dischargingTime</code> attribute MUST be set to the max of
-          all the individual batteries <code>dischargingTime</code>.
+          The <code>dischargingTime</code> attribute can be set to the sum or
+          weighted average  of the individual battery
+          <code>dischargingTime</code>, depending on whether they discharge
+          serially or in parallel respectively.
         </p>
       </section>
       <section>

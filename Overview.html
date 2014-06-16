@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-16T08:02:23.000Z" id="w3c-editor-s-draft-16-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-16">16 June 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-16T08:15:37.000Z" id="w3c-editor-s-draft-16-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-16">16 June 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -923,17 +923,20 @@ table.exceptions table {
           Otherwise, it <em class="rfc2119" title="MUST">MUST</em> be set to false.
         </p>
         <p>
-          The <code>level</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the sum of the
-          individual battery's <code>level</code> attributes divided by the
-          number of batteries.
+          The <code>level</code> attribute can be set to the sum of the levels
+          of batteries of same capacity, or the weighted average of the battery
+          level attributes for batteries of different capacities.
         </p>
         <p>
-          The <code>chargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the max of all
-          the individual batteries <code>chargingTime</code>.
+          Depending on whether multiple batteries charge in parallel or
+          serially, the <code>chargingTime</code> attribute can be set to the
+          maximum or sum of the individual battery charging time, respectively.
         </p>
         <p>
-          The <code>dischargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to the max of
-          all the individual batteries <code>dischargingTime</code>.
+          The <code>dischargingTime</code> attribute can be set to the sum or
+          weighted average  of the individual battery
+          <code>dischargingTime</code>, depending on whether they discharge
+          serially or in parallel respectively.
         </p>
       </section>
       <section id="event-handlers">
