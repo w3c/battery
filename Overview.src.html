@@ -289,9 +289,9 @@
           Otherwise, it MUST be set to false.
         </p>
         <p>
-          The <code>level</code> attribute can be set to the sum of the levels
-          of batteries of same capacity, or the weighted average of the battery
-          level attributes for batteries of different capacities.
+          The <code>level</code> attribute can be set to the average of the
+          levels of batteries of same capacity, or the weighted average of the
+          battery level attributes for batteries of different capacities.
         </p>
         <p>
           Depending on whether multiple batteries charge in parallel or
@@ -303,6 +303,12 @@
           weighted average  of the individual battery
           <code>dischargingTime</code>, depending on whether they discharge
           serially or in parallel respectively.
+        </p>
+        <p>
+          The <code>dischargingTime</code> attribute can be set to the maximum
+          discharging time of the individual batteries if discharging in
+          parallel, and to the sum of the individual batteries if discharging
+          serially.
         </p>
       </section>
       <section>
