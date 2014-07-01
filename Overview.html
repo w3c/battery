@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-16T09:17:30.000Z" id="w3c-editor-s-draft-16-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-06-16">16 June 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-07-01T06:10:18.000Z" id="w3c-editor-s-draft-01-july-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-07-01">01 July 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -690,14 +690,15 @@ table.exceptions table {
         following steps:
       </p>
       <ul>
-        <li>Let <var>promise</var> be a newly created Promise and return it
+        <li>Let <var><dfn id="dfn-promise">promise</dfn></var> be a newly created Promise and
+          return it.
         </li>
         <li>If an instance of <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> has previously been
         created in the current <a href="#dfn-browsing-context" class="internalDFN">browsing context</a>, let <var>battery</var>
         be the previously created instance.</li>
         <li>Otherwise, let <var>battery</var> be a new instance of
         <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>.</li>
-        <li>Resolve <var>promise</var> with <var>battery</var>.</li>
+        <li><dfn id="dfn-resolve">Resolve</dfn> <var>promise</var> with <var>battery</var>.</li>
       </ul>
       <p>
         The <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> reject the promise returned by
@@ -723,12 +724,13 @@ table.exceptions table {
       </p>
       <p>
         If the implementation is unable to report the battery status
-        information for a particular attribute, the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> will
-        emulate a fully charged battery by setting the attribute's value to a
-        value that of the fully charged battery. This prevents leaking of
-        information that could be used to fingerprint a user and allow web
-        developers to use the same code path for handling battery full and
-        battery status unknown cases.
+        information for any of the attributes, the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> will
+        emulate a fully charged battery by setting all the values to those
+        corresponding values of a fully charged battery. The reason for using
+        full battery defaults for unknown attribute values is that this will
+        not cause applications to degrade performance or functionality by
+        default if information is not available. It also reduces the potential
+        for fingerprinting.
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-BatteryManager">interface <span class="idlInterfaceID">BatteryManager</span> : <span class="idlSuperclass">EventTarget</span> {
 <span class="idlAttribute">    readonly    attribute <span class="idlAttrType">boolean</span>             <span class="idlAttrName"><a href="#widl-BatteryManager-charging">charging</a></span>;</span>
@@ -741,25 +743,14 @@ table.exceptions table {
 <span class="idlAttribute">                attribute <span class="idlAttrType">EventHandler</span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
 };</span></pre>
       <p>
-        When a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created, if the implementation
-        is unable to report the battery’s:
+        When the <a href="#dfn-promise" class="internalDFN">promise</a> is <a href="#dfn-resolve" class="internalDFN">resolve</a>d with the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>
+        object and the implementation is unable to provide any battery
+        information, the default values are set as follows (which is
+        equivalent to a fully charged battery): <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be
+        set to true, <code>chargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to 0,
+        <code>dischargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to positive Infinity, and
+        <code>level</code> <em class="rfc2119" title="MUST">MUST</em> be set to 1.0.
       </p>
-      <ul>
-        <li>
-          charging state, the <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to
-          true,
-        </li>
-        <li>
-          charging time, the <code>chargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to 0,
-        </li>
-        <li>
-          remaining time, the <code>dischargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to the
-          value positive Infinity,
-        </li>
-        <li>
-          level, the <code>level</code> attribute must be set to 1.0.
-        </li>
-      </ul>
       <p>
         The <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
@@ -818,9 +809,9 @@ table.exceptions table {
           Otherwise, it <em class="rfc2119" title="MUST">MUST</em> be set to false.
         </p>
         <p>
-          The <code>level</code> attribute can be set to the sum of the levels
-          of batteries of same capacity, or the weighted average of the battery
-          level attributes for batteries of different capacities.
+          The <code>level</code> attribute can be set to the average of the
+          levels of batteries of same capacity, or the weighted average of the
+          battery level attributes for batteries of different capacities.
         </p>
         <p>
           Depending on whether multiple batteries charge in parallel or
@@ -832,6 +823,12 @@ table.exceptions table {
           weighted average  of the individual battery
           <code>dischargingTime</code>, depending on whether they discharge
           serially or in parallel respectively.
+        </p>
+        <p>
+          The <code>dischargingTime</code> attribute can be set to the maximum
+          discharging time of the individual batteries if discharging in
+          parallel, and to the sum of the individual batteries if discharging
+          serially.
         </p>
       </section>
       <section id="event-handlers">
@@ -957,7 +954,7 @@ navigator</span><span class="pun">.</span><span class="pln">getBattery</span><sp
   
 
 <section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-ECMASCRIPT">[ECMASCRIPT]</dt><dd rel="dcterms:requires"><a href="http://people.mozilla.org/~jorendorff/es6-draft.html"><cite>ECMA-262 ECMAScript Language Specification, Edition 6</cite></a>. Draft. URL: <a href="http://people.mozilla.org/~jorendorff/es6-draft.html">http://people.mozilla.org/~jorendorff/es6-draft.html</a>
-</dd><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 29 April 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
+</dd><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 17 June 2014. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>
 </dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
 </dd></dl></section></section></body></html>
