@@ -189,12 +189,13 @@
       </p>
       <p>
         If the implementation is unable to report the battery status
-        information for a particular attribute, the <a>BatteryManager</a> will
-        emulate a fully charged battery by setting the attribute's value to a
-        value that of the fully charged battery. This prevents leaking of
-        information that could be used to fingerprint a user and allow web
-        developers to use the same code path for handling battery full and
-        battery status unknown cases.
+        information for any of the attributes, the <a>BatteryManager</a> will
+        emulate a fully charged battery by setting all the values to those
+        corresponding values of a fully charged battery. The reason for using
+        full battery defaults for unknown attribute values is that this will
+        not cause applications to degrade performance or functionality by
+        default if information is not available. It also reduces the potential
+        for fingerprinting.
       </p>
       <dl title="interface BatteryManager : EventTarget"
           class="idl">
