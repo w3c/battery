@@ -155,14 +155,14 @@
         following steps:
       </p>
       <ul>
-        <li>Let <var>promise</var> be a newly created Promise and return it
+        <li>Let <var>promise</var> be a newly created Promise and return it.
         </li>
         <li>If an instance of <a>BatteryManager</a> has previously been
         created in the current <a>browsing context</a>, let <var>battery</var>
         be the previously created instance.</li>
         <li>Otherwise, let <var>battery</var> be a new instance of
         <a>BatteryManager</a>.</li>
-        <li>Resolve <var>promise</var> with <var>battery</var>.</li>
+        <li><dfn>Resolve</dfn> <var>promise</var> with <var>battery</var>.</li>
       </ul>
       <p>
         The <a>user agent</a> SHOULD NOT reject the promise returned by
@@ -223,25 +223,14 @@
         <dd></dd>
       </dl>
       <p>
-        When a <a>BatteryManager</a> object is created, if the implementation
-        is unable to report the battery’s:
+        When the promise is <a>resolve</a>d with the <a>BatteryManager</a>
+        object and the implementation is unable to provide any battery
+        information, the default values are set as follows (which is
+        equivalent to a fully charged battery): <code>charging</code> MUST be
+        set to true, <code>chargingTime</code> MUST be set to 0,
+        <code>dischargingTime</code> MUST be set to positive Infinity, and
+        <code>level</code> MUST be set to 1.0.
       </p>
-      <ul>
-        <li>
-          charging state, the <code>charging</code> attribute MUST be set to
-          true,
-        </li>
-        <li>
-          charging time, the <code>chargingTime</code> MUST be set to 0,
-        </li>
-        <li>
-          remaining time, the <code>dischargingTime</code> MUST be set to the
-          value positive Infinity,
-        </li>
-        <li>
-          level, the <code>level</code> attribute MUST be set to 1.0.
-        </li>
-      </ul>
       <p>
         The <code>charging</code> attribute MUST be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
