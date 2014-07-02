@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-07-01T06:10:18.000Z" id="w3c-editor-s-draft-01-july-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-07-01">01 July 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-07-02T03:42:32.000Z" id="w3c-editor-s-draft-02-july-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-07-02">02 July 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -590,7 +590,7 @@ table.exceptions table {
       
     
   
-</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#navigator-interface" class="tocxref"><span class="secno">5. </span><span class="formerLink"><code>Navigator</code></span> Interface</a></li><li class="tocline"><a href="#batterymanager-interface" class="tocxref"><span class="secno">6. </span><span class="formerLink"><code>BatteryManager</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#multiple-batteries" class="tocxref"><span class="secno">6.1 </span>Multiple batteries</a></li><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">6.2 </span>Event handlers</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
+</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#the-navigator-interface" class="tocxref"><span class="secno">5. </span>The <span class="formerLink"><code>Navigator</code></span> interface</a></li><li class="tocline"><a href="#the-batterymanager-interface" class="tocxref"><span class="secno">6. </span>The <span class="formerLink"><code>BatteryManager</code></span> interface</a><ul class="toc"><li class="tocline"><a href="#multiple-batteries" class="tocxref"><span class="secno">6.1 </span>Multiple batteries</a></li><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">6.2 </span>Event handlers</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7. </span>Examples</a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
 
     
 
@@ -617,6 +617,17 @@ table.exceptions table {
         battery. Another example is a web-based word processor which could
         monitor the battery level and save changes before the battery runs
         out to prevent data loss.
+      </p>
+      <p>
+        The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface represents information about the
+        battery status of the hosting device. The <code>charging</code>
+        attribute represents the charging state of the system's battery.
+        The <code>chargingTime</code> attribute represents the time remaining
+        in seconds until the system's battery is fully charged. The
+        <code>dischargingTime</code> attribute represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended, and the <code>level</code> attribute 
+        represents the level of the system's battery.
       </p>
     </section>
 
@@ -680,8 +691,8 @@ table.exceptions table {
         device has no battery, is charging or is exposing fake values.
       </p>
     </section>
-    <section id="navigator-interface">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_navigator-interface"><span class="secno">5. </span><a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> Interface</h2>
+    <section id="the-navigator-interface">
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_the-navigator-interface"><span class="secno">5. </span>The <a href="#idl-def-Navigator" class="idlType"><code>Navigator</code></a> interface</h2>
       <pre class="idl"><span class="idlInterface" id="idl-def-Navigator">partial interface <span class="idlInterfaceID">Navigator</span> {
 <span class="idlMethod">    <span class="idlMethType">Promise&lt;<a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>&gt;</span> <span class="idlMethName"><a href="#widl-Navigator-getBattery-Promise-BatteryManager">getBattery</a></span> ();</span>
 };</span></pre>
@@ -709,29 +720,8 @@ table.exceptions table {
       </p>
     </section>
 
-    <section id="batterymanager-interface">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_batterymanager-interface"><span class="secno">6. </span><a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> Interface</h2>
-      <p>
-        The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface represents information about the
-        battery status of the hosting device. The <code>charging</code>
-        attribute represents the charging state of the system's battery.
-        The <code>chargingTime</code> attribute represents the time remaining
-        in seconds until the system's battery is fully charged. The
-        <code>dischargingTime</code> attribute represents the time remaining in
-        seconds until the system's battery is completely discharged and the
-        system is about to be suspended, and the <code>level</code> attribute 
-        represents the level of the system's battery.
-      </p>
-      <p>
-        If the implementation is unable to report the battery status
-        information for any of the attributes, the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> will
-        emulate a fully charged battery by setting all the values to those
-        corresponding values of a fully charged battery. The reason for using
-        full battery defaults for unknown attribute values is that this will
-        not cause applications to degrade performance or functionality by
-        default if information is not available. It also reduces the potential
-        for fingerprinting.
-      </p>
+    <section id="the-batterymanager-interface">
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_the-batterymanager-interface"><span class="secno">6. </span>The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface</h2>
       <pre class="idl"><span class="idlInterface" id="idl-def-BatteryManager">interface <span class="idlInterfaceID">BatteryManager</span> : <span class="idlSuperclass">EventTarget</span> {
 <span class="idlAttribute">    readonly    attribute <span class="idlAttrType">boolean</span>             <span class="idlAttrName"><a href="#widl-BatteryManager-charging">charging</a></span>;</span>
 <span class="idlAttribute">    readonly    attribute <span class="idlAttrType">unrestricted double</span> <span class="idlAttrName"><a href="#widl-BatteryManager-chargingTime">chargingTime</a></span>;</span>
@@ -751,6 +741,16 @@ table.exceptions table {
         <code>dischargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to positive Infinity, and
         <code>level</code> <em class="rfc2119" title="MUST">MUST</em> be set to 1.0.
       </p>
+      <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_1"><span>Note</span></div><p class="">
+        If the implementation is unable to report the battery status
+        information for any of the attributes, the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> will
+        emulate a fully charged battery by setting all the values to those
+        corresponding values of a fully charged battery. The reason for using
+        full battery defaults for unknown attribute values is that this will
+        not cause applications to degrade performance or functionality by
+        default if information is not available. It also reduces the potential
+        for fingerprinting.
+      </p></div>
       <p>
         The <code>charging</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
@@ -765,11 +765,11 @@ table.exceptions table {
         The <code>chargingTime</code> attribute <em class="rfc2119" title="MUST">MUST</em> be set to 0, if the
         battery is full or there is no battery attached to the system, and to
         the value positive Infinity if the battery is discharging, the
-        implementation is unable to report the remaining charging time while the
-        battery is charging but not full, or otherwise. When the battery
-        charging time is updated, the <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a>
-        which sets the <code>chargingTime</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires
-        a simple event</a> named <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code> at the
+        implementation is unable to report the remaining charging time, or
+        otherwise. When the battery charging time is updated, the <a href="#dfn-user-agent" class="internalDFN">user
+        agent</a> <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-queue-a-task" class="internalDFN">queue a task</a> which sets the
+        <code>chargingTime</code> attribute's value and <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple
+        event</a> named <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code> at the
         <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
       </p>
       <p>
@@ -792,11 +792,11 @@ table.exceptions table {
         <a href="#dfn-fires-a-simple-event" class="internalDFN">fires a simple event</a> named <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a></code> at
         the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object.
       </p>
-      <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_1"><span>Note</span></div><div class="">
+      <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_2"><span>Note</span></div><p class="">
         The definition of how often the <code><a href="#dfn-chargingtimechange" class="internalDFN">chargingtimechange</a></code>,
         <code><a href="#dfn-dischargingtimechange" class="internalDFN">dischargingtimechange</a></code>, and <code><a href="#dfn-levelchange" class="internalDFN">levelchange</a>
         </code> events are fired is left to the implementation.
-      </div></div>
+      </p></div>
       <section id="multiple-batteries">
         <h3 aria-level="2" role="heading" id="h3_multiple-batteries"><span class="secno">6.1 </span>Multiple batteries</h3>
         <p>
@@ -809,26 +809,20 @@ table.exceptions table {
           Otherwise, it <em class="rfc2119" title="MUST">MUST</em> be set to false.
         </p>
         <p>
-          The <code>level</code> attribute can be set to the average of the
-          levels of batteries of same capacity, or the weighted average of the
-          battery level attributes for batteries of different capacities.
-        </p>
-        <p>
-          Depending on whether multiple batteries charge in parallel or
-          serially, the <code>chargingTime</code> attribute can be set to the
-          maximum or sum of the individual battery charging time, respectively.
-        </p>
-        <p>
-          The <code>dischargingTime</code> attribute can be set to the sum or
-          weighted average  of the individual battery
-          <code>dischargingTime</code>, depending on whether they discharge
-          serially or in parallel respectively.
+          The <code>chargingTime</code> attribute can be set to the maximum
+          charging time of the individual batteries if charging in parallel,
+          and to the sum of the individual charging times if charging serially.
         </p>
         <p>
           The <code>dischargingTime</code> attribute can be set to the maximum
           discharging time of the individual batteries if discharging in
           parallel, and to the sum of the individual batteries if discharging
           serially.
+        </p>
+        <p>
+          The <code>level</code> attribute can be set to the average of the
+          levels of batteries of same capacity, or the weighted average of the
+          battery level attributes for batteries of different capacities.
         </p>
       </section>
       <section id="event-handlers">
