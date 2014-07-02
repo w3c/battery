@@ -91,6 +91,17 @@
         monitor the battery level and save changes before the battery runs
         out to prevent data loss.
       </p>
+      <p>
+        The <a>BatteryManager</a> interface represents information about the
+        battery status of the hosting device. The <code>charging</code>
+        attribute represents the charging state of the system's battery.
+        The <code>chargingTime</code> attribute represents the time remaining
+        in seconds until the system's battery is fully charged. The
+        <code>dischargingTime</code> attribute represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended, and the <code>level</code> attribute 
+        represents the level of the system's battery.
+      </p>
     </section>
 
     <section id="conformance">
@@ -145,7 +156,7 @@
       </p>
     </section>
     <section>
-      <h2><a>Navigator</a> Interface</h2>
+      <h2>The <a>Navigator</a> interface</h2>
       <dl title="partial interface Navigator" class="idl">
         <dt>Promise&lt;BatteryManager&gt; getBattery()</dt>
         <dd></dd>
@@ -175,28 +186,7 @@
     </section>
 
     <section>
-      <h2><a>BatteryManager</a> Interface</h2>
-      <p>
-        The <a>BatteryManager</a> interface represents information about the
-        battery status of the hosting device. The <code>charging</code>
-        attribute represents the charging state of the system's battery.
-        The <code>chargingTime</code> attribute represents the time remaining
-        in seconds until the system's battery is fully charged. The
-        <code>dischargingTime</code> attribute represents the time remaining in
-        seconds until the system's battery is completely discharged and the
-        system is about to be suspended, and the <code>level</code> attribute 
-        represents the level of the system's battery.
-      </p>
-      <p>
-        If the implementation is unable to report the battery status
-        information for any of the attributes, the <a>BatteryManager</a> will
-        emulate a fully charged battery by setting all the values to those
-        corresponding values of a fully charged battery. The reason for using
-        full battery defaults for unknown attribute values is that this will
-        not cause applications to degrade performance or functionality by
-        default if information is not available. It also reduces the potential
-        for fingerprinting.
-      </p>
+      <h2>The <a>BatteryManager</a> interface</h2>
       <dl title="interface BatteryManager : EventTarget"
           class="idl">
         <dt>readonly attribute boolean charging</dt>
@@ -232,6 +222,16 @@
         set to true, <code>chargingTime</code> MUST be set to 0,
         <code>dischargingTime</code> MUST be set to positive Infinity, and
         <code>level</code> MUST be set to 1.0.
+      </p>
+      <p class="note">
+        If the implementation is unable to report the battery status
+        information for any of the attributes, the <a>BatteryManager</a> will
+        emulate a fully charged battery by setting all the values to those
+        corresponding values of a fully charged battery. The reason for using
+        full battery defaults for unknown attribute values is that this will
+        not cause applications to degrade performance or functionality by
+        default if information is not available. It also reduces the potential
+        for fingerprinting.
       </p>
       <p>
         The <code>charging</code> attribute MUST be set to false if the battery
