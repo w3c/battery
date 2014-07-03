@@ -91,17 +91,6 @@
         monitor the battery level and save changes before the battery runs
         out to prevent data loss.
       </p>
-      <p>
-        The <a>BatteryManager</a> interface represents information about the
-        battery status of the hosting device. The <code>charging</code>
-        attribute represents the charging state of the system's battery.
-        The <code>chargingTime</code> attribute represents the time remaining
-        in seconds until the system's battery is fully charged. The
-        <code>dischargingTime</code> attribute represents the time remaining in
-        seconds until the system's battery is completely discharged and the
-        system is about to be suspended, and the <code>level</code> attribute 
-        represents the level of the system's battery.
-      </p>
     </section>
 
     <section id="conformance">
@@ -187,6 +176,17 @@
 
     <section>
       <h2>The <a>BatteryManager</a> interface</h2>
+      <p>
+        The <a>BatteryManager</a> interface represents information about the
+        battery status of the hosting device. The <code>charging</code>
+        attribute represents the charging state of the system's battery.
+        The <code>chargingTime</code> attribute represents the time remaining
+        in seconds until the system's battery is fully charged. The
+        <code>dischargingTime</code> attribute represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended, and the <code>level</code> attribute 
+        represents the level of the system's battery.
+      </p>
       <dl title="interface BatteryManager : EventTarget"
           class="idl">
         <dt>readonly attribute boolean charging</dt>
