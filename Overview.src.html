@@ -156,7 +156,15 @@
       </p>
       <ul>
         <li>
-          Let <var>promise</var> be a newly created <a>Promise</a> and return it.
+          If there is an initialized <a>Promise</a> object returned by
+          <code>getBattery()</code>, let <var>promise</var> be that
+          <a>Promise</a> object.
+        </li>
+        <li>
+          Otherwise, let <var>promise</var> be a newly created <a>Promise</a>.
+        </li>
+        <li>
+          Return <var>promise</var>.
         </li>
         <li>
           If an instance of <a>BatteryManager</a> has previously been
