@@ -130,7 +130,7 @@
       <p>
         <a href=
         'http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise-objects'>
-        Promise objects</a> are defined in [[!ECMASCRIPT]].
+        <dfn>Promise</dfn></a> objects are defined in [[!ECMASCRIPT]].
       </p>
     </section>
     <section class="informative">
@@ -151,19 +151,25 @@
         <dd></dd>
       </dl>
       <p>
-        The <code>getBattery()</code> method, when invoked, MUST run the
-        following steps:
+        The <code id="widl-Navigator-getBattery-Promise-BatteryManager">getBattery()</code>
+        method, when invoked, MUST run the following steps:
       </p>
       <ul>
-        <li>Let <var><dfn>promise</dfn></var> be a newly created Promise and
-          return it.
+        <li>
+          Let <var>promise</var> be a newly created <a>Promise</a> and return it.
         </li>
-        <li>If an instance of <a>BatteryManager</a> has previously been
-        created in the current <a>browsing context</a>, let <var>battery</var>
-        be the previously created instance.</li>
-        <li>Otherwise, let <var>battery</var> be a new instance of
-        <a>BatteryManager</a>.</li>
-        <li><dfn>Resolve</dfn> <var>promise</var> with <var>battery</var>.</li>
+        <li>
+          If an instance of <a>BatteryManager</a> has previously been
+          created in the current <a>browsing context</a>, let <var>battery</var>
+          be the previously created instance.
+        </li>
+        <li>
+          Otherwise, let <var>battery</var> be a new instance of
+          <a>BatteryManager</a>.
+        </li>
+        <li>
+          <dfn>Resolve</dfn> <var>promise</var> with <var>battery</var>.
+        </li>
       </ul>
       <p>
         The <a>user agent</a> SHOULD NOT reject the promise returned by
@@ -234,7 +240,8 @@
         for fingerprinting.
       </p>
       <p>
-        The <code>charging</code> attribute MUST be set to false if the battery
+        The <code id="widl-BatteryManager-charging">charging</code>
+        attribute MUST be set to false if the battery
         is discharging, and set to true, if the battery is charging, the
         implementation is unable to report the state, or there is no battery
         attached to the system, or otherwise. When the battery charging state
@@ -244,7 +251,8 @@
         <a>BatteryManager</a> object.
       </p>
       <p>
-        The <code>chargingTime</code> attribute MUST be set to 0, if the
+        The <code id="widl-BatteryManager-chargingTime">chargingTime</code>
+        attribute MUST be set to 0, if the
         battery is full or there is no battery attached to the system, and to
         the value positive Infinity if the battery is discharging, the
         implementation is unable to report the remaining charging time, or
@@ -255,7 +263,8 @@
         <a>BatteryManager</a> object.
       </p>
       <p>
-        The <code>dischargingTime</code> attribute MUST be set to the value
+        The <code id="widl-BatteryManager-dischargingTime">dischargingTime</code>
+        attribute MUST be set to the value
         positive Infinity, if the battery is charging, the implementation is
         unable to report the remaining discharging time, there is no battery
         attached to the system, or otherwise. When the battery discharging time
@@ -265,7 +274,8 @@
         <a>BatteryManager</a> object.
       </p>
       <p>
-        The <code>level</code> attribute MUST be set to 0 if the system's
+        The <code id="widl-BatteryManager-level">level</code>
+        attribute MUST be set to 0 if the system's
         battery is depleted and the system is about to be suspended, and to
         1.0 if the battery is full, the implementation is unable to report the
         battery's level, or there is no battery attached to the system. When
@@ -323,20 +333,52 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong><code>onchargingchange</code></strong></td>
-              <td><code><dfn>chargingchange</dfn></code></td>
+              <td>
+                <strong><code id="widl-BatteryManager-onchargingchange">
+                  onchargingchange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  chargingchange
+                </dfn></code>
+              </td>
             </tr>
             <tr>
-              <td><strong><code>onchargingtimechange</code></strong></td>
-              <td><code><dfn>chargingtimechange</dfn></code></td>
+              <td>
+                <strong><code id="widl-BatteryManager-onchargingtimechange">
+                  onchargingtimechange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  chargingtimechange
+                </dfn></code>
+              </td>
             </tr>
             <tr>
-              <td><strong><code>ondischargingtimechange</code></strong></td>
-              <td><code><dfn>dischargingtimechange</dfn></code></td>
+              <td>
+                <strong><code id="widl-BatteryManager-ondischargingtimechange">
+                  ondischargingtimechange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  dischargingtimechange
+                </dfn></code>
+              </td>
             </tr>
             <tr>
-              <td><strong><code>onlevelchange</code></strong></td>
-              <td><code><dfn>levelchange</dfn></code></td>
+              <td>
+                <strong><code id="widl-BatteryManager-onlevelchange">
+                  onlevelchange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  levelchange
+                </dfn></code>
+              </td>
             </tr>
           </tbody>
         </table>
