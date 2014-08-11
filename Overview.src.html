@@ -47,22 +47,23 @@
         interference with other, often unrelated, features.
       </p>
       <p>
-        The following changes have been made since the <a href="http://www.w3.org/TR/2012/CR-battery-status-20120508/">
+        The following changes have been made since the
+        <a href="http://www.w3.org/TR/2012/CR-battery-status-20120508/">
         last published version</a>:
       </p>
       <ul>
         <li>
           Expose <a>BatteryManager</a> via <code>getBattery()</code>
-          returning a Promise instead of a synchronous accessor.
-          (<a href="#h2_navigator-interface">Section 5</a>)
+          returning a <a>Promise</a> instead of a synchronous accessor.
+          (<a href="#the-navigator-interface">Section 5</a>)
         </li>
         <li>
-          Clarify defaults when a <a>BatteryManager</a> object is created.
-          (<a href="#batterymanager-interface">Section 6</a>)
+          Clarify <a>default values</a> when a <a>BatteryManager</a> object is created.
+          (<a href="#the-batterymanager-interface">Section 6</a>)
         </li>
         <li>
           Specify the behavior when a host device has more than one battery.
-          (<a href="#h3_multiple-batteries">Section 6.1</a>)
+          (<a href="#multiple-batteries">Section 6.1</a>)
         </li>
       </ul>
     </section>
@@ -297,7 +298,7 @@
         <code><a>dischargingtimechange</a></code>, and <code><a>levelchange</a>
         </code> events are fired is left to the implementation.
       </p>
-      <section>
+      <section id="multiple-batteries">
         <h2>Multiple batteries</h2>
         <p>
           If a hosting device contains more than one battery,
