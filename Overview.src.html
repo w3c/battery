@@ -172,11 +172,11 @@
         </li>
       </ul>
       <p>
-        The <a>user agent</a> SHOULD NOT reject the promise returned by
+        The <a>user agent</a> MUST NOT reject the promise returned by
         <code>getBattery()</code>. If the <a>user agent</a> does not want to
-        expose the battery information to the web page, it is RECOMMENDED to
-        not expose <code>getBattery()</code> or resolve the promise with an
-        instance of <a>BatteryManager</a> exposing only <a>default values</a>.
+        expose the battery information to the web page, it MUST resolve the
+        promise with an instance of <a>BatteryManager</a> exposing only
+        <a>default values</a>.
       </p>
     </section>
 
