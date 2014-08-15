@@ -153,32 +153,29 @@
         <dd></dd>
       </dl>
       <p>
+        For each <a>browsing context</a>, there is a <dfn>battery promise</dfn>,
+        which is initially set to <code>null</code>. It is a <a>Promise</a>
+        object which holds a <a>BatteryManager</a>.
+      </p>
+      <p>
         The <code id="widl-Navigator-getBattery-Promise-BatteryManager">getBattery()</code>
         method, when invoked, MUST run the following steps:
       </p>
       <ul>
         <li>
-          If there is an initialized <a>Promise</a> object returned by
-          <code>getBattery()</code>, let <var>promise</var> be that
-          <a>Promise</a> object.
+          If <a>battery promise</a> is not <code>null</code>, return <a>battery
+          promise</a> and abort those steps.
         </li>
         <li>
-          Otherwise, let <var>promise</var> be a newly created <a>Promise</a>.
+          Otherwise, set <a>battery promise</a> to a newly created
+          <a>Promise</a>.
         </li>
         <li>
-          Return <var>promise</var>.
+          Return <a>battery promise</a> and continue asynchronously.
         </li>
         <li>
-          If an instance of <a>BatteryManager</a> has previously been
-          created in the current <a>browsing context</a>, let <var>battery</var>
-          be the previously created instance.
-        </li>
-        <li>
-          Otherwise, let <var>battery</var> be a new instance of
+          <dfn>Resolve</dfn> <var>battery promise</var> with a new instance of
           <a>BatteryManager</a>.
-        </li>
-        <li>
-          <dfn>Resolve</dfn> <var>promise</var> with <var>battery</var>.
         </li>
       </ul>
       <p>
@@ -200,7 +197,7 @@
         in seconds until the system's battery is fully charged. The
         <code>dischargingTime</code> attribute represents the time remaining in
         seconds until the system's battery is completely discharged and the
-        system is about to be suspended, and the <code>level</code> attribute 
+        system is about to be suspended, and the <code>level</code> attribute
         represents the level of the system's battery.
       </p>
       <dl title="interface BatteryManager : EventTarget"
@@ -439,7 +436,7 @@
                 document.querySelector('#level').textContent = battery.level;
                 document.querySelector('#dischargingTime').textContent = battery.dischargingTime / 60;
               }
-            
+
               navigator.getBattery().then(function(battery) {
                 // Update the battery status initially when the promise resolves ...
                 updateBatteryStatus(battery);
