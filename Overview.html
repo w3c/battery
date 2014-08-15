@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-08-11T05:34:46.000Z" id="w3c-editor-s-draft-11-august-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-08-11">11 August 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-08-15T10:38:35.000Z" id="w3c-editor-s-draft-15-august-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-08-15">15 August 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -692,32 +692,29 @@ table.exceptions table {
 <span class="idlMethod">    <span class="idlMethType">Promise&lt;<a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>&gt;</span> <span class="idlMethName"><a href="#widl-Navigator-getBattery-Promise-BatteryManager">getBattery</a></span> ();</span>
 };</span></pre>
       <p>
+        For each <a href="#dfn-browsing-context" class="internalDFN">browsing context</a>, there is a <dfn id="dfn-battery-promise">battery promise</dfn>,
+        which is initially set to <code>null</code>. It is a <a href="#dfn-promise" class="internalDFN">Promise</a>
+        object which holds a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>.
+      </p>
+      <p>
         The <code id="widl-Navigator-getBattery-Promise-BatteryManager">getBattery()</code>
         method, when invoked, <em class="rfc2119" title="MUST">MUST</em> run the following steps:
       </p>
       <ul>
         <li>
-          If there is an initialized <a href="#dfn-promise" class="internalDFN">Promise</a> object returned by
-          <code>getBattery()</code>, let <var>promise</var> be that
-          <a href="#dfn-promise" class="internalDFN">Promise</a> object.
+          If <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> is not <code>null</code>, return <a href="#dfn-battery-promise" class="internalDFN">battery
+          promise</a> and abort those steps.
         </li>
         <li>
-          Otherwise, let <var>promise</var> be a newly created <a href="#dfn-promise" class="internalDFN">Promise</a>.
+          Otherwise, set <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> to a newly created
+          <a href="#dfn-promise" class="internalDFN">Promise</a>.
         </li>
         <li>
-          Return <var>promise</var>.
+          Return <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> and continue asynchronously.
         </li>
         <li>
-          If an instance of <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> has previously been
-          created in the current <a href="#dfn-browsing-context" class="internalDFN">browsing context</a>, let <var>battery</var>
-          be the previously created instance.
-        </li>
-        <li>
-          Otherwise, let <var>battery</var> be a new instance of
+          <dfn id="dfn-resolve">Resolve</dfn> <var>battery promise</var> with a new instance of
           <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>.
-        </li>
-        <li>
-          <dfn id="dfn-resolve">Resolve</dfn> <var>promise</var> with <var>battery</var>.
         </li>
       </ul>
       <p>
@@ -739,7 +736,7 @@ table.exceptions table {
         in seconds until the system's battery is fully charged. The
         <code>dischargingTime</code> attribute represents the time remaining in
         seconds until the system's battery is completely discharged and the
-        system is about to be suspended, and the <code>level</code> attribute 
+        system is about to be suspended, and the <code>level</code> attribute
         represents the level of the system's battery.
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-BatteryManager">interface <span class="idlInterfaceID">BatteryManager</span> : <span class="idlSuperclass">EventTarget</span> {
@@ -956,7 +953,7 @@ navigator</span><span class="pun">.</span><span class="pln">getBattery</span><sp
         document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#level'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">level</span><span class="pun">;</span><span class="pln">
         document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'#dischargingTime'</span><span class="pun">).</span><span class="pln">textContent </span><span class="pun">=</span><span class="pln"> battery</span><span class="pun">.</span><span class="pln">dischargingTime </span><span class="pun">/</span><span class="pln"> </span><span class="lit">60</span><span class="pun">;</span><span class="pln">
       </span><span class="pun">}</span><span class="pln">
-    
+
       navigator</span><span class="pun">.</span><span class="pln">getBattery</span><span class="pun">().</span><span class="pln">then</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
         </span><span class="com">// Update the battery status initially when the promise resolves ...</span><span class="pln">
         updateBatteryStatus</span><span class="pun">(</span><span class="pln">battery</span><span class="pun">);</span><span class="pln">
