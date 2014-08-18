@@ -58,7 +58,9 @@
           (<a href="#the-navigator-interface">Section 5</a>)
         </li>
         <li>
-          Clarify <a>default values</a> when a <a>BatteryManager</a> object is created.
+          Clarify <a>default values</a> when a <a>BatteryManager</a> object is
+          created and the implementation is <a>unable to report the battery
+          status information</a>.
           (<a href="#the-batterymanager-interface">Section 6</a>)
         </li>
         <li>
@@ -164,7 +166,7 @@
       <ul>
         <li>
           If <a>battery promise</a> is not <code>null</code>, return <a>battery
-          promise</a> and abort those steps.
+          promise</a> and abort these steps.
         </li>
         <li>
           Otherwise, set <a>battery promise</a> to a newly created
@@ -174,24 +176,23 @@
           Return <a>battery promise</a> and continue asynchronously.
         </li>
         <li>
-          <dfn>Resolve</dfn> <var>battery promise</var> with a new instance of
-          <a>BatteryManager</a>.
+          <a>Create a new <code>BatteryManager</code> object</a>,
+          and let <var>battery</var> be that object.
+        </li>
+        <li>
+          <dfn>Resolve</dfn> <a>battery promise</a> with <var>battery</var>.
         </li>
       </ul>
       <p>
-        The <a>user agent</a> MUST NOT reject the promise returned by
-        <code>getBattery()</code>. If the <a>user agent</a> does not want to
-        expose the battery information to the web page, it MUST resolve the
-        promise with an instance of <a>BatteryManager</a> exposing only
-        <a>default values</a>.
+        The <a>user agent</a> MUST NOT reject the <a>battery promise</a>.
       </p>
     </section>
 
     <section>
       <h2>The <a>BatteryManager</a> interface</h2>
       <p>
-        The <a>BatteryManager</a> interface represents information about the
-        battery status of the hosting device. The <code>charging</code>
+        The <a>BatteryManager</a> interface represents the <dfn>current battery
+        status information</dfn> of the hosting device. The <code>charging</code>
         attribute represents the charging state of the system's battery.
         The <code>chargingTime</code> attribute represents the time remaining
         in seconds until the system's battery is fully charged. The
@@ -228,23 +229,29 @@
         <dd></dd>
       </dl>
       <p>
-        When the <a>promise</a> is <a>resolve</a>d with the <a>BatteryManager</a>
-        object and the implementation is unable to provide any battery
-        information, the <dfn>default values</dfn> are set as follows (which is
-        equivalent to a fully charged battery): <code>charging</code> MUST be
-        set to true, <code>chargingTime</code> MUST be set to 0,
+        When the <a>user agent</a> is to <dfn>create a new
+        <code>BatteryManager</code> object</dfn>, it MUST instantiate a new
+        <a>BatteryManager</a> object and set its attributes' values to those
+        that represent the <a>current battery status information</a>, unless
+        the <a>user agent</a> is <a>unable to report the battery status
+        information</a>, in which case the values MUST be set to <dfn>default
+        values</dfn> as follows:
+        <code>charging</code> MUST be set to true,
+        <code>chargingTime</code> MUST be set to 0,
         <code>dischargingTime</code> MUST be set to positive Infinity, and
         <code>level</code> MUST be set to 1.0.
       </p>
+      <p>
+        The <a>user agent</a> is said to be <dfn>unable to report the
+        battery status information</dfn>, if it is not able to report the
+        values for any of the attributes, for example, due to a user or system
+        preference, setting, or limitation.
+      </p>
       <p class="note">
-        If the implementation is unable to report the battery status
-        information for any of the attributes, the <a>BatteryManager</a> will
-        emulate a fully charged battery by setting all the values to those
-        corresponding values of a fully charged battery. The reason for using
-        full battery defaults for unknown attribute values is that this will
-        not cause applications to degrade performance or functionality by
-        default if information is not available. It also reduces the potential
-        for fingerprinting.
+        Implementations <a>unable to report the battery status information</a>
+        emulate a fully charged and plugged in battery to reduce the potential
+        for fingerprinting and prevent applications from degrading performance,
+        if the battery status information is not made available, for example.
       </p>
       <p>
         The <code id="widl-BatteryManager-charging">charging</code>
