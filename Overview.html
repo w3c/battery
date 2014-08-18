@@ -436,7 +436,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Battery Status API</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-08-15T10:38:35.000Z" id="w3c-editor-s-draft-15-august-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-08-15">15 August 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-08-18T09:41:25.000Z" id="w3c-editor-s-draft-18-august-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-08-18">18 August 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -530,7 +530,9 @@ table.exceptions table {
           (<a href="#the-navigator-interface">Section 5</a>)
         </li>
         <li>
-          Clarify <a href="#dfn-default-values" class="internalDFN">default values</a> when a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is created.
+          Clarify <a href="#dfn-default-values" class="internalDFN">default values</a> when a <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object is
+          created and the implementation is <a href="#dfn-unable-to-report-the-battery-status-information" class="internalDFN">unable to report the battery
+          status information</a>.
           (<a href="#the-batterymanager-interface">Section 6</a>)
         </li>
         <li>
@@ -703,7 +705,7 @@ table.exceptions table {
       <ul>
         <li>
           If <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> is not <code>null</code>, return <a href="#dfn-battery-promise" class="internalDFN">battery
-          promise</a> and abort those steps.
+          promise</a> and abort these steps.
         </li>
         <li>
           Otherwise, set <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> to a newly created
@@ -713,24 +715,23 @@ table.exceptions table {
           Return <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> and continue asynchronously.
         </li>
         <li>
-          <dfn id="dfn-resolve">Resolve</dfn> <var>battery promise</var> with a new instance of
-          <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>.
+          <a href="#dfn-create-a-new-batterymanager-object" class="internalDFN">Create a new <code>BatteryManager</code> object</a>,
+          and let <var>battery</var> be that object.
+        </li>
+        <li>
+          <dfn id="dfn-resolve">Resolve</dfn> <a href="#dfn-battery-promise" class="internalDFN">battery promise</a> with <var>battery</var>.
         </li>
       </ul>
       <p>
-        The <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST NOT">MUST NOT</em> reject the promise returned by
-        <code>getBattery()</code>. If the <a href="#dfn-user-agent" class="internalDFN">user agent</a> does not want to
-        expose the battery information to the web page, it <em class="rfc2119" title="MUST">MUST</em> resolve the
-        promise with an instance of <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> exposing only
-        <a href="#dfn-default-values" class="internalDFN">default values</a>.
+        The <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST NOT">MUST NOT</em> reject the <a href="#dfn-battery-promise" class="internalDFN">battery promise</a>.
       </p>
     </section>
 
     <section id="the-batterymanager-interface">
       <!--OddPage--><h2 aria-level="1" role="heading" id="h2_the-batterymanager-interface"><span class="secno">6. </span>The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface</h2>
       <p>
-        The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface represents information about the
-        battery status of the hosting device. The <code>charging</code>
+        The <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> interface represents the <dfn id="dfn-current-battery-status-information">current battery
+        status information</dfn> of the hosting device. The <code>charging</code>
         attribute represents the charging state of the system's battery.
         The <code>chargingTime</code> attribute represents the time remaining
         in seconds until the system's battery is fully charged. The
@@ -750,23 +751,29 @@ table.exceptions table {
 <span class="idlAttribute">                attribute <span class="idlAttrType">EventHandler</span>        <span class="idlAttrName"><a href="#widl-BatteryManager-onlevelchange">onlevelchange</a></span>;</span>
 };</span></pre>
       <p>
-        When the <a href="#dfn-promise" class="internalDFN">promise</a> is <a href="#dfn-resolve" class="internalDFN">resolve</a>d with the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a>
-        object and the implementation is unable to provide any battery
-        information, the <dfn id="dfn-default-values">default values</dfn> are set as follows (which is
-        equivalent to a fully charged battery): <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be
-        set to true, <code>chargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to 0,
+        When the <a href="#dfn-user-agent" class="internalDFN">user agent</a> is to <dfn id="dfn-create-a-new-batterymanager-object">create a new
+        <code>BatteryManager</code> object</dfn>, it <em class="rfc2119" title="MUST">MUST</em> instantiate a new
+        <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> object and set its attributes' values to those
+        that represent the <a href="#dfn-current-battery-status-information" class="internalDFN">current battery status information</a>, unless
+        the <a href="#dfn-user-agent" class="internalDFN">user agent</a> is <a href="#dfn-unable-to-report-the-battery-status-information" class="internalDFN">unable to report the battery status
+        information</a>, in which case the values <em class="rfc2119" title="MUST">MUST</em> be set to <dfn id="dfn-default-values">default
+        values</dfn> as follows:
+        <code>charging</code> <em class="rfc2119" title="MUST">MUST</em> be set to true,
+        <code>chargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to 0,
         <code>dischargingTime</code> <em class="rfc2119" title="MUST">MUST</em> be set to positive Infinity, and
         <code>level</code> <em class="rfc2119" title="MUST">MUST</em> be set to 1.0.
       </p>
+      <p>
+        The <a href="#dfn-user-agent" class="internalDFN">user agent</a> is said to be <dfn id="dfn-unable-to-report-the-battery-status-information">unable to report the
+        battery status information</dfn>, if it is not able to report the
+        values for any of the attributes, for example, due to a user or system
+        preference, setting, or limitation.
+      </p>
       <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_1"><span>Note</span></div><p class="">
-        If the implementation is unable to report the battery status
-        information for any of the attributes, the <a href="#idl-def-BatteryManager" class="idlType"><code>BatteryManager</code></a> will
-        emulate a fully charged battery by setting all the values to those
-        corresponding values of a fully charged battery. The reason for using
-        full battery defaults for unknown attribute values is that this will
-        not cause applications to degrade performance or functionality by
-        default if information is not available. It also reduces the potential
-        for fingerprinting.
+        Implementations <a href="#dfn-unable-to-report-the-battery-status-information" class="internalDFN">unable to report the battery status information</a>
+        emulate a fully charged and plugged in battery to reduce the potential
+        for fingerprinting and prevent applications from degrading performance,
+        if the battery status information is not made available, for example.
       </p></div>
       <p>
         The <code id="widl-BatteryManager-charging">charging</code>
