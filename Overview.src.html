@@ -6,13 +6,13 @@
     <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
     <script class="remove">
       var respecConfig = {
-          specStatus:           "LC",
+          specStatus:           "CR",
           shortName:            "battery-status",
-          publishDate:          "2014-08-28",
-          previousPublishDate:  "2012-05-08",
-          previousMaturity:     "CR",
+          publishDate:          "2014-12-09",
+          previousPublishDate:  "2014-08-28",
+          previousMaturity:     "LC",
           edDraftURI:           "http://dvcs.w3.org/hg/dap/raw-file/default/battery/Overview.html",
-          lcEnd:                "2014-10-02",
+          crEnd:                "2015-02-03",
           editors:  [
               { name: "Anssi Kostiainen", company: "Intel", companyURL: "http://intel.com/" },
               { name: "Mounir Lamouri", company: "Google Inc.", companyURL: "http://google.com/", note: "previously Mozilla" }
@@ -48,28 +48,15 @@
         interference with other, often unrelated, features.
       </p>
       <p>
-        The following changes have been made since the
-        <a href="http://www.w3.org/TR/2012/CR-battery-status-20120508/">
-        W3C Candidate Recommendation 08 May 2012</a>
-        (<a href="LC2-diff.html">diff</a>):
+        No substantial changes have been made since the
+        <a href="http://www.w3.org/TR/2014/WD-battery-status-20140828/">
+        W3C Last Call Working Draft 28 August 2014</a>
+        (<a href="CR2-diff.html">diff</a>).
       </p>
-      <ul>
-        <li>
-          Expose <a>BatteryManager</a> via <code>getBattery()</code>
-          returning a <a>Promise</a> instead of a synchronous accessor.
-          (<a href="#the-navigator-interface">Section 5</a>)
-        </li>
-        <li>
-          Clarify <a>default values</a> when a <a>BatteryManager</a> object is
-          created and the implementation is <a>unable to report the battery
-          status information</a>.
-          (<a href="#the-batterymanager-interface">Section 6</a>)
-        </li>
-        <li>
-          Specify the behavior when a host device has more than one battery.
-          (<a href="#multiple-batteries">Section 6.1</a>)
-        </li>
-      </ul>
+      <p>
+        The CR exit criterion is two interoperable deployed implementations of
+        each feature. No features are marked as 'at-risk'.
+      </p>
     </section>
 
     <section class="informative">
