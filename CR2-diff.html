@@ -844,11 +844,6 @@ when
 a
 BatteryManager
 object
-is
-created
-and
-the
-implementation
 </del>
 <p>
 <ins class="diff-chg">The
@@ -857,34 +852,7 @@ exit
 criterion
 </ins>
 is
-<del class="diff-old">unable
-to
-report
-the
-battery
-status
-information
-.
-(
-Section
-6
-)
-Specify
-the
-behavior
-when
-a
-host
-device
-has
-more
-than
-one
-battery.
-(
-Section
-6.1
-)
+<del class="diff-old">created
 </del>
 <ins class="diff-chg">two
 interoperable
@@ -899,6 +867,84 @@ are
 marked
 as
 'at-risk'.
+</ins></p><p><ins class="diff-chg">
+This
+API
+uses
+EcmaScript
+promises,
+</ins>
+and
+<ins class="diff-new">as
+a
+result,
+relies
+on
+</ins>
+the
+<del class="diff-old">implementation
+is
+unable
+to
+report
+</del>
+<ins class="diff-chg">second
+edition
+of
+WebIDL
+which
+has
+not
+yet
+started
+its
+path
+on
+</ins>
+the
+<del class="diff-old">battery
+status
+information
+.
+(
+Section
+6
+)
+Specify
+</del>
+<ins class="diff-chg">W3C
+Recommendation
+track.
+That
+dependency
+will
+need
+to
+be
+analysed
+before
+</ins>
+the
+<del class="diff-old">behavior
+when
+a
+host
+device
+has
+more
+than
+one
+battery.
+(
+Section
+6.1
+)
+</del>
+<ins class="diff-chg">document
+can
+make
+further
+progress.
 </ins></p>
 <p>
 This
@@ -1720,7 +1766,10 @@ specification
 [
 <cite>
 <a class="bibref" href="#bib-WEBIDL">
-WEBIDL
+<del class="diff-old">WEBIDL
+</del>
+<ins class="diff-chg">WEBIDL2
+</ins>
 </a>
 </cite>
 ],
@@ -3472,6 +3521,9 @@ http://people.mozilla.org/~jorendorff/es6-draft.html
 [HTML5]
 </dt>
 <dd rel="dcterms:requires">
+<ins class="diff-new">Ian
+Hickson;
+</ins>
 Robin
 Berjon;
 Steve
@@ -3544,26 +3596,42 @@ URL:
 </a>
 </dd>
 <dt id="bib-WEBIDL">
-[WEBIDL]
+<del class="diff-old">[WEBIDL]
+</del>
+<ins class="diff-chg">[WEBIDL2]
+</ins>
 </dt>
 <dd rel="dcterms:requires">
 Cameron
 McCormack.
-<a href="http://www.w3.org/TR/WebIDL/">
+<a href="http://heycam.github.io/webidl/">
 <cite>
 Web
 IDL
+<ins class="diff-new">(Second
+Edition)
+</ins>
 </cite>
 </a>.
-19
+<del class="diff-old">19
 April
 2012.
 W3C
 Candidate
 Recommendation.
+</del>
+<ins class="diff-chg">13
+November
+2014.
+Editor’s
+Draft.
+</ins>
 URL:
-<a href="http://www.w3.org/TR/WebIDL/">
-http://www.w3.org/TR/WebIDL/
+<del class="diff-old">http://www.w3.org/TR/WebIDL/
+</del>
+<a href="http://heycam.github.io/webidl/">
+<ins class="diff-chg">http://heycam.github.io/webidl/
+</ins>
 </a>
 </dd>
 </dl>
