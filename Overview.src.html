@@ -130,11 +130,26 @@
       <h2>Security and privacy considerations</h2>
       <p>
         The API defined in this specification is used to determine the battery
-        status of the hosting device. The information disclosed has minimal
-        impact on privacy or fingerprinting, and therefore is exposed without
-        permission grants. For example, the user agent can obfuscate the
-        exposed value in a way that authors cannot directly know if a hosting
-        device has no battery, is charging or is exposing fake values.
+        status of the hosting device.
+      </p>
+      <p>
+        The user agent SHOULD not expose high precision readouts of battery
+        status information as that can introduce a new fingerprinting vector.
+      </p>
+      <p>
+        The user agent MAY ask the user for battery status information access, or
+        alternatively, enforce the user permission requirement in its private
+        browsing modes.
+      </p>
+      <p>
+        The user agent SHOULD inform the user of the API use by scripts in an
+        unobtrusive manner to aid transparency and to allow the user to revoke
+        the API access.
+      </p>
+      <p>
+        The user agent MAY obfuscate the exposed value in a way that authors
+        cannot directly know if a hosting device has no battery, is charging or
+        is exposing fake values.
       </p>
     </section>
     <section>
@@ -475,7 +490,8 @@
         specification. Special thanks to all the participants of the Device
         APIs Working Group and others who have sent in substantial feedback
         and comments, and made the Web a better place for everyone by
-        doing so.
+        doing so. Finally, thanks to Lukasz Olejnik, Gunes Acar, Claude
+        Castelluccia, and Claudia Diaz for the privacy analysis of the API.
       </p>
     </section>
   </body>
