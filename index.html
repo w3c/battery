@@ -10,13 +10,14 @@
     </script>
     <script class="remove">
       var respecConfig = {
-          specStatus:           "ED",
+          specStatus:           "PR",
           shortName:            "battery-status",
-          // publishDate:          "2014-12-09",
+          publishDate:          "2016-03-29",
           previousPublishDate:  "2014-12-09",
           previousMaturity:     "CR",
           edDraftURI:           "https://w3c.github.io/battery/",
-          // crEnd:                "2015-02-03",
+          lcEnd:                "2014-10-02",
+          prEnd:                "2016-04-29",
           editors:  [
               { name: "Anssi Kostiainen", company: "Intel", companyURL: "http://intel.com/" },
               { name: "Mounir Lamouri", company: "Google Inc.", companyURL: "http://google.com/", note: "previously Mozilla" }
@@ -42,22 +43,29 @@
     </section>
     <section id="sotd">
       <p>
-        The functionality described in this specification was initially
-        specified as part of the <a href=
-        "http://www.w3.org/TR/system-info-api/">System Information API</a> but
-        has been extracted in order to be more readily available, more
-        straightforward to implement, and in order to produce a specification
-        that could be implemented on its own merits without interference with
-        other, often unrelated, features.
+        No substantial changes have been made to the Battery Status API since
+        the <a href=
+        "https://www.w3.org/TR/2014/CR-battery-status-20141209/">W3C Candidate
+        Recommendation</a> of December 2014 (<a href="PR-diff.html">diff</a>) ,
+        however the document now has more detailed privacy considerations,
+        including advice regarding the implications of high precision readouts,
+        based on feedback from <a href=
+        "https://lists.w3.org/Archives/Public/public-device-apis/2015Aug/0000.html">
+        implementation experience</a>. It also has updated references.
       </p>
       <p>
-        No substantial changes have been made since the <a href=
-        "http://www.w3.org/TR/2014/WD-battery-status-20140828/">W3C Last Call
-        Working Draft 28 August 2014</a> (<a href="CR2-diff.html">diff</a>).
+        The <a href=
+        "https://w3c.github.io/test-results/battery-status/20160226.html">implementation
+        report</a> of the API shows all features have been implemented by two
+        independent deployed browsers, meeting the CR exit criteria. We had no
+        CR features marked as 'at-risk'.
       </p>
       <p>
-        The CR exit criterion is two interoperable deployed implementations of
-        each feature. No features are marked as 'at-risk'.
+        There is a known issue with some WebIDL implementations that are not
+        specific to the Battery Status API; the interoperability effect of that
+        issue is minimal, since it only affects error handling in case where
+        the API is mis-used, which is in practice detected at development time
+        rather than usage time.
       </p>
     </section>
     <section class="informative">
@@ -111,8 +119,7 @@
       <ul>
         <li>
           <code><a href=
-          "http://www.w3.org/TR/html5/webappapis.html#navigator">
-          Navigator</a></code>
+          "http://www.w3.org/TR/html5/webappapis.html#navigator">Navigator</a></code>
         </li>
         <li>
           <code><a href=
@@ -146,8 +153,8 @@
       </ul>
       <p>
         <a href=
-        'http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects'>
-        <dfn>Promise</dfn></a> objects are defined in [[!ECMASCRIPT]].
+        "http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects"><dfn>
+        Promise</dfn></a> objects are defined in [[!ECMASCRIPT]].
       </p>
     </section>
     <section class="informative">
