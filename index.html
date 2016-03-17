@@ -2,9 +2,497 @@
 <html>
   <head>
     <title>Battery Status API</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
+    <script class="remove">
+      var respecConfig = {
+          specStatus:           "ED",
+          shortName:            "battery-status",
+          // publishDate:          "2014-12-09",
+          previousPublishDate:  "2014-12-09",
+          previousMaturity:     "CR",
+          edDraftURI:           "https://dvcs.w3.org/hg/dap/raw-file/default/battery/Overview.html",
+          // crEnd:                "2015-02-03",
+          editors:  [
+              { name: "Anssi Kostiainen", company: "Intel", companyURL: "http://intel.com/" },
+              { name: "Mounir Lamouri", company: "Google Inc.", companyURL: "http://google.com/", note: "previously Mozilla" }
+          ],
+          inlineCSS:    true,
+          noIDLIn:      true,
+          noLegacyStyle: true,
+          wg:           "Device APIs Working Group",
+          wgURI:        "http://www.w3.org/2009/dap/",
+          wgPublicList: "public-device-apis",
+          wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/43696/status",
+          testSuiteURI: "http://w3c-test.org/battery-status/",
+          implementationReportURI: "http://www.w3.org/2009/dap/wiki/ImplementationStatus",
+          scheme:       "https",
+          processVersion: 2005
+      };
+    </script>
   </head>
   <body>
-    Moved to <a href="http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html">
-    http://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview.html</a>
+    <section id="abstract">
+      This specification defines an API that provides information about the
+      battery status of the hosting device.
+    </section>
+
+    <section id="sotd">
+      <p>
+        The functionality described in this specification was initially
+        specified as part of the
+        <a href="http://www.w3.org/TR/system-info-api/">System Information
+        API</a> but has been extracted in order to be more readily available,
+        more straightforward to implement, and in order to produce a
+        specification that could be implemented on its own merits without
+        interference with other, often unrelated, features.
+      </p>
+      <p>
+        No substantial changes have been made since the
+        <a href="http://www.w3.org/TR/2014/WD-battery-status-20140828/">
+        W3C Last Call Working Draft 28 August 2014</a>
+        (<a href="CR2-diff.html">diff</a>).
+      </p>
+      <p>
+        The CR exit criterion is two interoperable deployed implementations of
+        each feature. No features are marked as 'at-risk'.
+      </p>
+    </section>
+
+    <section class="informative">
+      <h2>Introduction</h2>
+      <p>
+        The Battery Status API specification defines a means for web
+        developers to programmatically determine the battery status of the
+        hosting device. Without knowing the battery status of a device, a web
+        developer must design the web application with an assumption of
+        sufficient battery level for the task at hand. This means the battery
+        of a device may exhaust faster than desired because web developers are
+        unable to make decisions based on the battery status. Given knowledge
+        of the battery status, web developers are able to craft web content and
+        applications which are power-efficient, thereby leading to improved
+        user experience. Authors should be aware, however, that a naïve
+        implementation of this API can negatively affect the battery life.
+     </p>
+     <p>
+        The Battery Status API can be used to defer or scale back work when
+        the device is not charging in or is low on battery. An archetype of an
+        advanced web application, a web-based email client, may check the
+        server for new email every few seconds if the device is charging,
+        but do so less frequently if the device is not charging or is low on
+        battery. Another example is a web-based word processor which could
+        monitor the battery level and save changes before the battery runs
+        out to prevent data loss.
+      </p>
+    </section>
+
+    <section id="conformance">
+      <p>
+        This specification defines conformance criteria that apply to a single
+        product: the <dfn>user agent</dfn> that implements the
+        interfaces that it contains.
+      </p>
+      <p>
+        Implementations that use ECMAScript to implement the APIs defined in
+        this specification must implement them in a manner consistent with the
+        ECMAScript Bindings defined in the Web IDL specification [[!WEBIDL]],
+        as this specification uses that specification and terminology.
+      </p>
+    </section>
+    <section>
+      <h2>Terminology</h2>
+      <p>
+        The following concepts, terms and interfaces are defined in [[!HTML5]]:
+      </p>
+      <ul>
+        <li><code><a href="http://www.w3.org/html/wg/drafts/html/master/webappapis.html#navigator">
+        Navigator</a></code></li>
+        <li><code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
+        EventHandler</a></code></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+        queue a task</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
+        fires a simple event</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
+        event handlers</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
+        event handler event types</a></dfn></li>
+        <li><dfn><a href="http://dev.w3.org/html5/spec/browsers.html#browsing-context">
+        browsing context</a></dfn></li>
+      </ul>
+      <p>
+        <a href=
+        'http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise-objects'>
+        <dfn>Promise</dfn></a> objects are defined in [[!ECMASCRIPT]].
+      </p>
+    </section>
+    <section class="informative">
+      <h2>Security and privacy considerations</h2>
+      <p>
+        The API defined in this specification is used to determine the battery
+        status of the hosting device.
+      </p>
+      <p>
+        The user agent SHOULD not expose high precision readouts of battery
+        status information as that can introduce a new fingerprinting vector.
+      </p>
+      <p>
+        The user agent MAY ask the user for battery status information access, or
+        alternatively, enforce the user permission requirement in its private
+        browsing modes.
+      </p>
+      <p>
+        The user agent SHOULD inform the user of the API use by scripts in an
+        unobtrusive manner to aid transparency and to allow the user to revoke
+        the API access.
+      </p>
+      <p>
+        The user agent MAY obfuscate the exposed value in a way that authors
+        cannot directly know if a hosting device has no battery, is charging or
+        is exposing fake values.
+      </p>
+    </section>
+    <section>
+      <h2>The <a>Navigator</a> interface</h2>
+      <dl title="partial interface Navigator" class="idl">
+        <dt>Promise&lt;BatteryManager&gt; getBattery()</dt>
+        <dd></dd>
+      </dl>
+      <p>
+        For each <a>browsing context</a>, there is a <dfn>battery promise</dfn>,
+        which is initially set to <code>null</code>. It is a <a>Promise</a>
+        object which holds a <a>BatteryManager</a>.
+      </p>
+      <p>
+        The <code id="widl-Navigator-getBattery-Promise-BatteryManager">getBattery()</code>
+        method, when invoked, MUST run the following steps:
+      </p>
+      <ul>
+        <li>
+          If <a>battery promise</a> is not <code>null</code>, return <a>battery
+          promise</a> and abort these steps.
+        </li>
+        <li>
+          Otherwise, set <a>battery promise</a> to a newly created
+          <a>Promise</a>.
+        </li>
+        <li>
+          Return <a>battery promise</a> and continue asynchronously.
+        </li>
+        <li>
+          <a>Create a new <code>BatteryManager</code> object</a>,
+          and let <var>battery</var> be that object.
+        </li>
+        <li>
+          <dfn>Resolve</dfn> <a>battery promise</a> with <var>battery</var>.
+        </li>
+      </ul>
+      <p>
+        The <a>user agent</a> MUST NOT reject the <a>battery promise</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>The <a>BatteryManager</a> interface</h2>
+      <p>
+        The <a>BatteryManager</a> interface represents the <dfn>current battery
+        status information</dfn> of the hosting device. The <code>charging</code>
+        attribute represents the charging state of the system's battery.
+        The <code>chargingTime</code> attribute represents the time remaining
+        in seconds until the system's battery is fully charged. The
+        <code>dischargingTime</code> attribute represents the time remaining in
+        seconds until the system's battery is completely discharged and the
+        system is about to be suspended, and the <code>level</code> attribute
+        represents the level of the system's battery.
+      </p>
+      <dl title="interface BatteryManager : EventTarget"
+          class="idl">
+        <dt>readonly attribute boolean charging</dt>
+        <dd></dd>
+        <dt>readonly attribute unrestricted double chargingTime</dt>
+        <dd></dd>
+        <dt>readonly attribute unrestricted double dischargingTime</dt>
+        <dd></dd>
+        <dt>readonly attribute double level</dt>
+        <dd></dd>
+        <dt>
+          attribute EventHandler onchargingchange
+        </dt>
+        <dd></dd>
+        <dt>
+          attribute EventHandler onchargingtimechange
+        </dt>
+        <dd></dd>
+        <dt>
+          attribute EventHandler ondischargingtimechange
+        </dt>
+        <dd></dd>
+        <dt>
+          attribute EventHandler onlevelchange
+        </dt>
+        <dd></dd>
+      </dl>
+      <p>
+        When the <a>user agent</a> is to <dfn>create a new
+        <code>BatteryManager</code> object</dfn>, it MUST instantiate a new
+        <a>BatteryManager</a> object and set its attributes' values to those
+        that represent the <a>current battery status information</a>, unless
+        the <a>user agent</a> is <a>unable to report the battery status
+        information</a>, in which case the values MUST be set to <dfn>default
+        values</dfn> as follows:
+        <code>charging</code> MUST be set to true,
+        <code>chargingTime</code> MUST be set to 0,
+        <code>dischargingTime</code> MUST be set to positive Infinity, and
+        <code>level</code> MUST be set to 1.0.
+      </p>
+      <p>
+        The <a>user agent</a> is said to be <dfn>unable to report the
+        battery status information</dfn>, if it is not able to report the
+        values for any of the attributes, for example, due to a user or system
+        preference, setting, or limitation.
+      </p>
+      <p class="note">
+        Implementations <a>unable to report the battery status information</a>
+        emulate a fully charged and plugged in battery to reduce the potential
+        for fingerprinting and prevent applications from degrading performance,
+        if the battery status information is not made available, for example.
+      </p>
+      <p>
+        The <code id="widl-BatteryManager-charging">charging</code>
+        attribute MUST be set to false if the battery
+        is discharging, and set to true, if the battery is charging, the
+        implementation is unable to report the state, or there is no battery
+        attached to the system, or otherwise. When the battery charging state
+        is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
+        the <code>charging</code> attribute's value and <a>fires a simple
+        event</a> named <code><a>chargingchange</a></code> at the
+        <a>BatteryManager</a> object.
+      </p>
+      <p>
+        The <code id="widl-BatteryManager-chargingTime">chargingTime</code>
+        attribute MUST be set to 0, if the
+        battery is full or there is no battery attached to the system, and to
+        the value positive Infinity if the battery is discharging, the
+        implementation is unable to report the remaining charging time, or
+        otherwise. When the battery charging time is updated, the <a>user
+        agent</a> MUST <a>queue a task</a> which sets the
+        <code>chargingTime</code> attribute's value and <a>fires a simple
+        event</a> named <code><a>chargingtimechange</a></code> at the
+        <a>BatteryManager</a> object.
+      </p>
+      <p>
+        The <code id="widl-BatteryManager-dischargingTime">dischargingTime</code>
+        attribute MUST be set to the value
+        positive Infinity, if the battery is charging, the implementation is
+        unable to report the remaining discharging time, there is no battery
+        attached to the system, or otherwise. When the battery discharging time
+        is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
+        the <code>dischargingTime</code> attribute's value and <a>fires a
+        simple event </a> named <code><a>dischargingtimechange</a></code> at the
+        <a>BatteryManager</a> object.
+      </p>
+      <p>
+        The <code id="widl-BatteryManager-level">level</code>
+        attribute MUST be set to 0 if the system's
+        battery is depleted and the system is about to be suspended, and to
+        1.0 if the battery is full, the implementation is unable to report the
+        battery's level, or there is no battery attached to the system. When
+        the battery level is updated, the <a>user agent</a> MUST <a>queue a
+        task</a> which sets the <code>level</code> attribute's value and
+        <a>fires a simple event</a> named <code><a>levelchange</a></code> at
+        the <a>BatteryManager</a> object.
+      </p>
+      <p class="note">
+        The definition of how often the <code><a>chargingtimechange</a></code>,
+        <code><a>dischargingtimechange</a></code>, and <code><a>levelchange</a>
+        </code> events are fired is left to the implementation.
+      </p>
+      <section id="multiple-batteries">
+        <h2>Multiple batteries</h2>
+        <p>
+          If a hosting device contains more than one battery,
+          <a>BatteryManager</a> SHOULD expose an unified view of the batteries.
+        </p>
+        <p>
+          The <code>charging</code> attribute MUST be set to true if at least
+          one battery's <code>charging</code> state as described above is true.
+          Otherwise, it MUST be set to false.
+        </p>
+        <p>
+          The <code>chargingTime</code> attribute can be set to the maximum
+          charging time of the individual batteries if charging in parallel,
+          and to the sum of the individual charging times if charging serially.
+        </p>
+        <p>
+          The <code>dischargingTime</code> attribute can be set to the maximum
+          discharging time of the individual batteries if discharging in
+          parallel, and to the sum of individual discharging times if
+          discharging serially.
+        </p>
+        <p>
+          The <code>level</code> attribute can be set to the average of the
+          levels of batteries of same capacity, or the weighted average of the
+          battery level attributes for batteries of different capacities.
+        </p>
+      </section>
+      <section>
+        <h2>Event handlers</h2>
+        <p>
+          The following are the <a>event handlers</a> (and their corresponding
+          <a>event handler event types</a>) that MUST be supported as
+          attributes by the <a>BatteryManager</a> object:
+        </p>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>event handler</th>
+              <th>event handler event type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong><code id="widl-BatteryManager-onchargingchange">
+                  onchargingchange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  chargingchange
+                </dfn></code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><code id="widl-BatteryManager-onchargingtimechange">
+                  onchargingtimechange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  chargingtimechange
+                </dfn></code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><code id="widl-BatteryManager-ondischargingtimechange">
+                  ondischargingtimechange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  dischargingtimechange
+                </dfn></code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong><code id="widl-BatteryManager-onlevelchange">
+                  onlevelchange
+                </code></strong>
+              </td>
+              <td>
+                <code><dfn>
+                  levelchange
+                </dfn></code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <section class="informative">
+      <h2>Examples</h2>
+      <p>
+        This trivial example writes the battery level to the console each time
+        the level changes:
+      </p>
+      <pre class="example highlight">
+        // We get the initial value when the promise resolves ...
+        navigator.getBattery().then(function(battery) {
+          console.log(battery.level);
+          // ... and any subsequent updates.
+          battery.onlevelchange = function() {
+            console.log(this.level);
+          };
+        });
+      </pre>
+      <p>
+        Alternatively, the same using the <code>addEventListener()</code>
+        method:
+      </p>
+      <pre class="example highlight">
+        navigator.getBattery().then(function(battery) {
+          console.log(battery.level);
+          battery.addEventListener('levelchange', function() {
+            console.log(this.level);
+          });
+        });
+      </pre>
+      <p>
+        The following example updates the indicators to show the charging
+        state, level and time remaining in minutes:
+      </p>
+      <pre class="example highlight">
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Battery Status API Example&lt;/title&gt;
+          &lt;script&gt;
+            window.onload = function () {
+              function updateBatteryStatus(battery) {
+                document.querySelector('#charging').textContent = battery.charging ? 'charging' : 'not charging';
+                document.querySelector('#level').textContent = battery.level;
+                document.querySelector('#dischargingTime').textContent = battery.dischargingTime / 60;
+              }
+
+              navigator.getBattery().then(function(battery) {
+                // Update the battery status initially when the promise resolves ...
+                updateBatteryStatus(battery);
+
+                // .. and for any subsequent updates.
+                battery.onchargingchange = function () {
+                  updateBatteryStatus(battery);
+                };
+
+                battery.onlevelchange = function () {
+                  updateBatteryStatus(battery);
+                };
+
+                battery.ondischargingtimechange = function () {
+                  updateBatteryStatus(battery);
+                };
+              });
+            };
+          &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;div id="charging"&gt;(charging state unknown)&lt;/div&gt;
+          &lt;div id="level"&gt;(battery level unknown)&lt;/div&gt;
+          &lt;div id="dischargingTime"&gt;(discharging time unknown)&lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+      </pre>
+    </section>
+    <section class="appendix">
+      <h2>Acknowledgements</h2>
+      <p>
+        The group is deeply indebted to Mounir Lamouri, Jonas Sicking, and
+        the Mozilla WebAPI team in general for their invaluable feedback
+        based on prototype implementations. Many thanks to the people behind
+        the System Information API and Device Orientation Event specification
+        for the initial inspiration. Also thanks to the nice folks bringing us
+        the Page Visibility specification, which motivated the editor of this
+        specification to write the introduction chapter discussing some
+        real-world high value use cases that apply equally to this
+        specification. Special thanks to all the participants of the Device
+        APIs Working Group and others who have sent in substantial feedback
+        and comments, and made the Web a better place for everyone by
+        doing so. Finally, thanks to Lukasz Olejnik, Gunes Acar, Claude
+        Castelluccia, and Claudia Diaz for the privacy analysis of the API.
+      </p>
+    </section>
   </body>
 </html>
