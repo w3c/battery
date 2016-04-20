@@ -114,7 +114,8 @@
         Terminology
       </h2>
       <p>
-        The following concepts, terms and interfaces are defined in [[!HTML5]]:
+        The following concepts, terms and interfaces are defined in [[!HTML5]]
+        and [[!ECMASCRIPT]]:
       </p>
       <ul>
         <li>
@@ -146,16 +147,14 @@
           event handler event types</a></dfn>
         </li>
         <li>
-          <dfn><a href=
-          "http://www.w3.org/TR/html5/browsers.html#browsing-context">browsing
-          context</a></dfn>
+          <a href=
+          "https://tc39.github.io/ecma262/#sec-promise-objects"><dfn>Promise</dfn></a>
+        </li>
+        <li>
+          <a href="https://tc39.github.io/ecma262/#realm"><dfn data-lt=
+          "realm">Realms</dfn></a>
         </li>
       </ul>
-      <p>
-        <a href=
-        "http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects"><dfn>
-        Promise</dfn></a> objects are defined in [[!ECMASCRIPT]].
-      </p>
     </section>
     <section class="informative">
       <h2>
@@ -196,7 +195,7 @@
         <dd></dd>
       </dl>
       <p>
-        For each <a>browsing context</a>, there is a <dfn>battery
+        For each <a>Navigator</a> object, there is a <dfn>battery
         promise</dfn>, which is initially set to <code>null</code>. It is a
         <a>Promise</a> object which holds a <a>BatteryManager</a>.
       </p>
@@ -205,23 +204,27 @@
         "widl-Navigator-getBattery-Promise-BatteryManager">getBattery()</code>
         method, when invoked, MUST run the following steps:
       </p>
-      <ul>
-        <li>If <a>battery promise</a> is not <code>null</code>, return
-        <a>battery promise</a> and abort these steps.
+      <ol>
+        <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
+        <code>null</code>, return this <a>Navigator</a> object's <a>battery
+        promise</a> and abort these steps.
         </li>
-        <li>Otherwise, set <a>battery promise</a> to a newly created
-        <a>Promise</a>.
+        <li>Otherwise, set this <a>Navigator</a> object's <a>battery
+        promise</a> to a newly created <a>Promise</a>, created in the
+        <a>Realm</a> of this <a>Navigator</a> object.
         </li>
-        <li>Return <a>battery promise</a> and continue asynchronously.
+        <li>Return this <a>Navigator</a> object's <a>battery promise</a> and
+        continue asynchronously.
         </li>
         <li>
-          <a>Create a new <code>BatteryManager</code> object</a>, and let
+          <a>Create a new <code>BatteryManager</code> object</a> in the
+          <a>Realm</a> of this <a>Navigator</a> object, and let
           <var>battery</var> be that object.
         </li>
-        <li>
-          <dfn>Resolve</dfn> <a>battery promise</a> with <var>battery</var>.
+        <li>Resolve this <a>Navigator</a> object's <a>battery promise</a> with
+        <var>battery</var>.
         </li>
-      </ul>
+      </ol>
       <p>
         The <a>user agent</a> MUST NOT reject the <a>battery promise</a>.
       </p>
