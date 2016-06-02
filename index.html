@@ -10,9 +10,9 @@
     </script>
     <script class="remove">
       var respecConfig = {
-          specStatus:           "PR",
+          specStatus:           "ED",
           shortName:            "battery-status",
-          publishDate:          "2016-03-29",
+          //publishDate:        "2016-03-29",
           previousPublishDate:  "2014-12-09",
           previousMaturity:     "CR",
           edDraftURI:           "https://w3c.github.io/battery/",
@@ -120,7 +120,7 @@
       <ul>
         <li>
           <code><a href=
-          "http://www.w3.org/TR/html5/webappapis.html#navigator">Navigator</a></code>
+          "http://www.w3.org/TR/html5/webappapis.html#navigator"><dfn>Navigator</dfn></a></code>
         </li>
         <li>
           <code><a href=
@@ -188,12 +188,11 @@
       <h2>
         The <a>Navigator</a> interface
       </h2>
-      <dl title="partial interface Navigator" class="idl">
-        <dt>
-          Promise&lt;BatteryManager&gt; getBattery()
-        </dt>
-        <dd></dd>
-      </dl>
+      <pre class="idl">
+        partial interface Navigator {
+          Promise&lt;BatteryManager&gt; getBattery();
+        };
+      </pre>
       <p>
         For each <a>Navigator</a> object, there is a <dfn>battery
         promise</dfn>, which is initially set to <code>null</code>. It is a
@@ -245,40 +244,18 @@
         <code>level</code> attribute represents the level of the system's
         battery.
       </p>
-      <dl title="interface BatteryManager : EventTarget" class="idl">
-        <dt>
-          readonly attribute boolean charging
-        </dt>
-        <dd></dd>
-        <dt>
-          readonly attribute unrestricted double chargingTime
-        </dt>
-        <dd></dd>
-        <dt>
-          readonly attribute unrestricted double dischargingTime
-        </dt>
-        <dd></dd>
-        <dt>
-          readonly attribute double level
-        </dt>
-        <dd></dd>
-        <dt>
-          attribute EventHandler onchargingchange
-        </dt>
-        <dd></dd>
-        <dt>
-          attribute EventHandler onchargingtimechange
-        </dt>
-        <dd></dd>
-        <dt>
-          attribute EventHandler ondischargingtimechange
-        </dt>
-        <dd></dd>
-        <dt>
-          attribute EventHandler onlevelchange
-        </dt>
-        <dd></dd>
-      </dl>
+      <pre class="idl">
+        interface BatteryManager : EventTarget {
+            readonly        attribute boolean             charging;
+            readonly        attribute unrestricted double chargingTime;
+            readonly        attribute unrestricted double dischargingTime;
+            readonly        attribute double              level;
+                            attribute EventHandler        onchargingchange;
+                            attribute EventHandler        onchargingtimechange;
+                            attribute EventHandler        ondischargingtimechange;
+                            attribute EventHandler        onlevelchange;
+        };
+      </pre>
       <p>
         When the <a>user agent</a> is to <dfn>create a new
         <code>BatteryManager</code> object</dfn>, it MUST instantiate a new
