@@ -221,8 +221,9 @@
       </p>
       <p>
         The <code id=
-        "widl-Navigator-getBattery-Promise-BatteryManager">getBattery()</code>
-        method, when invoked, MUST run the following steps:
+        "widl-Navigator-getBattery-Promise-BatteryManager"><dfn data-dfn-for=
+        "Navigator">getBattery</dfn>()</code> method, when invoked, MUST run
+        the following steps:
       </p>
       <ol>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
@@ -254,16 +255,18 @@
         The <a>BatteryManager</a> interface
       </h2>
       <p>
-        The <a>BatteryManager</a> interface represents the <dfn>current battery
-        status information</dfn> of the hosting device. The
-        <code>charging</code> attribute represents the charging state of the
-        system's battery. The <code>chargingTime</code> attribute represents
-        the time remaining in seconds until the system's battery is fully
-        charged. The <code>dischargingTime</code> attribute represents the time
-        remaining in seconds until the system's battery is completely
-        discharged and the system is about to be suspended, and the
-        <code>level</code> attribute represents the level of the system's
-        battery.
+        The <dfn>BatteryManager</dfn> interface represents the <dfn>current
+        battery status information</dfn> of the hosting device. The
+        <dfn data-dfn-for="BatteryManager"><code>charging</code></dfn>
+        attribute represents the charging state of the system's battery. The
+        <dfn data-dfn-for="BatteryManager"><code>chargingTime</code></dfn>
+        attribute represents the time remaining in seconds until the system's
+        battery is fully charged. The <dfn data-dfn-for=
+        "BatteryManager"><code>dischargingTime</code></dfn> attribute
+        represents the time remaining in seconds until the system's battery is
+        completely discharged and the system is about to be suspended, and the
+        <dfn data-dfn-for="BatteryManager"><code>level</code></dfn> attribute
+        represents the level of the system's battery.
       </p>
       <pre class="idl">
         interface BatteryManager : EventTarget {
@@ -403,8 +406,8 @@
           <tbody>
             <tr>
               <td>
-                <strong><code id=
-                "widl-BatteryManager-onchargingchange">onchargingchange</code></strong>
+                <strong><dfn data-dfn-for="BatteryManager"><code id=
+                "widl-BatteryManager-onchargingchange">onchargingchange</code></dfn></strong>
               </td>
               <td>
                 <code><dfn>chargingchange</dfn></code>
@@ -412,8 +415,8 @@
             </tr>
             <tr>
               <td>
-                <strong><code id=
-                "widl-BatteryManager-onchargingtimechange">onchargingtimechange</code></strong>
+                <strong><dfn data-dfn-for="BatteryManager"><code id=
+                "widl-BatteryManager-onchargingtimechange">onchargingtimechange</code></dfn></strong>
               </td>
               <td>
                 <code><dfn>chargingtimechange</dfn></code>
@@ -421,8 +424,8 @@
             </tr>
             <tr>
               <td>
-                <strong><code id=
-                "widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</code></strong>
+                <strong><dfn data-dfn-for="BatteryManager"><code id=
+                "widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</code></dfn></strong>
               </td>
               <td>
                 <code><dfn>dischargingtimechange</dfn></code>
@@ -430,8 +433,8 @@
             </tr>
             <tr>
               <td>
-                <strong><code id=
-                "widl-BatteryManager-onlevelchange">onlevelchange</code></strong>
+                <strong><dfn data-dfn-for="BatteryManager"><code id=
+                "widl-BatteryManager-onlevelchange">onlevelchange</code></dfn></strong>
               </td>
               <td>
                 <code><dfn>levelchange</dfn></code>
