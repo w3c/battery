@@ -135,17 +135,18 @@
         Terminology
       </h2>
       <p>
-        The following concepts, terms and interfaces are defined in [[!HTML5]]
-        and [[!ECMASCRIPT]]:
+        The following concepts, terms, and interfaces are defined in
+        [[!HTML5]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!SECURE-CONTEXTS]]:
       </p>
       <ul>
         <li>
-          <code><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#navigator"><dfn>Navigator</dfn></a></code>
+          <a href=
+          "https://www.w3.org/TR/html5/webappapis.html#navigator"><dfn><code>Navigator</code></dfn></a>
         </li>
         <li>
-          <code><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#eventhandler">EventHandler</a></code>
+          <a href=
+          "https://www.w3.org/TR/html5/webappapis.html#eventhandler"><dfn><code>
+          EventHandler</code></dfn></a>
         </li>
         <li>
           <dfn><a href=
@@ -168,12 +169,40 @@
           event handler event types</a></dfn>
         </li>
         <li>
+          <dfn><a href=
+          "https://www.w3.org/TR/html5/browsers.html#browsing-context">browsing
+          context</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">
+          top-level browsing context</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://www.w3.org/TR/html5/webappapis.html#incumbent-settings-object">
+          incumbent settings object</a></dfn>
+        </li>
+        <li>
           <a href=
           "https://tc39.github.io/ecma262/#sec-promise-objects"><dfn>Promise</dfn></a>
         </li>
         <li>
           <a href="https://tc39.github.io/ecma262/#realm"><dfn data-lt=
           "realm">Realms</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://heycam.github.io/webidl/#securityerror"><dfn><code>SecurityError</code></dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://heycam.github.io/webidl/#idl-DOMException"><dfn><code>DOMException</code></dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://www.w3.org/TR/secure-contexts/#secure-context"><dfn>secure
+          context</dfn></a>
         </li>
       </ul>
     </section>
@@ -226,6 +255,16 @@
         the following steps:
       </p>
       <ol>
+        <li>If the <a>incumbent settings object</a> is not a <a>secure
+        context</a>, then reject this <a>Navigator</a> object's <a>battery
+        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a> and abort
+        these steps.
+        </li>
+        <li>If the <a>browsing context</a> is not a <a>top-level browsing
+        context</a>, then reject this <a>Navigator</a> object's <a>battery
+        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a> and abort
+        these steps.
+        </li>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
         <code>null</code>, return this <a>Navigator</a> object's <a>battery
         promise</a> and abort these steps.
@@ -246,9 +285,6 @@
         <var>battery</var>.
         </li>
       </ol>
-      <p>
-        The <a>user agent</a> MUST NOT reject the <a>battery promise</a>.
-      </p>
     </section>
     <section>
       <h2>
