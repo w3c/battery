@@ -135,8 +135,8 @@
         Terminology
       </h2>
       <p>
-        The following concepts, terms, and interfaces are defined in
-        [[!HTML]], [[!HTML5]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!SECURE-CONTEXTS]]:
+        The following concepts, terms, and interfaces are defined in [[!HTML]],
+        [[!HTML5]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!SECURE-CONTEXTS]]:
       </p>
       <ul>
         <li>
@@ -204,6 +204,21 @@
           "https://www.w3.org/TR/secure-contexts/#secure-context"><dfn>secure
           context</dfn></a>
         </li>
+        <li>
+          <a href=
+          "https://html.spec.whatwg.org/multipage/browsers.html#active-document">
+          <dfn>active document</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://html.spec.whatwg.org/multipage/origin.html#concept-origin"><dfn>
+          origin</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://html.spec.whatwg.org/multipage/origin.html#same-origin-domain">
+          <dfn>same-origin domain</dfn></a>
+        </li>
       </ul>
     </section>
     <section class="informative">
@@ -261,11 +276,12 @@
         this <a>Navigator</a> object's <a>battery promise</a> and abort these
         steps.
         </li>
-        <li>If the <a>browsing context</a> is not a <a>top-level browsing
-        context</a>, then reject this <a>Navigator</a> object's <a>battery
-        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a>, return
-        this <a>Navigator</a> object's <a>battery promise</a> and abort these
-        steps.
+        <li>If the <a>top-level browsing context</a>'s <a>active document</a>'s
+        <a>origin</a> and the <a>origin</a> specified by the <a>current
+        settings object</a> is not <a>same-origin domain</a>, then reject this
+        <a>Navigator</a> object's <a>battery promise</a> with a
+        "<a>SecurityError</a>" <a>DOMException</a>, return this <a>Navigator</a>
+        object's <a>battery promise</a> and abort these steps.
         </li>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
         <code>null</code>, return this <a>Navigator</a> object's <a>battery
