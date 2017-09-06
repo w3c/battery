@@ -305,6 +305,7 @@
         represents the level of the system's battery.
       </p>
       <pre class="idl">
+        [Exposed=Window]
         interface BatteryManager : EventTarget {
             readonly        attribute boolean             charging;
             readonly        attribute unrestricted double chargingTime;
