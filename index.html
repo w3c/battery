@@ -136,7 +136,8 @@
       </h2>
       <p>
         The following concepts, terms, and interfaces are defined in [[!HTML]],
-        [[!HTML5]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!SECURE-CONTEXTS]]:
+        [[!HTML5]], [[!ECMASCRIPT]], [[!WEBIDL]], [[!SECURE-CONTEXTS]], and
+        [[!FEATURE-POLICY]]:
       </p>
       <ul>
         <li>
@@ -218,6 +219,21 @@
           <a href=
           "https://html.spec.whatwg.org/multipage/origin.html#same-origin-domain">
           <dfn>same-origin domain</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://wicg.github.io/feature-policy/#policy-controlled-feature"><dfn>
+          policy-controlled feature</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://wicg.github.io/feature-policy/#feature-name"><dfn>feature
+          name</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://wicg.github.io/feature-policy/#default-allowlist"><dfn>default
+          allowlist</dfn></a>
         </li>
       </ul>
     </section>
@@ -498,6 +514,20 @@
           </tbody>
         </table>
       </section>
+    </section>
+    <section>
+      <h2>
+        Feature Policy integration
+      </h2>
+      <p data-link-for="Navigator">
+        The Battery Status API is a <a>policy-controlled feature</a>, as
+        defined by Feature Policy [[!FEATURE-POLICY]]. The <a>feature name</a>
+        for the Battery Status API is "<code>battery</code>". The <a>default
+        allowlist</a> for the Battery Status API is <code>["self"]</code>. When
+        disabled in a document, the <code><a>getBattery</a>()</code> method
+        MUST return a <a>promise</a> which rejects with a
+        "<a>SecurityError</a>" <a>DOMException</a>.
+      </p>
     </section>
     <section class="informative">
       <h2>
