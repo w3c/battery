@@ -257,13 +257,15 @@
       <ol>
         <li>If the <a>incumbent settings object</a> is not a <a>secure
         context</a>, then reject this <a>Navigator</a> object's <a>battery
-        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a> and abort
-        these steps.
+        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a>, return
+        this <a>Navigator</a> object's <a>battery promise</a> and abort these
+        steps.
         </li>
         <li>If the <a>browsing context</a> is not a <a>top-level browsing
         context</a>, then reject this <a>Navigator</a> object's <a>battery
-        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a> and abort
-        these steps.
+        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a>, return
+        this <a>Navigator</a> object's <a>battery promise</a> and abort these
+        steps.
         </li>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
         <code>null</code>, return this <a>Navigator</a> object's <a>battery
