@@ -142,47 +142,54 @@
       <ul>
         <li>
           <a href=
-          "https://www.w3.org/TR/html5/webappapis.html#navigator"><dfn><code>Navigator</code></dfn></a>
+          "https://html.spec.whatwg.org/#navigator"><dfn><code>Navigator</code></dfn></a>
         </li>
         <li>
           <a href=
-          "https://www.w3.org/TR/html5/webappapis.html#eventhandler"><dfn><code>
-          EventHandler</code></dfn></a>
+          "https://html.spec.whatwg.org/#eventhandler"><dfn><code>EventHandler</code></dfn></a>
         </li>
         <li>
-          <dfn><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#queue-a-task">queue a
+          <dfn><a href="https://html.spec.whatwg.org/#queue-a-task">queue a
           task</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#fire-a-simple-event">fires
-          a simple event</a></dfn>
+          "https://www.w3.org/TR/html5/webappapis.html#firing-a-simple-event-named-e">
+          fires a simple event</a></dfn>
         </li>
         <li>
-          <dfn><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#event-handlers">event
+          <dfn><a href="https://html.spec.whatwg.org/#event-handlers">event
           handlers</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#event-handler-event-type">
-          event handler event types</a></dfn>
+          "https://html.spec.whatwg.org/#event-handler-event-type">event
+          handler event types</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://www.w3.org/TR/html5/browsers.html#browsing-context">browsing
+          "https://html.spec.whatwg.org/#browsing-context">browsing
           context</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://www.w3.org/TR/html5/browsers.html#top-level-browsing-context">
-          top-level browsing context</a></dfn>
+          "https://html.spec.whatwg.org/#concept-relevant-global">relevant
+          global object</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object">
-          current settings object</a></dfn>
+          "https://html.spec.whatwg.org/#relevant-settings-object">relevant
+          settings object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/#current-settings-object">current
+          settings object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/#concept-document-window">associated
+          <code>Document</code></a></dfn>
         </li>
         <li>
           <a href=
@@ -206,19 +213,16 @@
           context</dfn></a>
         </li>
         <li>
-          <a href=
-          "https://html.spec.whatwg.org/multipage/browsers.html#active-document">
-          <dfn>active document</dfn></a>
+          <a href="https://html.spec.whatwg.org/#active-document"><dfn>active
+          document</dfn></a>
         </li>
         <li>
           <a href=
-          "https://html.spec.whatwg.org/multipage/origin.html#concept-origin"><dfn>
-          origin</dfn></a>
+          "https://html.spec.whatwg.org/#concept-origin"><dfn>origin</dfn></a>
         </li>
         <li>
-          <a href=
-          "https://html.spec.whatwg.org/multipage/origin.html#same-origin-domain">
-          <dfn>same-origin domain</dfn></a>
+          <a href="https://html.spec.whatwg.org/#same-origin-domain"><dfn>same
+          origin-domain</dfn></a>
         </li>
         <li>
           <a href=
@@ -286,18 +290,20 @@
         the following steps:
       </p>
       <ol>
-        <li>If the <a>current settings object</a> is not a <a>secure
-        context</a>, then reject this <a>Navigator</a> object's <a>battery
-        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a>, return
-        this <a>Navigator</a> object's <a>battery promise</a> and abort these
-        steps.
-        </li>
-        <li>If the <a>top-level browsing context</a>'s <a>active document</a>'s
-        <a>origin</a> and the <a>origin</a> specified by the <a>current
-        settings object</a> is not <a>same-origin domain</a>, then reject this
+        <li>If the <a>relevant settings object</a> of this <a>Navigator</a>
+        object is not a <a>secure context</a>, then reject this
         <a>Navigator</a> object's <a>battery promise</a> with a
-        "<a>SecurityError</a>" <a>DOMException</a>, return this <a>Navigator</a>
-        object's <a>battery promise</a> and abort these steps.
+        "<a>SecurityError</a>" <a>DOMException</a>, return this
+        <a>Navigator</a> object's <a>battery promise</a> and abort these steps.
+        </li>
+        <li>If this <a>Navigator</a> object's <a>relevant global object</a>'s
+        <a>associated <code>Document</code></a>'s <a>browsing context</a>'s <a>
+          active document</a>'s <a>origin</a> is not <a>same origin-domain</a>
+          with the <a>origin</a> of the <a>current settings object</a> of this
+          <a>Navigator</a> object, then reject this <a>Navigator</a> object's
+          <a>battery promise</a> with a "<a>SecurityError</a>"
+          <a>DOMException</a>, return this <a>Navigator</a> object's <a>battery
+          promise</a> and abort these steps.
         </li>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
         <code>null</code>, return this <a>Navigator</a> object's <a>battery
@@ -523,9 +529,9 @@
         The Battery Status API is a <a>policy-controlled feature</a>, as
         defined by Feature Policy [[!FEATURE-POLICY]]. The <a>feature name</a>
         for the Battery Status API is "<code>battery</code>". The <a>default
-        allowlist</a> for the Battery Status API is <code>["self"]</code>. When
-        disabled in a document, the <code><a>getBattery</a>()</code> method
-        MUST return a <a>promise</a> which rejects with a
+        allowlist</a> for the Battery Status API is <code>« "self" »</code>.
+        When disabled in a document, the <code><a>getBattery</a>()</code>
+        method MUST return a <a>promise</a> which rejects with a
         "<a>SecurityError</a>" <a>DOMException</a>.
       </p>
     </section>
