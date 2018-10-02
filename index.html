@@ -225,6 +225,10 @@
           origin-domain</dfn></a>
         </li>
         <li>
+          <a href="https://html.spec.whatwg.org/#allowed-to-use"><dfn>allowed
+          to use</dfn></a>
+        </li>
+        <li>
           <a href=
           "https://wicg.github.io/feature-policy/#policy-controlled-feature"><dfn>
           policy-controlled feature</dfn></a>
@@ -297,13 +301,18 @@
         <a>Navigator</a> object's <a>battery promise</a> and abort these steps.
         </li>
         <li>If this <a>Navigator</a> object's <a>relevant global object</a>'s
-        <a>associated <code>Document</code></a>'s <a>browsing context</a>'s <a>
-          active document</a>'s <a>origin</a> is not <a>same origin-domain</a>
-          with the <a>origin</a> of the <a>current settings object</a> of this
-          <a>Navigator</a> object, then reject this <a>Navigator</a> object's
-          <a>battery promise</a> with a "<a>SecurityError</a>"
-          <a>DOMException</a>, return this <a>Navigator</a> object's <a>battery
-          promise</a> and abort these steps.
+        <a>associated <code>Document</code></a> is not <a>allowed to use</a>
+        the <code>battery</code> feature, then reject this <a>Navigator</a>
+        object's <a>battery promise</a> with a "<a>SecurityError</a>"
+        <a>DOMException</a>, return this <a>Navigator</a> object's <a>battery
+        promise</a> and abort these steps.
+          <div class="note">
+            In other words, this step rejects if the <a>associated
+            <code>Document</code></a>'s <a>browsing context</a>'s <a>active
+            document</a>'s <a>origin</a> is not <a>same origin-domain</a> with
+            the <a>origin</a> of the <a>current settings object</a> of this
+            <a>Navigator</a> object.
+          </div>
         </li>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
         <code>null</code>, return this <a>Navigator</a> object's <a>battery
@@ -526,13 +535,11 @@
         Feature Policy integration
       </h2>
       <p data-link-for="Navigator">
-        The Battery Status API is a <a>policy-controlled feature</a>, as
-        defined by Feature Policy [[!FEATURE-POLICY]]. The <a>feature name</a>
-        for the Battery Status API is "<code>battery</code>". The <a>default
-        allowlist</a> for the Battery Status API is <code>« "self" »</code>.
-        When disabled in a document, the <code><a>getBattery</a>()</code>
-        method MUST return a <a>promise</a> which rejects with a
-        "<a>SecurityError</a>" <a>DOMException</a>.
+        The Battery Status API is a <a>policy-controlled feature</a> identified
+        by the string "<code>battery</code>". It's default allowlist is
+        <code>'self'</code>. When disabled in a document, the
+        <code><a>getBattery</a>()</code> method MUST return a <a>promise</a>
+        which rejects with a "<a>SecurityError</a>" <a>DOMException</a>.
       </p>
     </section>
     <section class="informative">
