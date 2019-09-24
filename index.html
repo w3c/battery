@@ -148,14 +148,12 @@
           EventHandler</code></dfn></a>
         </li>
         <li>
-          <a href=
-          "https://dom.spec.whatwg.org/#eventtarget"><dfn><code>
-          EventTarget</code></dfn></a>
-        </li>
-        <li>
           <dfn><a href=
           "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
           task</a></dfn>
+        </li>
+        <li>
+          <code><dfn data-cite="DOM#eventtarget">EventTarget</dfn></code>
         </li>
         <li>
           <dfn><a href=
@@ -179,6 +177,21 @@
         </li>
         <li>
           <dfn><a href=
+          "https://html.spec.whatwg.org/#concept-relevant-global">relevant
+          global object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/#relevant-settings-object">relevant
+          settings object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/#current-settings-object">current
+          settings object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
           "https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">
           top-level browsing context</a></dfn>
         </li>
@@ -186,6 +199,11 @@
           <dfn><a href=
           "https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">
           incumbent settings object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/#concept-document-window">associated
+          <code>Document</code></a></dfn>
         </li>
         <li>
           <a href=
@@ -201,12 +219,47 @@
         </li>
         <li>
           <a href=
+          "https://heycam.github.io/webidl/#notallowederror"><dfn><code>NotAllowedError</code></dfn></a>
+        </li>
+        <li>
+          <a href=
           "https://heycam.github.io/webidl/#idl-DOMException"><dfn><code>DOMException</code></dfn></a>
         </li>
         <li>
           <a href=
           "https://www.w3.org/TR/secure-contexts/#secure-context"><dfn>secure
           context</dfn></a>
+        </li>
+        <li>
+          <a href="https://html.spec.whatwg.org/#active-document"><dfn>active
+          document</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://html.spec.whatwg.org/#concept-origin"><dfn>origin</dfn></a>
+        </li>
+        <li>
+          <a href="https://html.spec.whatwg.org/#same-origin-domain"><dfn>same
+          origin-domain</dfn></a>
+        </li>
+        <li>
+          <a href="https://html.spec.whatwg.org/#allowed-to-use"><dfn>allowed
+          to use</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://wicg.github.io/feature-policy/#policy-controlled-feature"><dfn>
+          policy-controlled feature</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://wicg.github.io/feature-policy/#feature-name"><dfn>feature
+          name</dfn></a>
+        </li>
+        <li>
+          <a href=
+          "https://wicg.github.io/feature-policy/#default-allowlist"><dfn>default
+          allowlist</dfn></a>
         </li>
       </ul>
     </section>
@@ -259,17 +312,26 @@
         the following steps:
       </p>
       <ol>
-        <li>If the <a>incumbent settings object</a> is not a <a>secure
-        context</a>, then reject this <a>Navigator</a> object's <a>battery
-        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a>, return
-        this <a>Navigator</a> object's <a>battery promise</a> and abort these
-        steps.
+        <li>If the <a>relevant settings object</a> of this <a>Navigator</a>
+        object is not a <a>secure context</a>, then reject this
+        <a>Navigator</a> object's <a>battery promise</a> with a
+        "<a>SecurityError</a>" <a>DOMException</a>, return this
+        <a>Navigator</a> object's <a>battery promise</a> and abort these steps.
         </li>
-        <li>If the <a>browsing context</a> is not a <a>top-level browsing
-        context</a>, then reject this <a>Navigator</a> object's <a>battery
-        promise</a> with a "<a>SecurityError</a>" <a>DOMException</a>, return
-        this <a>Navigator</a> object's <a>battery promise</a> and abort these
-        steps.
+        <li>If this <a>Navigator</a> object's <a>relevant global object</a>'s
+        <a>associated <code>Document</code></a> is not <a>allowed to use</a>
+        the <code>battery</code> feature, then reject this <a>Navigator</a>
+        object's <a>battery promise</a> with a "<a>NotAllowedError</a>"
+        <a>DOMException</a>, return this <a>Navigator</a> object's <a>battery
+        promise</a> and abort these steps.
+          <div class="note">
+            In other words, this step rejects if the <a>associated
+            <code>Document</code></a>'s <a>browsing context</a>'s <a>active
+            document</a>'s <a>origin</a> is not <a>same origin-domain</a> with
+            the <a>origin</a> of the <a>current settings object</a> of this
+            <a>Navigator</a> object, unless specifically allowed by the
+            document's feature policy.
+          </div>
         </li>
         <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
         <code>null</code>, return this <a>Navigator</a> object's <a>battery
@@ -485,6 +547,18 @@
           </tbody>
         </table>
       </section>
+    </section>
+    <section>
+      <h2>
+        Feature Policy integration
+      </h2>
+      <p data-link-for="Navigator">
+        The Battery Status API is a <a>policy-controlled feature</a> identified
+        by the string "<code>battery</code>". It's default allowlist is
+        <code>'self'</code>. When disabled in a document, the
+        <code><a>getBattery</a>()</code> method MUST return a <a>promise</a>
+        which rejects with a "<a>SecurityError</a>" <a>DOMException</a>.
+      </p>
     </section>
     <section class="informative">
       <h2>
