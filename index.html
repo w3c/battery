@@ -32,7 +32,6 @@
           testSuiteURI: "https://w3c-test.org/battery-status/",
           implementationReportURI: "https://w3c.github.io/test-results/battery-status/20160621.html",
           scheme:       "https",
-          processVersion: 2005,
           otherLinks: [{
             key: "Participate",
             data: [
@@ -135,21 +134,27 @@
         Terminology
       </h2>
       <p>
-        The following concepts, terms, and interfaces are defined in [[!HTML]],
-        [[!HTML5]], [[!ECMASCRIPT]], [[!WEBIDL]], [[!SECURE-CONTEXTS]], and
-        [[!FEATURE-POLICY]]:
+        The following concepts, terms, and interfaces are defined in
+        [[!HTML]], [[!DOM]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!SECURE-CONTEXTS]]:
       </p>
       <ul>
         <li>
           <a href=
-          "https://html.spec.whatwg.org/#navigator"><dfn><code>Navigator</code></dfn></a>
+          "https://html.spec.whatwg.org/multipage/system-state.html#navigator"><dfn><code>Navigator</code></dfn></a>
         </li>
         <li>
           <a href=
-          "https://html.spec.whatwg.org/#eventhandler"><dfn><code>EventHandler</code></dfn></a>
+          "https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><dfn><code>
+          EventHandler</code></dfn></a>
         </li>
         <li>
-          <dfn><a href="https://html.spec.whatwg.org/#queue-a-task">queue a
+          <a href=
+          "https://dom.spec.whatwg.org/#eventtarget"><dfn><code>
+          EventTarget</code></dfn></a>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
           task</a></dfn>
         </li>
         <li>
@@ -157,21 +162,22 @@
         </li>
         <li>
           <dfn><a href=
-          "https://www.w3.org/TR/html5/webappapis.html#firing-a-simple-event-named-e">
-          fires a simple event</a></dfn>
+          "https://dom.spec.whatwg.org/#concept-event-fire">fires
+          an event</a></dfn>
         </li>
         <li>
-          <dfn><a href="https://html.spec.whatwg.org/#event-handlers">event
+          <dfn><a href=
+          "https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event
           handlers</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://html.spec.whatwg.org/#event-handler-event-type">event
-          handler event types</a></dfn>
+          "https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">
+          event handler event types</a></dfn>
         </li>
         <li>
           <dfn><a href=
-          "https://html.spec.whatwg.org/#browsing-context">browsing
+          "https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing
           context</a></dfn>
         </li>
         <li>
@@ -188,6 +194,16 @@
           <dfn><a href=
           "https://html.spec.whatwg.org/#current-settings-object">current
           settings object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">
+          top-level browsing context</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">
+          incumbent settings object</a></dfn>
         </li>
         <li>
           <dfn><a href=
@@ -405,7 +421,7 @@
         state, or there is no battery attached to the system, or otherwise.
         When the battery charging state is updated, the <a>user agent</a> MUST
         <a>queue a task</a> which sets the <code>charging</code> attribute's
-        value and <a>fires a simple event</a> named
+        value and <a>fires an event</a> named
         <code><a>chargingchange</a></code> at the <a>BatteryManager</a> object.
       </p>
       <p>
@@ -415,8 +431,7 @@
         the battery is discharging, the implementation is unable to report the
         remaining charging time, or otherwise. When the battery charging time
         is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
-        the <code>chargingTime</code> attribute's value and <a>fires a simple
-        event</a> named <code><a>chargingtimechange</a></code> at the
+        the <code>chargingTime</code> attribute's value and <a>fires an event</a> named <code><a>chargingtimechange</a></code> at the
         <a>BatteryManager</a> object.
       </p>
       <p>
@@ -427,7 +442,7 @@
         there is no battery attached to the system, or otherwise. When the
         battery discharging time is updated, the <a>user agent</a> MUST
         <a>queue a task</a> which sets the <code>dischargingTime</code>
-        attribute's value and <a>fires a simple event</a> named
+        attribute's value and <a>fires an event</a> named
         <code><a>dischargingtimechange</a></code> at the <a>BatteryManager</a>
         object.
       </p>
@@ -438,7 +453,7 @@
         unable to report the battery's level, or there is no battery attached
         to the system. When the battery level is updated, the <a>user agent</a>
         MUST <a>queue a task</a> which sets the <code>level</code> attribute's
-        value and <a>fires a simple event</a> named
+        value and <a>fires an event</a> named
         <code><a>levelchange</a></code> at the <a>BatteryManager</a> object.
       </p>
       <p class="note">
