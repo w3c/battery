@@ -306,17 +306,17 @@
         <a>relevant realm</a>. There is also a <dfn>battery manager</dfn>, which
         is initially null.
       </p>
+      <p class="warning">
+        This method is not currently restricted to a <a>secure context</a>, but
+        it should be. Track progress on that in <a
+        href="https://github.com/w3c/battery/issues/15">issue #15</a>.
+      </p>
       <p>
         The <code id=
         "widl-Navigator-getBattery-Promise-BatteryManager"><dfn data-dfn-for=
         "Navigator">getBattery</dfn>()</code> method steps are:
       </p>
       <ol>
-        <li>If <a>this</a>'s <a>relevant settings object</a> is not a <a>secure
-        context</a>, then reject <a>this</a>'s <a>battery promise</a> with a
-        "<a>SecurityError</a>" <a>DOMException</a>, and return <a>this</a>'s
-        <a>battery promise</a>.</li>
-
         <li>
           If <a>this</a>'s <a>relevant global object</a>'s <a>associated
           <code>Document</code></a> is not <a>allowed to use</a> the
