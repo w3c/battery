@@ -135,7 +135,7 @@
       </h2>
       <p>
         The following concepts, terms, and interfaces are defined in
-        [[!HTML]], [[!DOM]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!SECURE-CONTEXTS]]:
+        [[!HTML]], [[!DOM]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!PERMISSIONS-POLICY]]:
       </p>
       <ul>
         <li>
@@ -179,6 +179,11 @@
           <dfn><a href=
           "https://html.spec.whatwg.org/#concept-relevant-global">relevant
           global object</a></dfn>
+        </li>
+        <li>
+          <dfn><a href=
+          "https://html.spec.whatwg.org/#concept-relevant-realm">relevant
+          realm</a></dfn>
         </li>
         <li>
           <dfn><a href=
@@ -227,7 +232,7 @@
         </li>
         <li>
           <a href=
-          "https://www.w3.org/TR/secure-contexts/#secure-context"><dfn>secure
+          "https://html.spec.whatwg.org/#secure-context"><dfn>secure
           context</dfn></a>
         </li>
         <li>
@@ -248,17 +253,12 @@
         </li>
         <li>
           <a href=
-          "https://wicg.github.io/feature-policy/#policy-controlled-feature"><dfn>
+          "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"><dfn>
           policy-controlled feature</dfn></a>
         </li>
         <li>
           <a href=
-          "https://wicg.github.io/feature-policy/#feature-name"><dfn>feature
-          name</dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://wicg.github.io/feature-policy/#default-allowlist"><dfn>default
+          "https://w3c.github.io/webappsec-permissions-policy/#default-allowlist"><dfn>default
           allowlist</dfn></a>
         </li>
       </ul>
@@ -301,57 +301,48 @@
         };
       </pre>
       <p>
-        For each <a>Navigator</a> object, there is a <dfn>battery
-        promise</dfn>, which is initially set to <code>null</code>. It is a
-        <a>Promise</a> object which holds a <a>BatteryManager</a>.
+        For each <a>Navigator</a> object, there is a <dfn>battery promise</dfn>,
+        which is a <a>Promise</a> created in the <a>Navigator</a> object's
+        <a>relevant realm</a>. There is also a <dfn>battery manager</dfn>, which
+        is initially null.
+      </p>
+      <p class="warning">
+        This method is not currently restricted to a <a>secure context</a>, but
+        it should be. Track progress on that in <a
+        href="https://github.com/w3c/battery/issues/15">issue #15</a>.
       </p>
       <p>
         The <code id=
         "widl-Navigator-getBattery-Promise-BatteryManager"><dfn data-dfn-for=
-        "Navigator">getBattery</dfn>()</code> method, when invoked, MUST run
-        the following steps:
+        "Navigator">getBattery</dfn>()</code> method steps are:
       </p>
       <ol>
-        <li>If the <a>relevant settings object</a> of this <a>Navigator</a>
-        object is not a <a>secure context</a>, then reject this
-        <a>Navigator</a> object's <a>battery promise</a> with a
-        "<a>SecurityError</a>" <a>DOMException</a>, return this
-        <a>Navigator</a> object's <a>battery promise</a> and abort these steps.
-        </li>
-        <li>If this <a>Navigator</a> object's <a>relevant global object</a>'s
-        <a>associated <code>Document</code></a> is not <a>allowed to use</a>
-        the <code>battery</code> feature, then reject this <a>Navigator</a>
-        object's <a>battery promise</a> with a "<a>NotAllowedError</a>"
-        <a>DOMException</a>, return this <a>Navigator</a> object's <a>battery
-        promise</a> and abort these steps.
-          <div class="note">
-            In other words, this step rejects if the <a>associated
-            <code>Document</code></a>'s <a>browsing context</a>'s <a>active
-            document</a>'s <a>origin</a> is not <a>same origin-domain</a> with
-            the <a>origin</a> of the <a>current settings object</a> of this
-            <a>Navigator</a> object, unless specifically allowed by the
-            document's feature policy.
-          </div>
-        </li>
-        <li>If this <a>Navigator</a> object's <a>battery promise</a> is not
-        <code>null</code>, return this <a>Navigator</a> object's <a>battery
-        promise</a> and abort these steps.
-        </li>
-        <li>Otherwise, set this <a>Navigator</a> object's <a>battery
-        promise</a> to a newly created <a>Promise</a>, created in the
-        <a>Realm</a> of this <a>Navigator</a> object.
-        </li>
-        <li>Return this <a>Navigator</a> object's <a>battery promise</a> and
-        continue asynchronously.
-        </li>
         <li>
-          <a>Create a new <code>BatteryManager</code> object</a> in the
-          <a>Realm</a> of this <a>Navigator</a> object, and let
-          <var>battery</var> be that object.
+          If <a>this</a>'s <a>relevant global object</a>'s <a>associated
+          <code>Document</code></a> is not <a>allowed to use</a> the
+          "<code>battery</code>" feature, then reject <a>this</a>'s <a>battery
+          promise</a> with a "<a>NotAllowedError</a>" <a>DOMException</a>, and
+          return <a>this</a>'s <a>battery promise</a>.
+
+          <div class="note">In other words, this step rejects if the
+          <a>associated <code>Document</code></a>'s <a>browsing context</a>'s
+          <a>active document</a>'s <a>origin</a> is not <a>same
+          origin-domain</a> with the <a>origin</a> of the <a>current settings
+          object</a> of this <a>Navigator</a> object, unless specifically
+          allowed by the document's permissions policy.</div>
         </li>
-        <li>Resolve this <a>Navigator</a> object's <a>battery promise</a> with
-        <var>battery</var>.
-        </li>
+
+        <li>If <a>this</a>'s <a>battery manager</a> is not null, return
+        <a>this</a>'s <a>battery promise</a>.</li>
+
+        <li>Set <a>this</a>'s <a>battery manager</a> to the result of
+        <a>creating a new <code>BatteryManager</code> object</a> in
+        <a>this</a>'s <a>relevant realm</a>.</li>
+
+        <li><a>Resolve</a> <a>this</a>'s <a>battery promise</a> with
+        <a>this</a>'s <a>battery manager</a>.</li>
+
+        <li>Return <a>this</a>'s <a>battery promise</a>.</li>
       </ol>
     </section>
     <section>
@@ -386,16 +377,16 @@
         };
       </pre>
       <p>
-        When the <a>user agent</a> is to <dfn>create a new
-        <code>BatteryManager</code> object</dfn>, it MUST instantiate a new
-        <a>BatteryManager</a> object and set its attributes' values to those
-        that represent the <a>current battery status information</a>, unless
-        the <a>user agent</a> is <a>unable to report the battery status
-        information</a>, in which case the values MUST be set to <dfn>default
-        values</dfn> as follows: <code>charging</code> MUST be set to true,
-        <code>chargingTime</code> MUST be set to 0,
-        <code>dischargingTime</code> MUST be set to positive Infinity, and
-        <code>level</code> MUST be set to 1.0.
+        When the <a>user agent</a> is to <dfn data-lt="creating a new
+        BatteryManager object">create a new <code>BatteryManager</code>
+        object</dfn>, it MUST instantiate a new <a>BatteryManager</a> object and
+        set its attributes' values to those that represent the <a>current
+        battery status information</a>, unless the <a>user agent</a> is
+        <a>unable to report the battery status information</a>, in which case
+        the values MUST be set to <dfn>default values</dfn> as follows:
+        <code>charging</code> MUST be set to true, <code>chargingTime</code>
+        MUST be set to 0, <code>dischargingTime</code> MUST be set to positive
+        Infinity, and <code>level</code> MUST be set to 1.0.
       </p>
       <p>
         The <a>user agent</a> is said to be <dfn>unable to report the battery
@@ -550,13 +541,13 @@
     </section>
     <section>
       <h2>
-        Feature Policy integration
+        Permissions Policy integration
       </h2>
       <p data-link-for="Navigator">
         The Battery Status API is a <a>policy-controlled feature</a> identified
-        by the string "<code>battery</code>". It's default allowlist is
+        by the string "<code>battery</code>". Its <a>default allowlist</a> is
         <code>'self'</code>. When disabled in a document, the
-        <code><a>getBattery</a>()</code> method MUST return a <a>promise</a>
+        <code><a>getBattery</a>()</code> method will return a <a>promise</a>
         which rejects with a "<a>NotAllowedError</a>" <a>DOMException</a>.
       </p>
     </section>
