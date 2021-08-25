@@ -53,7 +53,13 @@
                 href: "https://github.com/w3c/battery/commits/"
               }
             ]
-          }]
+          }],
+          xref: {
+            profile: "web-platform",
+            specs: [
+              "permissions-policy"
+            ]
+          }
         };
     </script>
   </head>
@@ -118,134 +124,9 @@
         Terminology
       </h2>
       <p>
-        The following concepts, terms, and interfaces are defined in
-        [[!HTML]], [[!DOM]], [[!ECMASCRIPT]], [[!WEBIDL]], and [[!PERMISSIONS-POLICY]]:
+        The following term is defined in [[!DOM]]: <dfn data-cite=
+        "DOM#concept-event-fire">fires an event</dfn>.
       </p>
-      <ul>
-        <li>
-          <a href=
-          "https://html.spec.whatwg.org/multipage/system-state.html#navigator"><dfn><code>Navigator</code></dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><dfn><code>
-          EventHandler</code></dfn></a>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
-          task</a></dfn>
-        </li>
-        <li>
-          <code><dfn data-cite="DOM#eventtarget">EventTarget</dfn></code>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://dom.spec.whatwg.org/#concept-event-fire">fires
-          an event</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers">event
-          handlers</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">
-          event handler event types</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/browsers.html#browsing-context">browsing
-          context</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/#concept-relevant-global">relevant
-          global object</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/#concept-relevant-realm">relevant
-          realm</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/#relevant-settings-object">relevant
-          settings object</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/#current-settings-object">current
-          settings object</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/browsers.html#top-level-browsing-context">
-          top-level browsing context</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/multipage/webappapis.html#incumbent-settings-object">
-          incumbent settings object</a></dfn>
-        </li>
-        <li>
-          <dfn><a href=
-          "https://html.spec.whatwg.org/#concept-document-window">associated
-          <code>Document</code></a></dfn>
-        </li>
-        <li>
-          <a href=
-          "https://tc39.es/ecma262/#sec-promise-objects"><dfn>Promise</dfn></a>
-        </li>
-        <li>
-          <a href="https://tc39.es/ecma262/#realm"><dfn data-lt=
-          "realm">Realms</dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://heycam.github.io/webidl/#securityerror"><dfn><code>SecurityError</code></dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://heycam.github.io/webidl/#notallowederror"><dfn><code>NotAllowedError</code></dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://heycam.github.io/webidl/#idl-DOMException"><dfn><code>DOMException</code></dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://html.spec.whatwg.org/#secure-context"><dfn>secure
-          context</dfn></a>
-        </li>
-        <li>
-          <a href="https://html.spec.whatwg.org/#active-document"><dfn>active
-          document</dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://html.spec.whatwg.org/#concept-origin"><dfn>origin</dfn></a>
-        </li>
-        <li>
-          <a href="https://html.spec.whatwg.org/#same-origin-domain"><dfn>same
-          origin-domain</dfn></a>
-        </li>
-        <li>
-          <a href="https://html.spec.whatwg.org/#allowed-to-use"><dfn>allowed
-          to use</dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"><dfn>
-          policy-controlled feature</dfn></a>
-        </li>
-        <li>
-          <a href=
-          "https://w3c.github.io/webappsec-permissions-policy/#default-allowlist"><dfn>default
-          allowlist</dfn></a>
-        </li>
-      </ul>
     </section>
     <section class="informative">
       <h2>
@@ -277,7 +158,7 @@
     </section>
     <section>
       <h2>
-        The <a>Navigator</a> interface
+        The `Navigator` interface
       </h2>
       <pre class="idl">
         partial interface Navigator {
@@ -285,8 +166,8 @@
         };
       </pre>
       <p>
-        For each <a>Navigator</a> object, there is a <dfn>battery promise</dfn>,
-        which is a <a>Promise</a> created in the <a>Navigator</a> object's
+        For each {{Navigator}} object, there is a <dfn>battery promise</dfn>,
+        which is a {{Promise}} created in the {{Navigator}} object's
         <a>relevant realm</a>. There is also a <dfn>battery manager</dfn>, which
         is initially null.
       </p>
@@ -305,14 +186,14 @@
           If <a>this</a>'s <a>relevant global object</a>'s <a>associated
           <code>Document</code></a> is not <a>allowed to use</a> the
           "<code>battery</code>" feature, then reject <a>this</a>'s <a>battery
-          promise</a> with a "<a>NotAllowedError</a>" <a>DOMException</a>, and
+          promise</a> with a {{"NotAllowedError"}} {{DOMException}}, and
           return <a>this</a>'s <a>battery promise</a>.
 
           <div class="note">In other words, this step rejects if the
           <a>associated <code>Document</code></a>'s <a>browsing context</a>'s
           <a>active document</a>'s <a>origin</a> is not <a>same
           origin-domain</a> with the <a>origin</a> of the <a>current settings
-          object</a> of this <a>Navigator</a> object, unless specifically
+          object</a> of this {{Navigator}} object, unless specifically
           allowed by the document's permissions policy.</div>
         </li>
 
@@ -531,8 +412,8 @@
         The Battery Status API is a <a>policy-controlled feature</a> identified
         by the string "<code>battery</code>". Its <a>default allowlist</a> is
         <code>'self'</code>. When disabled in a document, the
-        <code><a>getBattery</a>()</code> method will return a <a>promise</a>
-        which rejects with a "<a>NotAllowedError</a>" <a>DOMException</a>.
+        <code><a>getBattery</a>()</code> method will return a {{Promise}} which
+        rejects with a {{"NotAllowedError"}} {{DOMException}}.
       </p>
     </section>
     <section class="informative">
