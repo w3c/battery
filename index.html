@@ -151,60 +151,107 @@
         is exposing fake values.
       </p>
     </section>
-    <section>
+    <section data-dfn-for="Navigator">
       <h2>
-        The `Navigator` interface
+        Extensions to the `Navigator` interface
       </h2>
       <pre class="idl">
         partial interface Navigator {
           Promise&lt;BatteryManager&gt; getBattery();
         };
       </pre>
-      <p>
-        For each {{Navigator}} object, there is a <dfn>battery promise</dfn>,
-        which is a {{Promise}} created in the {{Navigator}} object's
-        <a>relevant realm</a>. There is also a <dfn>battery manager</dfn>,
-        which is initially null.
-      </p>
       <p class="warning">
         This method is not currently restricted to a <a>secure context</a>, but
         it should be. Track progress on that in <a href=
         "https://github.com/w3c/battery/issues/15">issue #15</a>.
       </p>
-      <p>
-        The <code id=
-        "widl-Navigator-getBattery-Promise-BatteryManager"><dfn data-dfn-for=
-        "Navigator">getBattery</dfn>()</code> method steps are:
-      </p>
-      <ol>
-        <li>If <a>this</a>'s <a>relevant global object</a>'s <a>associated
-        <code>Document</code></a> is not <a>allowed to use</a> the
-        "<code>battery</code>" feature, then reject <a>this</a>'s <a>battery
-        promise</a> with a {{"NotAllowedError"}} {{DOMException}}, and return
-        <a>this</a>'s <a>battery promise</a>.
-          <div class="note">
-            In other words, this step rejects if the <a>associated
-            <code>Document</code></a>'s <a>browsing context</a>'s <a>active
-            document</a>'s <a>origin</a> is not <a>same origin-domain</a> with
-            the <a>origin</a> of the <a>current settings object</a> of this
-            {{Navigator}} object, unless specifically allowed by the document's
-            permissions policy.
-          </div>
-        </li>
-        <li>If <a>this</a>'s <a>battery manager</a> is not null, return
-        <a>this</a>'s <a>battery promise</a>.
-        </li>
-        <li>Set <a>this</a>'s <a>battery manager</a> to the result of
-        <a>creating a new <code>BatteryManager</code> object</a> in
-        <a>this</a>'s <a>relevant realm</a>.
-        </li>
-        <li>
-          <a>Resolve</a> <a>this</a>'s <a>battery promise</a> with
-          <a>this</a>'s <a>battery manager</a>.
-        </li>
-        <li>Return <a>this</a>'s <a>battery promise</a>.
-        </li>
-      </ol>
+      <section>
+        <h3>
+          Internal slots
+        </h3>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>
+                Internal slot
+              </th>
+              <th>
+                Initial value
+              </th>
+              <th>
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <dfn>[[\BatteryPromise]]</dfn>
+              </td>
+              <td>
+                `null`
+              </td>
+              <td>
+                A {{Promise}} returned by calls to {{Navigator/getBattery()}}.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <dfn>[[\BatteryManager]]</dfn>
+              </td>
+              <td>
+                `null`
+              </td>
+              <td>
+                The <a>BatteryManager</a> instance associated with a given
+                {{Navigator}} after it has been created via
+                {{Navigator/getBattery()}}.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h3>
+          The `getBattery()` method
+        </h3>
+        <p data-tests=
+        "battery-promise-window.https.html, battery-promise.https.html">
+          The <dfn>getBattery()</dfn> method, when invoked, MUST run the
+          following steps:
+        </p>
+        <ol class="algorithm">
+          <li>If [=this=].{{Navigator/[[BatteryPromise]]}} is `null`, then set
+          it to [=a new promise=] in [=this=]'s [=relevant realm=].
+          </li>
+          <li>If [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=allowed to use=] the "`battery`"
+          [=policy-controlled feature=], then [=reject=]
+          [=this=].{{Navigator/[[BatteryPromise]]}} with a
+          {{"NotAllowedError"}} {{DOMException}}.
+            <div class="note">
+              In other words, this step rejects if the [=associated
+              `Document`=]'s [=browsing context=]'s [=active document=]'s
+              [=origin=] is not [=same origin-domain=] with the [=origin=] of
+              the [=current settings object=] of this {{Navigator}} object,
+              unless specifically allowed by the document's permissions policy.
+            </div>
+          </li>
+          <li>Otherwise:
+            <ol>
+              <li>If [=this=].{{Navigator/[[BatteryManager]]}} is `null`, then
+              set it to the result of [=creating a new `BatteryManager`
+              object=] in [=this=].[=relevant realm=].
+              </li>
+              <li>[=Resolve=] [=this=].{{Navigator/[[BatteryPromise]]}} with
+              [=this=].{{Navigator/[[BatteryManager]]}}.
+              </li>
+            </ol>
+          </li>
+          <li>Return [=this=].{{Navigator/[[BatteryPromise]]}}.
+          </li>
+        </ol>
+      </section>
     </section>
     <section>
       <h2>
