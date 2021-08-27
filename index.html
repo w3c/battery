@@ -5,7 +5,8 @@
       Battery Status API
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"
+    defer></script>
     <script class="remove">
       var respecConfig = {
           specStatus:           "ED",
@@ -71,11 +72,11 @@
     <section id="sotd">
       <p>
         The Devices and Sensors Working Group will apply editorial
-        modernizations to this specification, perform a round of self-review and
-        revisions on the security and privacy aspects of the API before
-        requesting horizontal review. Existing <a
-        href="https://www.w3.org/PM/horizontal/review.html?shortname=battery-status">security
-        and privacy issues</a> are available.
+        modernizations to this specification, perform a round of self-review
+        and revisions on the security and privacy aspects of the API before
+        requesting horizontal review. Existing <a href=
+        "https://www.w3.org/PM/horizontal/review.html?shortname=battery-status">
+        security and privacy issues</a> are available.
       </p>
     </section>
     <section class="informative">
@@ -168,13 +169,13 @@
       <p>
         For each {{Navigator}} object, there is a <dfn>battery promise</dfn>,
         which is a {{Promise}} created in the {{Navigator}} object's
-        <a>relevant realm</a>. There is also a <dfn>battery manager</dfn>, which
-        is initially null.
+        <a>relevant realm</a>. There is also a <dfn>battery manager</dfn>,
+        which is initially null.
       </p>
       <p class="warning">
         This method is not currently restricted to a <a>secure context</a>, but
-        it should be. Track progress on that in <a
-        href="https://github.com/w3c/battery/issues/15">issue #15</a>.
+        it should be. Track progress on that in <a href=
+        "https://github.com/w3c/battery/issues/15">issue #15</a>.
       </p>
       <p>
         The <code id=
@@ -182,32 +183,33 @@
         "Navigator">getBattery</dfn>()</code> method steps are:
       </p>
       <ol>
-        <li>
-          If <a>this</a>'s <a>relevant global object</a>'s <a>associated
-          <code>Document</code></a> is not <a>allowed to use</a> the
-          "<code>battery</code>" feature, then reject <a>this</a>'s <a>battery
-          promise</a> with a {{"NotAllowedError"}} {{DOMException}}, and
-          return <a>this</a>'s <a>battery promise</a>.
-
-          <div class="note">In other words, this step rejects if the
-          <a>associated <code>Document</code></a>'s <a>browsing context</a>'s
-          <a>active document</a>'s <a>origin</a> is not <a>same
-          origin-domain</a> with the <a>origin</a> of the <a>current settings
-          object</a> of this {{Navigator}} object, unless specifically
-          allowed by the document's permissions policy.</div>
+        <li>If <a>this</a>'s <a>relevant global object</a>'s <a>associated
+        <code>Document</code></a> is not <a>allowed to use</a> the
+        "<code>battery</code>" feature, then reject <a>this</a>'s <a>battery
+        promise</a> with a {{"NotAllowedError"}} {{DOMException}}, and return
+        <a>this</a>'s <a>battery promise</a>.
+          <div class="note">
+            In other words, this step rejects if the <a>associated
+            <code>Document</code></a>'s <a>browsing context</a>'s <a>active
+            document</a>'s <a>origin</a> is not <a>same origin-domain</a> with
+            the <a>origin</a> of the <a>current settings object</a> of this
+            {{Navigator}} object, unless specifically allowed by the document's
+            permissions policy.
+          </div>
         </li>
-
         <li>If <a>this</a>'s <a>battery manager</a> is not null, return
-        <a>this</a>'s <a>battery promise</a>.</li>
-
+        <a>this</a>'s <a>battery promise</a>.
+        </li>
         <li>Set <a>this</a>'s <a>battery manager</a> to the result of
         <a>creating a new <code>BatteryManager</code> object</a> in
-        <a>this</a>'s <a>relevant realm</a>.</li>
-
-        <li><a>Resolve</a> <a>this</a>'s <a>battery promise</a> with
-        <a>this</a>'s <a>battery manager</a>.</li>
-
-        <li>Return <a>this</a>'s <a>battery promise</a>.</li>
+        <a>this</a>'s <a>relevant realm</a>.
+        </li>
+        <li>
+          <a>Resolve</a> <a>this</a>'s <a>battery promise</a> with
+          <a>this</a>'s <a>battery manager</a>.
+        </li>
+        <li>Return <a>this</a>'s <a>battery promise</a>.
+        </li>
       </ol>
     </section>
     <section>
@@ -242,16 +244,17 @@
         };
       </pre>
       <p>
-        When the <a>user agent</a> is to <dfn data-lt="creating a new
-        BatteryManager object">create a new <code>BatteryManager</code>
-        object</dfn>, it MUST instantiate a new <a>BatteryManager</a> object and
-        set its attributes' values to those that represent the <a>current
-        battery status information</a>, unless the <a>user agent</a> is
-        <a>unable to report the battery status information</a>, in which case
-        the values MUST be set to <dfn>default values</dfn> as follows:
-        <code>charging</code> MUST be set to true, <code>chargingTime</code>
-        MUST be set to 0, <code>dischargingTime</code> MUST be set to positive
-        Infinity, and <code>level</code> MUST be set to 1.0.
+        When the <a>user agent</a> is to <dfn data-lt=
+        "creating a new BatteryManager object">create a new
+        <code>BatteryManager</code> object</dfn>, it MUST instantiate a new
+        <a>BatteryManager</a> object and set its attributes' values to those
+        that represent the <a>current battery status information</a>, unless
+        the <a>user agent</a> is <a>unable to report the battery status
+        information</a>, in which case the values MUST be set to <dfn>default
+        values</dfn> as follows: <code>charging</code> MUST be set to true,
+        <code>chargingTime</code> MUST be set to 0,
+        <code>dischargingTime</code> MUST be set to positive Infinity, and
+        <code>level</code> MUST be set to 1.0.
       </p>
       <p>
         The <a>user agent</a> is said to be <dfn>unable to report the battery
@@ -282,7 +285,8 @@
         the battery is discharging, the implementation is unable to report the
         remaining charging time, or otherwise. When the battery charging time
         is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
-        the <code>chargingTime</code> attribute's value and <a>fires an event</a> named <code><a>chargingtimechange</a></code> at the
+        the <code>chargingTime</code> attribute's value and <a>fires an
+        event</a> named <code><a>chargingtimechange</a></code> at the
         <a>BatteryManager</a> object.
       </p>
       <p>
@@ -304,8 +308,8 @@
         unable to report the battery's level, or there is no battery attached
         to the system. When the battery level is updated, the <a>user agent</a>
         MUST <a>queue a task</a> which sets the <code>level</code> attribute's
-        value and <a>fires an event</a> named
-        <code><a>levelchange</a></code> at the <a>BatteryManager</a> object.
+        value and <a>fires an event</a> named <code><a>levelchange</a></code>
+        at the <a>BatteryManager</a> object.
       </p>
       <p class="note">
         The definition of how often the <code><a>chargingtimechange</a></code>,
