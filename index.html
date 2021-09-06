@@ -543,7 +543,7 @@
           slot |slot|, a |value| and an |eventName|, run the following steps:
         </p>
         <ol class="algorithm">
-          <li>Let |global| be the <a>current global object</a>.
+          <li>Let |global| be the [=current global object=].
           </li>
           <li>If |global| is not a {{Window}}, abort these steps.
           </li>
@@ -554,14 +554,12 @@
           </li>
           <li>If |batteryManager| is `null`, abort these steps.
           </li>
-          <li>
-            <a>Queue a global task</a> on the <a>battery status task source</a>
-            given |global| to run the following steps:
+          <li>[=Queue a global task=] on the [=battery status task source=]
+          given |global| to run the following steps:
             <ol>
               <li>Set |batteryManager|.|slot| to |value|.
               </li>
-              <li>
-                <a>Fire an event</a> named |eventName| at |batteryManager|.
+              <li>[=Fire an event=] named |eventName| at |batteryManager|.
               </li>
             </ol>
           </li>
