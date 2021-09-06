@@ -307,9 +307,6 @@
               <th>
                 Initial value
               </th>
-              <th>
-                Description (non-normative)
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -320,9 +317,6 @@
               <td>
                 `true`
               </td>
-              <td>
-                Charging state of the system's battery.
-              </td>
             </tr>
             <tr>
               <td>
@@ -330,10 +324,6 @@
               </td>
               <td>
                 0
-              </td>
-              <td>
-                Remaining time in seconds until the system's battery is fully
-                charged.
               </td>
             </tr>
             <tr>
@@ -343,10 +333,6 @@
               <td>
                 Positive Infinity
               </td>
-              <td>
-                Remaining time in seconds until the system's battery is
-                completely discharged and the system is about to be suspended.
-              </td>
             </tr>
             <tr>
               <td>
@@ -354,9 +340,6 @@
               </td>
               <td>
                 1.0
-              </td>
-              <td>
-                Level of the system's battery.
               </td>
             </tr>
           </tbody>
@@ -386,7 +369,7 @@
           </h4>
           <p>
             The {{BatteryManager/[[ChargingTime]]}} internal slot represents
-            the time remaining in seconds until the system's battery is fully
+            the remaining time in seconds until the system's battery is fully
             charged. It MUST be set to 0 if the battery is full or there is no
             battery attached to the system, and to the value positive Infinity
             if the battery is discharging, the implementation is unable to
@@ -405,7 +388,7 @@
           </h4>
           <p>
             The {{BatteryManager/[[DischargingTime]]}} attribute represents the
-            time remaining in seconds until the system's battery is completely
+            remaining time in seconds until the system's battery is completely
             discharged and the system is about to be suspended. It MUST be set
             to the value positive Infinity if the battery is charging, the
             implementation is unable to report the remaining discharging time,
@@ -423,8 +406,8 @@
             The `[[Level]]` internal slot
           </h4>
           <p>
-            The {{BatteryManager/[[Level]]}} internal slot represents the level
-            of the system's battery. It MUST be set to 0 if the system's
+            The {{BatteryManager/[[Level]]}} internal slot represents the
+            system's battery's level. It MUST be set to 0 if the system's
             battery is depleted and the system is about to be suspended, and to
             1.0 if the battery is full, the implementation is unable to report
             the battery's level, or there is no battery attached to the system.
