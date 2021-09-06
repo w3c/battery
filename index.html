@@ -203,7 +203,7 @@
                 `null`
               </td>
               <td>
-                The <a>BatteryManager</a> instance associated with a given
+                The {{BatteryManager}} instance associated with a given
                 {{Navigator}} after it has been created via
                 {{Navigator/getBattery()}}.
               </td>
@@ -282,7 +282,7 @@
       </p>
       <aside class="note">
         If the user agent is <a>unable to report the battery status
-        information</a>, the <a>BatteryManager</a>'s internal slots will remain
+        information</a>, the {{BatteryManager}}'s internal slots will remain
         with their default values, which emulate a fully charged and plugged in
         battery. This is aimed at reducing the potential for fingerprinting and
         preventing applications from degrading performance, if the battery
@@ -554,7 +554,7 @@
         </h2>
         <p>
           If a hosting device contains more than one battery,
-          <a>BatteryManager</a> SHOULD expose an unified view of the batteries.
+          {{BatteryManager}} SHOULD expose a unified view of the batteries.
         </p>
         <p>
           The {{BatteryManager/[[Charging]]}} internal slot MUST be set to true
