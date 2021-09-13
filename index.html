@@ -116,15 +116,6 @@
     </section>
     <section>
       <h2>
-        Terminology
-      </h2>
-      <p>
-        The following term is defined in [[!DOM]]: <dfn data-cite=
-        "DOM#concept-event-fire">fires an event</dfn>.
-      </p>
-    </section>
-    <section>
-      <h2>
         Security and privacy considerations
       </h2>
       <p>
@@ -149,6 +140,15 @@
         The user agent MAY obfuscate the exposed value in a way that authors
         cannot directly know if a hosting device has no battery, is charging or
         is exposing fake values.
+      </p>
+    </section>
+    <section>
+      <h2>
+        Concepts
+      </h2>
+      <p>
+        The <a>task source</a> for the <a>tasks</a> mentioned in this
+        specification is the <dfn>battery status task source</dfn>.
       </p>
     </section>
     <section data-dfn-for="Navigator">
@@ -203,7 +203,7 @@
                 `null`
               </td>
               <td>
-                The <a>BatteryManager</a> instance associated with a given
+                The {{BatteryManager}} instance associated with a given
                 {{Navigator}} after it has been created via
                 {{Navigator/getBattery()}}.
               </td>
@@ -240,8 +240,8 @@
           <li>Otherwise:
             <ol>
               <li>If [=this=].{{Navigator/[[BatteryManager]]}} is `null`, then
-              set it to the result of [=creating a new `BatteryManager`
-              object=] in [=this=].[=relevant realm=].
+              set it to the result of creating a [=new=] {{BatteryManager}} in
+              [=this=]'s [=relevant realm=].
               </li>
               <li>[=Resolve=] [=this=].{{Navigator/[[BatteryPromise]]}} with
               [=this=].{{Navigator/[[BatteryManager]]}}.
@@ -253,24 +253,10 @@
         </ol>
       </section>
     </section>
-    <section>
+    <section data-dfn-for="BatteryManager">
       <h2>
-        The <a>BatteryManager</a> interface
+        The `BatteryManager` interface
       </h2>
-      <p>
-        The <dfn>BatteryManager</dfn> interface represents the <dfn>current
-        battery status information</dfn> of the hosting device. The
-        <dfn data-dfn-for="BatteryManager"><code>charging</code></dfn>
-        attribute represents the charging state of the system's battery. The
-        <dfn data-dfn-for="BatteryManager"><code>chargingTime</code></dfn>
-        attribute represents the time remaining in seconds until the system's
-        battery is fully charged. The <dfn data-dfn-for=
-        "BatteryManager"><code>dischargingTime</code></dfn> attribute
-        represents the time remaining in seconds until the system's battery is
-        completely discharged and the system is about to be suspended, and the
-        <dfn data-dfn-for="BatteryManager"><code>level</code></dfn> attribute
-        represents the level of the system's battery.
-      </p>
       <pre class="idl">
         [Exposed=Window]
         interface BatteryManager : EventTarget {
@@ -285,107 +271,194 @@
         };
       </pre>
       <p>
-        When the <a>user agent</a> is to <dfn data-lt=
-        "creating a new BatteryManager object">create a new
-        <code>BatteryManager</code> object</dfn>, it MUST instantiate a new
-        <a>BatteryManager</a> object and set its attributes' values to those
-        that represent the <a>current battery status information</a>, unless
-        the <a>user agent</a> is <a>unable to report the battery status
-        information</a>, in which case the values MUST be set to <dfn>default
-        values</dfn> as follows: <code>charging</code> MUST be set to true,
-        <code>chargingTime</code> MUST be set to 0,
-        <code>dischargingTime</code> MUST be set to positive Infinity, and
-        <code>level</code> MUST be set to 1.0.
+        The <dfn>BatteryManager</dfn> interface represents the <dfn>current
+        battery status information</dfn> of the hosting device.
       </p>
       <p>
         The <a>user agent</a> is said to be <dfn>unable to report the battery
-        status information</dfn>, if it is not able to report the values for
-        any of the attributes, for example, due to a user or system preference,
+        status information</dfn> if it is not able to report the values for any
+        of the attributes, for example, due to a user or system preference,
         setting, or limitation.
       </p>
-      <p class="note">
-        Implementations <a>unable to report the battery status information</a>
-        emulate a fully charged and plugged in battery to reduce the potential
-        for fingerprinting and prevent applications from degrading performance,
-        if the battery status information is not made available, for example.
-      </p>
-      <p>
-        The <code id="widl-BatteryManager-charging">charging</code> attribute
-        MUST be set to false if the battery is discharging, and set to true, if
-        the battery is charging, the implementation is unable to report the
-        state, or there is no battery attached to the system, or otherwise.
-        When the battery charging state is updated, the <a>user agent</a> MUST
-        <a>queue a task</a> which sets the <code>charging</code> attribute's
-        value and <a>fires an event</a> named
-        <code><a>chargingchange</a></code> at the <a>BatteryManager</a> object.
-      </p>
-      <p>
-        The <code id="widl-BatteryManager-chargingTime">chargingTime</code>
-        attribute MUST be set to 0, if the battery is full or there is no
-        battery attached to the system, and to the value positive Infinity if
-        the battery is discharging, the implementation is unable to report the
-        remaining charging time, or otherwise. When the battery charging time
-        is updated, the <a>user agent</a> MUST <a>queue a task</a> which sets
-        the <code>chargingTime</code> attribute's value and <a>fires an
-        event</a> named <code><a>chargingtimechange</a></code> at the
-        <a>BatteryManager</a> object.
-      </p>
-      <p>
-        The <code id=
-        "widl-BatteryManager-dischargingTime">dischargingTime</code> attribute
-        MUST be set to the value positive Infinity, if the battery is charging,
-        the implementation is unable to report the remaining discharging time,
-        there is no battery attached to the system, or otherwise. When the
-        battery discharging time is updated, the <a>user agent</a> MUST
-        <a>queue a task</a> which sets the <code>dischargingTime</code>
-        attribute's value and <a>fires an event</a> named
-        <code><a>dischargingtimechange</a></code> at the <a>BatteryManager</a>
-        object.
-      </p>
-      <p>
-        The <code id="widl-BatteryManager-level">level</code> attribute MUST be
-        set to 0 if the system's battery is depleted and the system is about to
-        be suspended, and to 1.0 if the battery is full, the implementation is
-        unable to report the battery's level, or there is no battery attached
-        to the system. When the battery level is updated, the <a>user agent</a>
-        MUST <a>queue a task</a> which sets the <code>level</code> attribute's
-        value and <a>fires an event</a> named <code><a>levelchange</a></code>
-        at the <a>BatteryManager</a> object.
-      </p>
-      <p class="note">
-        The definition of how often the <code><a>chargingtimechange</a></code>,
-        <code><a>dischargingtimechange</a></code>, and
-        <code><a>levelchange</a></code> events are fired is left to the
-        implementation.
-      </p>
-      <section id="multiple-batteries">
-        <h2>
-          Multiple batteries
-        </h2>
+      <aside class="note">
+        If the user agent is <a>unable to report the battery status
+        information</a>, the {{BatteryManager}}'s internal slots will remain
+        with their default values, which emulate a fully charged and plugged in
+        battery. This is aimed at reducing the potential for fingerprinting and
+        preventing applications from degrading performance, if the battery
+        status information is not made available, for example.
+      </aside>
+      <section>
+        <h3>
+          Internal slots
+        </h3>
         <p>
-          If a hosting device contains more than one battery,
-          <a>BatteryManager</a> SHOULD expose an unified view of the batteries.
+          {{BatteryManager}} instances are created with the following
+          <a data-cite=
+          "ECMASCRIPT#sec-object-internal-methods-and-internal-slots">internal
+          slots</a>:
         </p>
-        <p>
-          The <code>charging</code> attribute MUST be set to true if at least
-          one battery's <code>charging</code> state as described above is true.
-          Otherwise, it MUST be set to false.
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>
+                Internal slot
+              </th>
+              <th>
+                Initial value
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <dfn>[[\Charging]]</dfn>
+              </td>
+              <td>
+                `true`
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <dfn>[[\ChargingTime]]</dfn>
+              </td>
+              <td>
+                0
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <dfn>[[\DischargingTime]]</dfn>
+              </td>
+              <td>
+                Positive Infinity
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <dfn>[[\Level]]</dfn>
+              </td>
+              <td>
+                1.0
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <section>
+          <h4>
+            The `[[Charging]]` internal slot
+          </h4>
+          <p>
+            The {{BatteryManager/[[Charging]]}} internal slot represents the
+            charging state of the system's battery. It MUST be set to `false`
+            if the battery is discharging, and set to `true` if the battery is
+            charging, the implementation is unable to report the state, or
+            there is no battery attached to the system, or otherwise.
+          </p>
+          <p>
+            When the system battery's charging state changes, the user agent
+            must run the <a>update the battery status and notify</a> algorithm
+            with {{BatteryManager/[[Charging]]}}, `true` or `false` depending
+            on whether the battery is charging or discharging, and
+            "[=chargingchange=]".
+          </p>
+        </section>
+        <section>
+          <h4>
+            The `[[ChargingTime]]` internal slot
+          </h4>
+          <p>
+            The {{BatteryManager/[[ChargingTime]]}} internal slot represents
+            the remaining time in seconds until the system's battery is fully
+            charged. It MUST be set to 0 if the battery is full or there is no
+            battery attached to the system, and to the value positive Infinity
+            if the battery is discharging, the implementation is unable to
+            report the remaining charging time, or otherwise.
+          </p>
+          <p>
+            When the battery charging time is updated, the user agent must run
+            the <a>update the battery status and notify</a> algorithm with
+            {{BatteryManager/[[ChargingTime]]}}, the new charging time in
+            seconds, and "[=chargingtimechange=]".
+          </p>
+        </section>
+        <section>
+          <h4>
+            The `[[DischargingTime]]` internal slot
+          </h4>
+          <p>
+            The {{BatteryManager/[[DischargingTime]]}} attribute represents the
+            remaining time in seconds until the system's battery is completely
+            discharged and the system is about to be suspended. It MUST be set
+            to the value positive Infinity if the battery is charging, the
+            implementation is unable to report the remaining discharging time,
+            there is no battery attached to the system, or otherwise.
+          </p>
+          <p>
+            When the battery discharging time is updated, the user agent must
+            run the <a>update the battery status and notify</a> algorithm with
+            {{BatteryManager/[[DischargingTime]]}}, the new discharging time in
+            seconds, and "[=dischargingtimechange=]".
+          </p>
+        </section>
+        <section>
+          <h4>
+            The `[[Level]]` internal slot
+          </h4>
+          <p>
+            The {{BatteryManager/[[Level]]}} internal slot represents the
+            system's battery's level. It MUST be set to 0 if the system's
+            battery is depleted and the system is about to be suspended, and to
+            1.0 if the battery is full, the implementation is unable to report
+            the battery's level, or there is no battery attached to the system.
+          </p>
+          <p>
+            When the battery level is updated, the user agent must run the
+            <a>update the battery status and notify</a> algorithm with
+            {{BatteryManager/[[Level]]}}, the new battery level, and
+            "[=levelchange=]".
+          </p>
+        </section>
+        <p class="note">
+          The definition of how often the "[=chargingtimechange=]",
+          "[=dischargingtimechange=]", and "[=levelchange=]" events are fired
+          is left to the implementation.
         </p>
+      </section>
+      <section>
+        <h3>
+          The `charging` attribute
+        </h3>
         <p>
-          The <code>chargingTime</code> attribute can be set to the maximum
-          charging time of the individual batteries if charging in parallel,
-          and to the sum of the individual charging times if charging serially.
+          The <dfn>charging</dfn> attribute's getter returns the value of the
+          {{BatteryManager/[[Charging]]}} internal slot.
         </p>
+      </section>
+      <section>
+        <h3>
+          The `chargingTime` attribute
+        </h3>
         <p>
-          The <code>dischargingTime</code> attribute can be set to the maximum
-          discharging time of the individual batteries if discharging in
-          parallel, and to the sum of individual discharging times if
-          discharging serially.
+          The <dfn>chargingTime</dfn> attribute's getter returns the value of
+          the {{BatteryManager/[[ChargingTime]]}} internal slot.
         </p>
+      </section>
+      <section>
+        <h3>
+          The `dischargingTime` attribute
+        </h3>
         <p>
-          The <code>level</code> attribute can be set to the average of the
-          levels of batteries of same capacity, or the weighted average of the
-          battery level attributes for batteries of different capacities.
+          The <dfn>dischargingTime</dfn> attribute's getter returns the value
+          of the {{BatteryManager/[[DischargingTime]]}} internal slot.
+        </p>
+      </section>
+      <section>
+        <h3>
+          The `level` attribute
+        </h3>
+        <p>
+          The <dfn>level</dfn> attribute's getter returns the value of the
+          {{BatteryManager/[[Level]]}} internal slot.
         </p>
       </section>
       <section>
@@ -395,7 +468,7 @@
         <p>
           The following are the <a>event handlers</a> (and their corresponding
           <a>event handler event types</a>) that MUST be supported as
-          attributes by the <a>BatteryManager</a> object:
+          attributes by the {{BatteryManager}} object:
         </p>
         <table class="simple">
           <thead>
@@ -411,42 +484,100 @@
           <tbody>
             <tr>
               <td>
-                <strong><dfn data-dfn-for="BatteryManager"><code id=
-                "widl-BatteryManager-onchargingchange">onchargingchange</code></dfn></strong>
+                <dfn>onchargingchange</dfn>
               </td>
               <td>
-                <code><dfn>chargingchange</dfn></code>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong><dfn data-dfn-for="BatteryManager"><code id=
-                "widl-BatteryManager-onchargingtimechange">onchargingtimechange</code></dfn></strong>
-              </td>
-              <td>
-                <code><dfn>chargingtimechange</dfn></code>
+                <dfn>`chargingchange`</dfn>
               </td>
             </tr>
             <tr>
               <td>
-                <strong><dfn data-dfn-for="BatteryManager"><code id=
-                "widl-BatteryManager-ondischargingtimechange">ondischargingtimechange</code></dfn></strong>
+                <dfn>onchargingtimechange</dfn>
               </td>
               <td>
-                <code><dfn>dischargingtimechange</dfn></code>
+                <dfn>`chargingtimechange`</dfn>
               </td>
             </tr>
             <tr>
               <td>
-                <strong><dfn data-dfn-for="BatteryManager"><code id=
-                "widl-BatteryManager-onlevelchange">onlevelchange</code></dfn></strong>
+                <dfn>ondischargingtimechange</dfn>
               </td>
               <td>
-                <code><dfn>levelchange</dfn></code>
+                <dfn>`dischargingtimechange`</dfn>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <dfn>onlevelchange</dfn>
+              </td>
+              <td>
+                <dfn>`levelchange`</dfn>
               </td>
             </tr>
           </tbody>
         </table>
+      </section>
+      <section>
+        <h3>
+          Algorithms
+        </h3>
+        <p>
+          To <dfn>update the battery status and notify</dfn> given an internal
+          slot |slot|, a |value| and an |eventName|, run the following steps:
+        </p>
+        <ol class="algorithm">
+          <li>Let |global| be the [=current global object=].
+          </li>
+          <li>If |global| is not a {{Window}}, abort these steps.
+          </li>
+          <li>Let |navigator:Navigator| be |global|'s associated {{Navigator}}.
+          </li>
+          <li>Let |batteryManager:BatteryManager| be the value of |navigator|.
+          {{Navigator/[[BatteryManager]]}}.
+          </li>
+          <li>If |batteryManager| is `null`, abort these steps.
+          </li>
+          <li>[=Queue a global task=] on the [=battery status task source=]
+          given |global| to run the following steps:
+            <ol>
+              <li>Set |batteryManager|.|slot| to |value|.
+              </li>
+              <li>[=Fire an event=] named |eventName| at |batteryManager|.
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </section>
+      <section id="multiple-batteries">
+        <h2>
+          Multiple batteries
+        </h2>
+        <p>
+          If a hosting device contains more than one battery,
+          {{BatteryManager}} SHOULD expose a unified view of the batteries.
+        </p>
+        <p>
+          The {{BatteryManager/[[Charging]]}} internal slot MUST be set to true
+          if at least one battery's charging state as described above is true.
+          Otherwise, it MUST be set to false.
+        </p>
+        <p>
+          The {{BatteryManager/[[ChargingTime]]}} internal slot can be set to
+          the maximum charging time of the individual batteries if charging in
+          parallel, and to the sum of the individual charging times if charging
+          serially.
+        </p>
+        <p>
+          The {{BatteryManager/[[DischargingTime]]}} internal slot can be set
+          to the maximum discharging time of the individual batteries if
+          discharging in parallel, and to the sum of individual discharging
+          times if discharging serially.
+        </p>
+        <p>
+          The {{BatteryManager/[[Level]]}} internal slot can be set to the
+          average of the levels of batteries of same capacity, or the weighted
+          average of the battery levels for batteries of different capacities.
+        </p>
       </section>
     </section>
     <section>
