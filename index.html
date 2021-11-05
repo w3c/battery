@@ -217,8 +217,7 @@
         </h3>
         <p data-tests=
         "battery-promise-window.https.html, battery-promise.https.html">
-          The <dfn>getBattery()</dfn> method, when invoked, MUST run the
-          following steps:
+          The <dfn>getBattery()</dfn> method steps are:
         </p>
         <ol class="algorithm">
           <li>If [=this=].{{Navigator/[[BatteryPromise]]}} is `null`, then set
@@ -430,8 +429,8 @@
           The `charging` attribute
         </h3>
         <p>
-          The <dfn>charging</dfn> attribute's getter returns the value of the
-          {{BatteryManager/[[Charging]]}} internal slot.
+          The <dfn>charging</dfn> getter steps are to return
+          [=this=].{{BatteryManager/[[Charging]]}}.
         </p>
       </section>
       <section>
@@ -439,8 +438,8 @@
           The `chargingTime` attribute
         </h3>
         <p>
-          The <dfn>chargingTime</dfn> attribute's getter returns the value of
-          the {{BatteryManager/[[ChargingTime]]}} internal slot.
+          The <dfn>chargingTime</dfn> getter steps are to return
+          [=this=].{{BatteryManager/[[ChargingTime]]}}.
         </p>
       </section>
       <section>
@@ -448,8 +447,8 @@
           The `dischargingTime` attribute
         </h3>
         <p>
-          The <dfn>dischargingTime</dfn> attribute's getter returns the value
-          of the {{BatteryManager/[[DischargingTime]]}} internal slot.
+          The <dfn>dischargingTime</dfn> getter steps are to return
+          [=this=].{{BatteryManager/[[DischargingTime]]}}.
         </p>
       </section>
       <section>
@@ -457,8 +456,8 @@
           The `level` attribute
         </h3>
         <p>
-          The <dfn>level</dfn> attribute's getter returns the value of the
-          {{BatteryManager/[[Level]]}} internal slot.
+          The <dfn>level</dfn> getter steps are to return
+          [=this=].{{BatteryManager/[[Level]]}}.
         </p>
       </section>
       <section>
