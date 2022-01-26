@@ -135,14 +135,14 @@
         Extensions to the `Navigator` interface
       </h2>
       <pre class="idl">
+        [SecureContext]
         partial interface Navigator {
           Promise&lt;BatteryManager&gt; getBattery();
         };
       </pre>
-      <p class="warning">
-        This method is not currently restricted to a <a>secure context</a>, but
-        it should be. Track progress on that in <a href=
-        "https://github.com/w3c/battery/issues/15">issue #15</a>.
+      <p class="note">
+        This method was exposed to a non-secure context until <a href=
+        "https://github.com/w3c/battery/pull/51">PR #51</a>.
       </p>
       <section>
         <h3>
@@ -236,7 +236,7 @@
         The `BatteryManager` interface
       </h2>
       <pre class="idl">
-        [Exposed=Window]
+        [SecureContext, Exposed=Window]
         interface BatteryManager : EventTarget {
             readonly        attribute boolean             charging;
             readonly        attribute unrestricted double chargingTime;
