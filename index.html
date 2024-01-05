@@ -213,13 +213,6 @@
           [=policy-controlled feature=], then [=reject=]
           [=this=].{{Navigator/[[BatteryPromise]]}} with a
           {{"NotAllowedError"}} {{DOMException}}.
-            <div class="note">
-              In other words, this step rejects if the [=associated
-              `Document`=]'s [=browsing context=]'s [=active document=]'s
-              [=origin=] is not [=same origin-domain=] with the [=origin=] of
-              the [=current settings object=] of this {{Navigator}} object,
-              unless specifically allowed by the document's permissions policy.
-            </div>
           </li>
           <li>Otherwise:
             <ol>
