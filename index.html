@@ -351,8 +351,8 @@
             the remaining time in seconds until the system's battery is fully
             charged. It MUST be set to 0 if the battery is full or there is no
             battery attached to the system, and to the value positive Infinity
-            if the battery is discharging, the implementation is unable to
-            report the remaining charging time, or otherwise.
+            if the battery is discharging or the implementation is unable to
+            report the remaining charging time.
           </p>
           <p>
             When the battery charging time is updated, the user agent must run
@@ -371,7 +371,7 @@
             discharged and the system is about to be suspended. It MUST be set
             to the value positive Infinity if the battery is charging, the
             implementation is unable to report the remaining discharging time,
-            there is no battery attached to the system, or otherwise.
+            or there is no battery attached to the system.
           </p>
           <p>
             When the battery discharging time is updated, the user agent must
